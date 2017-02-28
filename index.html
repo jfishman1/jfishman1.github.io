@@ -1,1 +1,14 @@
-Hello World
+<head>
+  <link rel=manifest href=/manifest.json>
+  <script src=https://cdn.onesignal.com/sdks/OneSignalSDK.js async></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push([init, {
+      appId: 6aef80f4-d515-42d8-9462-2057e9e3428f,
+      autoRegister: false,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      }
+    }]);
+  </script>
+</head>
