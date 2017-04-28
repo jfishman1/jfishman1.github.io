@@ -32,9 +32,23 @@ cancelButtonText: "Не сейчас"
 
 
 
-      
+
     }]);
   </script>
+
+
+OneSignal.push(function() {
+OneSignal.sendTag("identifier", 'f1dd44e9e6c037738849a3cedf2520ad');
+OneSignal.syncHashedEmail("nik@omirussia.ru");
+});
+
+OneSignal.push(function() {
+OneSignal.registerForPushNotifications({
+modalPrompt: true
+});
+});
+
+  
 </head>
 
 
