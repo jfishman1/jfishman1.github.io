@@ -1,51 +1,16 @@
 <head>
-<link rel="manifest" href="/manifest.json">
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-
-
-
-<script>
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
-        appId: "818363b1-b1e1-458a-b56d-b9d9b6500d73",
-        autoRegister: false,
-        notifyButton: {
-            enable: false,
-            /* Required to use the notify button */
-            size: 'medium',
-            /* One of 'small', 'medium', or 'large' */
-            theme: 'default',
-            position: 'bottom-right',
-            displayPredicate: 'Promise',
-            prenotify: true,
-            showCredit: false,
-            /* Hide the OneSignal logo */
-        },
-        welcomeNotification: {
-            disable: true
-        },
-        promptOptions: {
-            siteName: "Moemnenie",
-            actionMessage: "Подпишитесь на приглашения к опросам и новости прямо в своем браузере!",
-            exampleNotificationTitle: "Пример приглашения в браузере",
-            exampleNotificationMessage: "Для вас доступен новый опрос от проекта МоеМнение. Нажмите на это окно для участия!",
-            exampleNotificationCaption: "Вы можете отписаться в любое время",
-            acceptButtonText: "Подписаться",
-            cancelButtonText: "Не сейчас"
-        }
+      appId: "6aef80f4-d515-42d8-9462-2057e9e3428f",
+      autoRegister: false,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      }
     }]);
-
-    OneSignal.push(function() {
-        OneSignal.sendTag("identifier", 'f1dd44e9e6c037738849a3cedf2520ad');
-        OneSignal.syncHashedEmail("nik@omirussia.ru");
-    });
-
-    OneSignal.push(function() {
-        OneSignal.registerForPushNotifications({
-            modalPrompt: true
-        });
-    });
-</script>
+  </script>
 </head>
 
 
