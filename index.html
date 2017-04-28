@@ -5,10 +5,34 @@
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
       appId: "6aef80f4-d515-42d8-9462-2057e9e3428f",
+      
+
       autoRegister: false,
-      notifyButton: {
-        enable: true /* Set to false to hide */
-      }
+notifyButton: {
+enable: false, /* Required to use the notify button */
+size: 'medium', /* One of 'small', 'medium', or 'large' */
+theme: 'default',
+position: 'bottom-right',
+displayPredicate: 'Promise',
+prenotify: true,
+showCredit: false, /* Hide the OneSignal logo */
+},
+welcomeNotification: {
+disable: true
+},
+promptOptions: {
+siteName: "Moemnenie",
+actionMessage: "Подпишитесь на приглашения к опросам и новости прямо в своем браузере!",
+exampleNotificationTitle: "Пример приглашения в браузере",
+exampleNotificationMessage: "Для вас доступен новый опрос от проекта МоеМнение. Нажмите на это окно для участия!",
+exampleNotificationCaption: "Вы можете отписаться в любое время",
+acceptButtonText: "Подписаться",
+cancelButtonText: "Не сейчас"
+}
+
+
+
+      
     }]);
   </script>
 </head>
