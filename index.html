@@ -3,35 +3,55 @@
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
   <script>
 
-
 var OneSignal = window.OneSignal || [];
-OneSignal.push(["init", {
-  appId: "6aef80f4-d515-42d8-9462-2057e9e3428f",
-  autoRegister: false,
-  notifyButton: {
-      enable: false,
-      /* Required to use the notify button */
-      size: 'medium',
-      /* One of 'small', 'medium', or 'large' */
-      theme: 'default',
-      position: 'bottom-right',
-      displayPredicate: 'Promise',
-      prenotify: true,
-      showCredit: false,
-      /* Hide the OneSignal logo */
-  },
-  welcomeNotification: {
-      disable: true
-  },
-  promptOptions: {
-      siteName: "Moemnenie",
-      actionMessage: "Подпишитесь на приглашения к опросам и новости прямо в своем браузере!",
-      exampleNotificationTitle: "Пример приглашения в браузере",
-      exampleNotificationMessage: "Для вас доступен новый опрос от проекта МоеМнение. Нажмите на это окно для участия!",
-      exampleNotificationCaption: "Вы можете отписаться в любое время",
-      acceptButtonText: "Подписаться",
-      cancelButtonText: "Не сейчас"
-  }
+    OneSignal.push(["init", {
+      appId: "30aff5f8-0158-4e72-9b5d-7164073e1644",
+      autoRegister: true, /* Set to true to automatically prompt visitors */
+      subdomainName: 'stephenblord',
+      /*
+      subdomainName: Use the value you entered in step 1.4: http://imgur.com/a/f6hqN
+      */
+      safari_web_id: 'web.onesignal.auto.3377791d-2467-4a62-9fdc-3aca1a0bc947',
+      httpPermissionRequest: {
+        enable: true
+      },
+      notifyButton: {
+          enable: true /* Set to false to hide */
+          size: 'medium', /* One of 'small', 'medium', or 'large' */
+          theme: 'default', /* One of 'default' (red-white) or 'inverse" (white-red) */
+          position: 'bottom-right', /* Either 'bottom-left' or 'bottom-right' */
+          offset: {
+            bottom: '0px',
+            left: '0px', /* Only applied if bottom-left */
+            right: '0px' /* Only applied if bottom-right */
+        },
+        prenotify: true, /* Show an icon with 1 unread message for first-time site visitors */
+        showCredit: false, /* Hide the OneSignal logo */
+        text: {
+            'tip.state.unsubscribed': 'Subscribe to notifications',
+            'tip.state.subscribed': "You're subscribed to notifications",
+            'tip.state.blocked': "You've blocked notifications",
+            'message.prenotify': 'Click to subscribe to notifications',
+            'message.action.subscribed': "Thanks for subscribing!",
+            'message.action.resubscribed': "You're subscribed to notifications",
+            'message.action.unsubscribed': "You won't receive notifications again",
+            'dialog.main.title': 'Manage Site Notifications',
+            'dialog.main.button.subscribe': 'SUBSCRIBE',
+            'dialog.main.button.unsubscribe': 'UNSUBSCRIBE',
+            'dialog.blocked.title': 'Unblock Notifications',
+            'dialog.blocked.message': "Follow these instructions to allow notifications:"
+        }
+      }
+        // Your other init options here
+    promptOptions: {
+        /* These prompt options values configure both the HTTP prompt and the HTTP popup. */
+        /* actionMessage limited to 90 characters */
+        actionMessage: "We'd like to show you notifications for the latest news and updates.",
+        /* acceptButtonText limited to 15 characters */
+        acceptButtonText: "ALLOW",
+        /* cancelButtonText limited to 15 characters */
+        cancelButtonText: "NO THANKS"
+    }
 }]);
 
 OneSignal.push(function() {
@@ -64,7 +84,3 @@ OneSignal.push(function() {
    "Hello World!"
  </script>
 </body>
-
-
-
-
