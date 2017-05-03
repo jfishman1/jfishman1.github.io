@@ -41,7 +41,7 @@ var OneSignal = window.OneSignal || [];
             'dialog.blocked.title': 'Unblock Notifications',
             'dialog.blocked.message': "Follow these instructions to allow notifications:"
         }
-      }
+      },
         // Your other init options here
     promptOptions: {
         /* These prompt options values configure both the HTTP prompt and the HTTP popup. */
@@ -70,7 +70,7 @@ OneSignal.push(function() {
               OneSignal.registerForPushNotifications({
                   modalPrompt: true
               });
-          })
+          });
       }
   });
 });
