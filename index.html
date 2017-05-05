@@ -5,15 +5,25 @@
 
 var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
-      appId: "6aef80f4-d515-42d8-9462-2057e9e3428f",
+      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
       autoRegister: false, /* Set to true to automatically prompt visitors */
-      //subdomainName: 'stephenblord',
+      //subdomainName: 'NONE_SINCE_HTTPS',
       /*
       subdomainName: Use the value you entered in step 1.4: http://imgur.com/a/f6hqN
       */
-      safari_web_id: 'web.onesignal.auto.596e7d36-250c-4e22-98d4-39c9730f6c95',
+      safari_web_id: 'web.onesignal.auto.3db514d6-c75f-4a27-ad99-adae19a9a814',
+      welcomeNotification: {
+        //disable: true
+        "title": "My Custom Title",
+        "message": "Thanks for subscribing!",
+        // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
+      },
       httpPermissionRequest: {
-        enable: true
+        enable: true, // Required
+        useCustomModal: true, // Optional SPECIAL CASE Set to false to hide our modal and use your own. You must handle the user clicking on the modal and call OneSignal.registerForPushNotifications({httpPermissionRequest: true}) after.
+        modalTitle: "Thanks for subscribing to my site!", // Optional
+        modalMessage: "You are now suscribed! YAAAAAAAAY!!!!", // Optional
+        modalButtonText: "That was fun! Finish the excitement here!" // Optional
       },
       notifyButton: {
           enable: true, /* Set to false to hide */
@@ -56,7 +66,7 @@ var OneSignal = window.OneSignal || [];
 
 OneSignal.push(function() {
   OneSignal.sendTag("identifier", 'f1dd44e9e6c037738849a3cedf2520ad');
-  OneSignal.syncHashedEmail("nik@omirussia.ru");
+  OneSignal.syncHashedEmail("test@test.com");
 });
 
 OneSignal.push(function() {
@@ -74,6 +84,8 @@ OneSignal.push(function() {
       }
   });
 });
+
+
 
   </script>
 </head>
