@@ -69,21 +69,21 @@ OneSignal.push(function() {
   OneSignal.syncHashedEmail("test@test.com");
 });
 
-OneSignal.push(function() {
-  /* These examples are all valid */
-  OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      if (isEnabled) {
-          console.log("Push notifications are enabled!");
-      } else {
-          console.log("Push notifications are not enabled yet.");
-          OneSignal.push(function() {
-              OneSignal.registerForPushNotifications({
-                  modalPrompt: true
-              });
-          });
-      }
-  });
-});
+// OneSignal.push(function() {
+//   /* These examples are all valid */
+//   OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+//       if (isEnabled) {
+//           console.log("Push notifications are enabled!");
+//       } else {
+//           console.log("Push notifications are not enabled yet.");
+//           OneSignal.push(function() {
+//               OneSignal.registerForPushNotifications({
+//                   modalPrompt: true
+//               });
+//           });
+//       }
+//   });
+// });
 
 
 
