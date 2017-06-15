@@ -8,12 +8,7 @@
   var isPushSupported = OneSignal.isPushNotificationsSupported();
   if (isPushSupported) {
     // Push notifications are supported
-  } else {
-    // Push notifications are not supported
-  }
-});
-
-var OneSignal = window.OneSignal || [];
+    var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
       autoRegister: true, /* Set to true to automatically prompt visitors */
@@ -96,6 +91,12 @@ OneSignal.push(function() {
       }
   });
 });
+
+  } else {
+    // Push notifications are not supported
+  }
+});
+
 
 
 
