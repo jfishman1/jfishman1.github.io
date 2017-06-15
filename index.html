@@ -3,11 +3,7 @@
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
   <script>
 
-  OneSignal.push(function() {
-  /* These examples are all valid */
-  var isPushSupported = OneSignal.isPushNotificationsSupported();
-  if (isPushSupported) {
-    // Push notifications are supported
+
     var OneSignal = window.OneSignal || [];
     OneSignal.push(["init", {
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
@@ -92,10 +88,6 @@ OneSignal.push(function() {
   });
 });
 
-  } else {
-    // Push notifications are not supported
-  }
-});
 
 
 
