@@ -1,5 +1,5 @@
 <head>
-  <link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/manifest.json">
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
   <script>
     var OneSignal = window.OneSignal || [];
@@ -33,38 +33,5 @@
     <body>
         <h1>OneSignal Example</h1>
         
-        <form>
-            <input type="button" value="Register For Push Notifications iOS" onclick="registerForPushNotification()" />
-            <br>
-            <input type="button" value="Get Ids" onclick="getIds()" />
-            <br>
-            <input type="button" value="Send Tags" onclick="sendTags()" />
-            <br>
-            <input type="button" value="Get Tags" onclick="getTags()" />
-            <br>
-            <input type="button" value="Delete Tags" onclick="deleteTags()" />
-            <br>
-            <input type="button" value="Prompt Location" onclick="promptLocation()" />
-            <br>
-            <input type="button" value="Sync Hashed Email" onclick="syncHashedEmail()" />
-            <br>
-            <input type="button" value="Post Notification" onclick="postNotification()" />
-            <br>
-            <input type="button" value="Set Subscription(false)" onclick="setSubscription()" />
-            <br>
-        </form>
-        
-        <p id="OneSignalUserId"></p>
-        <p style="word-break: break-all;" id="OneSignalPushToken"></p>
-        <div id="deviceready" class="blink">
-            <p class="event listening">Connecting to Device</p>
-            <p class="event received">Device is Ready</p>
-        </div>
-        
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
         
     </body>
