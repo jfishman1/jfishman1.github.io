@@ -1,62 +1,76 @@
 <head>
-<link rel="manifest" href="/manifest.json">
-
-<!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
-<script data-cfasync="false">
-  window.OneSignal = window.OneSignal || [];
-  
-  /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
-  var notificationPromptDelay = 30000;
-  
-  /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
-  window.OneSignal.push(function() {
-    /* Use navigation timing to find out when the page actually loaded instead of using setTimeout() only which can be delayed by script execution */
-    var navigationStart = window.performance.timing.navigationStart;
-
-    /* Get current time */
-    var timeNow = Date.now();
-
-    /* Prompt the user if enough time has elapsed */
-    setTimeout(promptAndSubscribeUser, Math.max(notificationPromptDelay - (timeNow - navigationStart), 0));
-  });
-  
-  function promptAndSubscribeUser() {
-    /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
-    window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      if (!isEnabled) {        
-        //window.OneSignal.showHttpPrompt();
-        window.OneSignal.registerForPushNotifications();
-      }
-    });
-  }
-</script>
-
+  <link rel="manifest" href="/subdirectory/manifest.json">
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
   <script>
-    var OneSignal = window.OneSignal || [];
+  var OneSignal = OneSignal || [];
+OneSignal.push(function() {
+  // Be sure to call this code *before* you initialize the web SDK
+  
+  // This registers the workers at the root scope, which is allowed by the HTTP header "Service-Worker-Allowed: /"
+  OneSignal.SERVICE_WORKER_PARAM = { scope: '/' };
+});
     OneSignal.push(["init", {
+        path: '/subdirectory/', /* CHANGE "subdirectory" TO YOUR DIRECT PATH NAME*/
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
       autoRegister: false,
       notifyButton: {
-        enable: true /* Set to false to hide */
+        enable: true,
+        size: 'medium',
+        theme: 'default',
+        position: 'bottom-right',
+        offset: {
+            bottom: '0px',
+            left: '0px', 
+            right: '0px' 
+        },
+        prenotify: true,
+        showCredit: false,
+        text: {
+            'tip.state.unsubscribed': 'Subscribe to notifications',
+            'tip.state.subscribed': "You're subscribed to notifications",
+            'tip.state.blocked': "You've blocked notifications",
+            'message.prenotify': 'Click to subscribe to notifications',
+            'message.action.subscribed': "Thanks for subscribing!",
+            'message.action.resubscribed': "You're subscribed to notifications",
+            'message.action.unsubscribed': "You won't receive notifications again",
+            'dialog.main.title': 'Manage Site Notifications',
+            'dialog.main.button.subscribe': 'SUBSCRIBE',
+            'dialog.main.button.unsubscribe': 'UNSUBSCRIBE',
+            'dialog.blocked.title': 'Unblock Notifications',
+            'dialog.blocked.message': "Follow these instructions to allow notifications:"
+        },
+        colors: {
+           'circle.background': 'rgb(84,110,123)',
+           'circle.foreground': 'white',
+           'badge.background': 'rgb(84,110,123)',
+           'badge.foreground': 'white',
+           'badge.bordercolor': 'white',
+           'pulse.color': 'white',
+           'dialog.button.background.hovering': 'rgb(77, 101, 113)',
+           'dialog.button.background.active': 'rgb(70, 92, 103)',
+           'dialog.button.background': 'rgb(84,110,123)',
+           'dialog.button.foreground': 'white'
+         },
+        displayPredicate: function() {
+            return OneSignal.isPushNotificationsEnabled()
+                .then(function(isPushEnabled) {
+                    return !isPushEnabled;
+                });
+        }
       },
       welcomeNotification: {
         "title": "My Custom Title",
         "message": "Thanks for subscribing!",
-        // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
       },
       promptOptions: {
-        /* actionMessage limited to 90 characters */
         actionMessage: "We'd like to show you notifications for the latest news and updates.",
-        /* acceptButtonText limited to 15 characters */
         acceptButtonText: "ALLOW",
-        /* cancelButtonText limited to 15 characters */
         cancelButtonText: "NO THANKS"
       }
     }]);
-    // OneSignal.push(function() {
-    //   OneSignal.showHttpPrompt();
-    // });
+    OneSignal.push(function() {
+      OneSignal.showHttpPrompt();
+    });
   </script>
 </head>
 
