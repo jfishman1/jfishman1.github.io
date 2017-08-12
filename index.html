@@ -24,7 +24,8 @@
     /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
     window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
       if (!isEnabled) {        
-        window.OneSignal.showHttpPrompt();
+        //window.OneSignal.showHttpPrompt();
+        window.OneSignal.registerForPushNotifications();
       }
     });
   }
