@@ -67,8 +67,8 @@
     <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
     <script>
+    	var output = document.getElementById("out");
         function geoFindMe() {
-            var output = document.getElementById("out");
 
             if (!navigator.geolocation) {
                 output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
