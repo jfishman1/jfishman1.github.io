@@ -1,100 +1,107 @@
 <head>
-<link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
-<!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
-<script data-cfasync="false">
-  window.OneSignal = window.OneSignal || [];
-  
-  /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
-  var notificationPromptDelay = 3000;
-  
-  /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
-  window.OneSignal.push(function() {
-    /* Use navigation timing to find out when the page actually loaded instead of using setTimeout() only which can be delayed by script execution */
-    var navigationStart = window.performance.timing.navigationStart;
+    <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
+    <script data-cfasync="false">
+        window.OneSignal = window.OneSignal || [];
 
-    /* Get current time */
-    var timeNow = Date.now();
+        /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
+        var notificationPromptDelay = 30000;
 
-    /* Prompt the user if enough time has elapsed */
-    setTimeout(promptAndSubscribeUser, Math.max(notificationPromptDelay - (timeNow - navigationStart), 0));
-  });
-  
-  function promptAndSubscribeUser() {
-    /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
-    window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      if (!isEnabled) {        
-        //window.OneSignal.showHttpPrompt();
-        window.OneSignal.registerForPushNotifications();
-      }
-    });
-  }
-</script>
+        /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
+        window.OneSignal.push(function() {
+            /* Use navigation timing to find out when the page actually loaded instead of using setTimeout() only which can be delayed by script execution */
+            var navigationStart = window.performance.timing.navigationStart;
 
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-  <script>
-    var OneSignal = window.OneSignal || [];
-    OneSignal.push(["init", {
-      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-      autoRegister: false,
-      notifyButton: {
-        enable: true /* Set to false to hide */
-      },
-      welcomeNotification: {
-        "title": "My Custom Title",
-        "message": "Thanks for subscribing!",
-        // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
-      },
-      promptOptions: {
-        /* actionMessage limited to 90 characters */
-        actionMessage: "We'd like to show you notifications for the latest news and updates.",
-        /* acceptButtonText limited to 15 characters */
-        acceptButtonText: "ALLOW",
-        /* cancelButtonText limited to 15 characters */
-        cancelButtonText: "NO THANKS"
-      }
-    }]);
-    // OneSignal.push(function() {
-    //   OneSignal.showHttpPrompt();
-    // });
-  </script>
+            /* Get current time */
+            var timeNow = Date.now();
+
+            /* Prompt the user if enough time has elapsed */
+            setTimeout(promptAndSubscribeUser, Math.max(notificationPromptDelay - (timeNow - navigationStart), 0));
+        });
+
+        function promptAndSubscribeUser() {
+            /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
+            window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+                if (!isEnabled) {
+                    //window.OneSignal.showHttpPrompt();
+                    window.OneSignal.registerForPushNotifications();
+                }
+            });
+        }
+    </script>
+
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(["init", {
+            appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+            autoRegister: false,
+            notifyButton: {
+                enable: true /* Set to false to hide */
+            },
+            welcomeNotification: {
+                "title": "My Custom Title",
+                "message": "Thanks for subscribing!",
+                // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
+            },
+            promptOptions: {
+                /* actionMessage limited to 90 characters */
+                actionMessage: "We'd like to show you notifications for the latest news and updates.",
+                /* acceptButtonText limited to 15 characters */
+                acceptButtonText: "ALLOW",
+                /* cancelButtonText limited to 15 characters */
+                cancelButtonText: "NO THANKS"
+            }
+        }]);
+        // OneSignal.push(function() {
+        //   OneSignal.showHttpPrompt();
+        // });
+    </script>
 </head>
 
 
-    <body>
-        <h1>OneSignal Example</h1>
+<body>
+    <h1>OneSignal Example</h1>
 
-        <p><button onclick="geoFindMe()">Show my location</button></p>
-<div id="out"></div>
-<script>
+    <p><button onclick="geoFindMe()">Show my location</button></p>
+    <div id="out"></div>
+    <script>
         function geoFindMe() {
-  var output = document.getElementById("out");
+            var output = document.getElementById("out");
 
-  if (!navigator.geolocation){
-    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    return;
-  }
+            if (!navigator.geolocation) {
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
+            }
 
-  function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
+            output.innerHTML = "<p>Locating…</p>";
 
-    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
 
-    var img = new Image();
-    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+        function success(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
 
-    output.appendChild(img);
-  }
+            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
-  function error() {
-    output.innerHTML = "Unable to retrieve your location";
-  }
+            OneSignal.push(function() {
+                OneSignal.sendTags({
+                    latitude: latitude,
+                    long: longitude
+                });
+            });
 
-  output.innerHTML = "<p>Locating…</p>";
+            var img = new Image();
+            img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
-  navigator.geolocation.getCurrentPosition(success, error);
-}
-  </script>      
-        
-    </body>
+            output.appendChild(img);
+        }
+
+        function error() {
+            output.innerHTML = "Unable to retrieve your location";
+        }
+    </script>
+
+</body>
