@@ -73,7 +73,15 @@
         // Occurs when the user's subscription changes to a new value.
         OneSignal.on('subscriptionChange', function (isSubscribed) {
             console.log("The user's subscription state is now:", isSubscribed);
-            console.log("this just got called");
+            OneSignal.getUserId( function(userId) {
+                console.log("OneSignal User ID:", userId);
+                // Make a POST call to your server with the user ID
+                var _hsq = window._hsq = window._hsq || [];
+                _hsq.push(["identify",{
+                    playerId: userId
+                }]);
+
+            });
         });
     });
    </script>
