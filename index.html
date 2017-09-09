@@ -68,6 +68,15 @@
 <body>
     <h1>OneSignal Example</h1>
 
+   <script>
+   OneSignal.push(function() {
+        // Occurs when the user's subscription changes to a new value.
+        OneSignal.on('subscriptionChange', function (isSubscribed) {
+            console.log("The user's subscription state is now:", isSubscribed);
+        });
+    });
+   </script>
+
     <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
     <script>
