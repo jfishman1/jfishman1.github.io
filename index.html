@@ -77,8 +77,9 @@
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
                 var _hsq = window._hsq = window._hsq || [];
-                _hsq.push(["identify",{
-                    playerId: userId
+                _hsq.push(["trackEvent",{
+                    id: "player id",
+                    value: userId
                 }]);
 
             });
