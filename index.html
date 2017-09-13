@@ -76,6 +76,7 @@
   ga('create', 'UA-106423818-1', 'auto');
   ga('send', 'pageview');
 
+
 </script>
 
 
@@ -88,6 +89,7 @@
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
+                ga('set', 'userId', {{userId}}); // Set the user ID using signed-in user_id.
             });
         });
     });
