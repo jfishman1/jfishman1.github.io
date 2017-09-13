@@ -58,10 +58,6 @@
         //   OneSignal.showHttpPrompt();
         // });
     </script>
-
-    <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/3895181.js"></script>
-<!-- End of HubSpot Embed Code -->
 </head>
 
 
@@ -76,33 +72,36 @@
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                var _hsq = window._hsq = window._hsq || [];
-                _hsq.push(["trackEvent",{
-                    id: "player id",
-                    value: userId
-                }]);
-
             });
         });
     });
    </script>
+
+   <!-- segment.io test -->
+   <script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+  analytics.load("Fgzue5bXqfY5mDhStQ77ff5t1dc4CAKa");
+  analytics.page();
+  }}();
+</script>
+
+
+
+
+
 
     <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
     <script>
     	var output = document.getElementById("out");
         function geoFindMe() {
-
             if (!navigator.geolocation) {
                 output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
                 return;
             }
-
             output.innerHTML = "<p>Locating…</p>";
-
             navigator.geolocation.getCurrentPosition(success, error);
         }
-
         function success(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
