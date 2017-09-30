@@ -1,27 +1,30 @@
 <head>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106423818-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-106423818-1');
+</script>
+
 
     <link rel="manifest" href="/manifest.json">
-
     <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
-
     <script data-cfasync="false">
         window.OneSignal = window.OneSignal || [];
-
         /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
         var notificationPromptDelay = 30000;
-
         /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
         window.OneSignal.push(function() {
             /* Use navigation timing to find out when the page actually loaded instead of using setTimeout() only which can be delayed by script execution */
             var navigationStart = window.performance.timing.navigationStart;
-
             /* Get current time */
             var timeNow = Date.now();
-
             /* Prompt the user if enough time has elapsed */
             setTimeout(promptAndSubscribeUser, Math.max(notificationPromptDelay - (timeNow - navigationStart), 0));
         });
-
         function promptAndSubscribeUser() {
             /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
             window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
@@ -32,7 +35,6 @@
             });
         }
     </script>
-
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
     <script>
         var OneSignal = window.OneSignal || [];
@@ -60,27 +62,12 @@
         //   OneSignal.showHttpPrompt();
         // });
     </script>
- 
 </head>
 
 
 <body>
-
-<!-- Google Analytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-106423818-1', 'auto');
-  ga('send', 'pageview');
-
-
-</script>
-
-
-    <h1>OneSignal Example</h1>
+<h1>OneSignal Example</h1>
+<!-- GET ONESIGNAL USERID -->
    <script>
    OneSignal.push(function() {
         // Occurs when the user's subscription changes to a new value.
@@ -89,12 +76,12 @@
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                ga('set', 'userId', userId); // Set the GA user ID using signed-in user_id.
+                
             });
         });
     });
    </script>
-
+<!-- Track Users on button click -->
     <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
     <script>
@@ -130,4 +117,5 @@
             output.innerHTML = "Unable to retrieve your location";
         }
     </script>
+<!-- END Tracking code -->
 </body>
