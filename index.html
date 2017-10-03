@@ -7,9 +7,11 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-106423818-1');
+
+
+
+
 </script>
-
-
     <link rel="manifest" href="/manifest.json">
     <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
     <script data-cfasync="false">
@@ -67,6 +69,10 @@
 
 <body>
 <h1>OneSignal Example</h1>
+
+
+
+
 <!-- GET ONESIGNAL USERID -->
    <script>
    OneSignal.push(function() {
@@ -76,11 +82,20 @@
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                
+                ga('send', 'event', 'Subscription Change', isSubscribed, userId)
             });
         });
     });
    </script>
+
+
+
+
+
+
+
+
+
 <!-- Track Users on button click -->
     <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
