@@ -76,11 +76,11 @@
    OneSignal.push(function() {
         // Occurs when the user's subscription changes to a new value.
         OneSignal.on('subscriptionChange', function (isSubscribed) {
-            console.log("The user's subscription state is now:", isSubscribed);
+            console.log("The user's subscription status has change, isSubscribed:", isSubscribed);
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                gtag('event', 'Subscription Change', { 'isUserSubscribed: ': isSubscribed, 'OSplayerID': userId });
+                gtag('event', 'Subscription_Change', { 'isUserSubscribed: ': isSubscribed, 'OSplayerID': userId });
             });
         });
     });
