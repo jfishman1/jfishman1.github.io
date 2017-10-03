@@ -80,7 +80,7 @@
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                ga('send', 'event', 'Subscription Change', 'isSubscribed', 'userId')
+                gtag('send', 'event', 'Subscription Change', isSubscribed, userId)
             });
         });
     });
