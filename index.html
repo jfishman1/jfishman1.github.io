@@ -7,11 +7,9 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-106423818-1');
-
-
-
-
 </script>
+
+
     <link rel="manifest" href="/manifest.json">
     <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
     <script data-cfasync="false">
@@ -82,7 +80,7 @@
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                ga('send', 'event', 'Subscription Change', isSubscribed, userId)
+                ga('send', 'event', 'Subscription Change', 'isSubscribed', 'userId')
             });
         });
     });
