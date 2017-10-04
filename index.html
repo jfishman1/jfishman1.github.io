@@ -87,7 +87,12 @@ OneSignal.push(["addListenerForNotificationOpened", function(data) {
     console.log("Received NotificationOpened:");
     console.log(data);
     console.log(data.id);
-    console.log(data.header);
+    console.log(data.heading);
+    OneSignal.getUserId( function(userId) {
+            console.log("OneSignal User ID:", userId);
+            // Make a POST call to your server with the notification data and userId
+            ga('send', 'event', 'Notification_Clicked', data.id, userId);
+        });
 }]);
 </script>
 
