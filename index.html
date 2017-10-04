@@ -81,22 +81,32 @@ console.log(ga.q);
 <h1>OneSignal Example</h1>
 
 
+<!-- GET NOTIFICATION DATA, SEND TO GA -->
+<script>
+OneSignal.push(["addListenerForNotificationOpened", function(data) {
+    console.log("Received NotificationOpened:");
+    console.log(data);
+    console.log(id);
+    console.log(header);
+}]);
+</script>
+
 
 
 <!-- GET ONESIGNAL USERID -->
-   <script>
-   OneSignal.push(function() {
-        // Occurs when the user's subscription changes to a new value.
-        OneSignal.on('subscriptionChange', function (isSubscribed) {
-            console.log("The user's subscription status has change, isSubscribed:", isSubscribed);
-            OneSignal.getUserId( function(userId) {
-                console.log("OneSignal User ID:", userId);
-                // Make a POST call to your server with the user ID
-                ga('send', 'event', 'isUserSubscribed', isSubscribed, userId);
-            });
+<script>
+OneSignal.push(function() {
+    // Occurs when the user's subscription changes to a new value.
+    OneSignal.on('subscriptionChange', function (isSubscribed) {
+        console.log("The user's subscription status has change, isSubscribed:", isSubscribed);
+        OneSignal.getUserId( function(userId) {
+            console.log("OneSignal User ID:", userId);
+            // Make a POST call to your server with the user ID
+            ga('send', 'event', 'isUserSubscribed', isSubscribed, userId);
         });
     });
-   </script>
+});
+</script>
 
 
 
