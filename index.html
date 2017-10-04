@@ -1,5 +1,5 @@
 <head>
-    <!-- Global Site Tag (gtag.js) - Google Analytics 
+    <!-- Global Site Tag (gtag.js) - Google Analytics  -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106423818-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -7,8 +7,8 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-106423818-1');
-</script>-->
-<!-- Google Analytics -->
+</script>
+<!-- Google Analytics 
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -92,7 +92,7 @@ console.log(ga.q);
             OneSignal.getUserId( function(userId) {
                 console.log("OneSignal User ID:", userId);
                 // Make a POST call to your server with the user ID
-                ga('send', 'event', 'Subscription_Change', 'isUserSubscribed', 'userId');
+                ga('send', 'event', 'Subscription_Change', isUserSubscribed, userId);
             });
         });
     });
