@@ -86,8 +86,8 @@ console.log(ga.q);
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
     console.log("Received NotificationOpened:");
     console.log(data);
-    console.log(id);
-    console.log(header);
+    console.log(data.id);
+    console.log(data.header);
 }]);
 </script>
 
