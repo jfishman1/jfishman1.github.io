@@ -68,7 +68,45 @@ console.log(ga.q);
                 acceptButtonText: "ALLOW",
                 /* cancelButtonText limited to 15 characters */
                 cancelButtonText: "NO THANKS"
-            }
+            },
+            notifyButton: {
+        enable: true, /* Required to use the notify button */
+        size: "large", /* One of "small", "medium", or "large" */
+        theme: "inverse", /* One of "default" (red-white) or "inverse" (white-red) */
+        position: "bottom-right", /* Either "bottom-left" or "bottom-right" */
+        offset: {
+            bottom: "30px",
+            right: "30px" /* Only applied if bottom-right */
+        },
+        prenotify: true, /* Show an icon with 1 unread message for first-time site visitors */
+        showCredit: false, /* Hide the OneSignal logo */
+        text: {
+            "tip.state.unsubscribed": "Subscrever notificações bet.pt",
+            "tip.state.subscribed": "Notificações ativas",
+            "tip.state.blocked": "Notificações bet.pt bloqueadas",
+            "message.prenotify": "Clique para subscrever",
+            "message.action.subscribed": "Obrigado por subscrever!",
+            "message.action.resubscribed": "Obrigado por subscrever",
+            "message.action.unsubscribed": "Não irá receber mais notificações",
+            "dialog.main.title": "Gerir notificações",
+            "dialog.main.button.subscribe": "Subscrever",
+            "dialog.main.button.unsubscribe": "Desativar",
+            "dialog.blocked.title": "Desbloquear notificações",
+            "dialog.blocked.message": "Siga os passos para subscrever:"
+        },
+        colors: { // Customize the colors of the main button and dialog popup button
+                    "circle.background": "rgb(255,75,0)",
+                    "circle.foreground": "white",
+                    "badge.background": "rgb(255,75,0)",
+                    "badge.foreground": "white",
+                    "badge.bordercolor": "white",
+                    "pulse.color": "white",
+                    "dialog.button.background.hovering": "rgb(255,75,0)",
+                    "dialog.button.background.active": "rgb(70, 92, 103)",
+                    "dialog.button.background": "rgb(255,75,0)",
+                    "dialog.button.foreground": "white"
+        }
+      }
         }]);
         // OneSignal.push(function() {
         //   OneSignal.showHttpPrompt();
