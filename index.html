@@ -21,6 +21,8 @@ console.log(ga.q);
 </script>
 <!-- End Google Analytics -->
 <a href="momenta.html"></a>
+
+<!--
     <script data-cfasync="false">
         window.OneSignal = window.OneSignal || [];
         /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
@@ -110,6 +112,48 @@ console.log(ga.q);
         //   OneSignal.showHttpPrompt();
         // });
     </script>
+-->
+
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.SERVICE_WORKER_PARAM = { scope: '/br/' };
+    OneSignal.SERVICE_WORKER_PATH = "onesignalsdkworker.js";
+    OneSignal.SERVICE_WORKER_UPDATER_PATH = "onesignalsdkupdaterworker.js";
+  });
+ 
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "d7df921d-492a-4382-841b-11ce2b915c7c",
+      path: "/br/",
+      autoRegister: false,
+      persistNotification: true,
+      notifyButton: {
+        enable: false,
+      },
+      // Your other init options here
+    promptOptions: {
+        /* These prompt options values configure both the HTTP prompt and the HTTP popup. */
+        /* actionMessage limited to 90 characters */
+        actionMessage: "Ative as notificações, receba novidades, promoções e aproveite Bateria Externa com 50% OFF",
+        /* acceptButtonText limited to 15 characters */
+        acceptButtonText: "QUERO RECEBER",
+        /* cancelButtonText limited to 15 characters */
+        cancelButtonText: "NÃO, OBRIGADO."
+    },
+      /* Your other init options here */
+      welcomeNotification: {
+        "title": "Agradecemos o seu cadastro!",
+        "message": "Para comemorar, aproveite sua primeira oferta exclusiva: Bateria Externa 5000 mAh com 50% OFF!",
+        "url": "https://shop.samsung.com/br/promo/apply?cc=be5000mah&url=https%3A%2F%2Fwww.samsung.com%2Fbr%2Fmobile-accessories%2Fbattery-pack-5000mah-eb-p3020%2F?cid=br_webpush_crm_cad-campanha-boas-vindas-bateria_20180604&utm_source=crm&utm_medium=webpush&utm_campaign=cad-boas-vindas-bateria"
+    }
+    });
+   
+      OneSignal.showHttpPrompt();
+  });
+</script> 
 </head>
 
 
