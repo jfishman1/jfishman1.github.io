@@ -60,7 +60,7 @@ console.log(ga.q);
                 "message": "Thanks for subscribing!",
                 // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
             },
-            
+            requiresUserPrivacyConsent: true,
             promptOptions: {
                 /* actionMessage limited to 90 characters */
                 actionMessage: "We'd like to show you notifications for the latest news and updates.",
@@ -112,6 +112,8 @@ console.log(ga.q);
         //   OneSignal.showHttpPrompt();
         // });
     </script>
+
+
 
 
 <!-- <link rel="manifest" href="/manifest.json" />
@@ -194,7 +196,14 @@ OneSignal.push(function() {
 </script>
 
 
-
+<p><button onclick="provideUserConsent()">Provide User Consent</button></p>
+<script>
+    function provideUserConsent() {
+        OneSignal.push(function() {
+            OneSignal.provideUserConsent(true);
+        });
+    }
+</script>
 
 
 
