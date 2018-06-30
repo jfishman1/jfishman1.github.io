@@ -68,45 +68,7 @@ console.log(ga.q);
                 acceptButtonText: "ALLOW",
                 /* cancelButtonText limited to 15 characters */
                 cancelButtonText: "NO THANKS"
-            },
-            notifyButton: {
-        enable: true, /* Required to use the notify button */
-        size: "large", /* One of "small", "medium", or "large" */
-        theme: "inverse", /* One of "default" (red-white) or "inverse" (white-red) */
-        position: "bottom-right", /* Either "bottom-left" or "bottom-right" */
-        offset: {
-            bottom: "30px",
-            right: "30px" /* Only applied if bottom-right */
-        },
-        prenotify: true, /* Show an icon with 1 unread message for first-time site visitors */
-        showCredit: false, /* Hide the OneSignal logo */
-        text: {
-            "tip.state.unsubscribed": "Subscrever notificações bet.pt",
-            "tip.state.subscribed": "Notificações ativas",
-            "tip.state.blocked": "Notificações bet.pt bloqueadas",
-            "message.prenotify": "Clique para subscrever",
-            "message.action.subscribed": "Obrigado por subscrever!",
-            "message.action.resubscribed": "Obrigado por subscrever",
-            "message.action.unsubscribed": "Não irá receber mais notificações",
-            "dialog.main.title": "Gerir notificações",
-            "dialog.main.button.subscribe": "Subscrever",
-            "dialog.main.button.unsubscribe": "Desativar",
-            "dialog.blocked.title": "Desbloquear notificações",
-            "dialog.blocked.message": "Siga os passos para subscrever:"
-        },
-        colors: { // Customize the colors of the main button and dialog popup button
-                    "circle.background": "rgb(255,75,0)",
-                    "circle.foreground": "white",
-                    "badge.background": "rgb(255,75,0)",
-                    "badge.foreground": "white",
-                    "badge.bordercolor": "white",
-                    "pulse.color": "white",
-                    "dialog.button.background.hovering": "rgb(255,75,0)",
-                    "dialog.button.background.active": "rgb(70, 92, 103)",
-                    "dialog.button.background": "rgb(255,75,0)",
-                    "dialog.button.foreground": "white"
-        }
-      }
+            }
         }]);
         // OneSignal.push(function() {
         //   OneSignal.showHttpPrompt();
@@ -114,49 +76,6 @@ console.log(ga.q);
     </script>
 
 
-
-
-<!-- <link rel="manifest" href="/manifest.json" />
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  var OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.SERVICE_WORKER_PARAM = { scope: '/br/' };
-    OneSignal.SERVICE_WORKER_PATH = "OneSignalSDKWorker.js";
-    OneSignal.SERVICE_WORKER_UPDATER_PATH = "OneSignalSDKUpdaterWorker.js";
-  });
- 
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-      path: "/br/",
-      autoRegister: false,
-      persistNotification: true,
-      notifyButton: {
-        enable: false,
-      },
-      // Your other init options here
-    promptOptions: {
-        /* These prompt options values configure both the HTTP prompt and the HTTP popup. */
-        /* actionMessage limited to 90 characters */
-        actionMessage: "Ative as notificações, receba novidades, promoções e aproveite Bateria Externa com 50% OFF",
-        /* acceptButtonText limited to 15 characters */
-        acceptButtonText: "QUERO RECEBER",
-        /* cancelButtonText limited to 15 characters */
-        cancelButtonText: "NÃO, OBRIGADO."
-    },
-      /* Your other init options here */
-      welcomeNotification: {
-        "title": "Agradecemos o seu cadastro!",
-        "message": "Para comemorar, aproveite sua primeira oferta exclusiva: Bateria Externa 5000 mAh com 50% OFF!",
-        "url": "https://shop.samsung.com/br/promo/apply?cc=be5000mah&url=https%3A%2F%2Fwww.samsung.com%2Fbr%2Fmobile-accessories%2Fbattery-pack-5000mah-eb-p3020%2F?cid=br_webpush_crm_cad-campanha-boas-vindas-bateria_20180604&utm_source=crm&utm_medium=webpush&utm_campaign=cad-boas-vindas-bateria"
-    }
-    });
-   
-      OneSignal.showHttpPrompt();
-  });
-</script> 
-</head> -->
 
 
 <body>
