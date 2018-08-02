@@ -1,11 +1,11 @@
 <head>
-<!-- Google Tag Manager -->
+<!-- Google Tag Manager 
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-P42B6X9');</script>
-<!-- End Google Tag Manager -->
+<!-- End Google Tag Manager --> -->
 
 <!-- Google Analytics -->
 <!-- <script>
@@ -48,6 +48,18 @@ console.log(ga.q);
     </script> -->
     <!-- End OneSignal Delay prompt --> 
 
+    <!-- OS Typical Setup -->
+        <link rel="manifest" href="/manifest.json" />
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>
+          var OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+            });
+          });
+        </script>
+    <!-- End OS Typical Setup -->
 
    <!--  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
     <script>
@@ -82,7 +94,7 @@ console.log(ga.q);
 
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript)
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P42B6X9"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
@@ -136,7 +148,7 @@ OneSignal.push(function() {
 
 
 
-<!-- Track Users on button click -->
+<!-- Location Tracking on button click -->
     <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
     <script>
@@ -172,5 +184,5 @@ OneSignal.push(function() {
             output.innerHTML = "Unable to retrieve your location";
         }
     </script>
-<!-- END Tracking code -->
+<!-- END Location Tracking code -->
 </body>
