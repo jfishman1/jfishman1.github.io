@@ -106,11 +106,11 @@ console.log(ga.q);
 <!-- GET NOTIFICATION DATA, SEND TO GA -->
 <script>
   OneSignal.push(function() {
-  OneSignal.sendTags({
-            key: 'value',
-            key2: 'value2',
-          });
-)};
+    OneSignal.sendTags({
+      key: 'value',
+      key2: 'value2',
+    });
+  });
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
     console.log("Received NotificationOpened:");
     console.log(data);
