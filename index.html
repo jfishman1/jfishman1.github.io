@@ -69,7 +69,7 @@ console.log(ga.q);
           
           var OneSignal = window.OneSignal || [];
           if (window.isWebPushOneClick) {
-
+            console.log("isWebPushOneClick: ", isWebPushOneClick);
             OneSignal.push(function() {
                 var h = OneSignal.init({
                     appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
@@ -83,6 +83,7 @@ console.log(ga.q);
                 });
             });
         } else {
+          console.log("isWebPushOneClick: ", isWebPushOneClick);
             OneSignal.push(function() {
                 var h = OneSignal.init({
                     appId: "3beb3078-e0f1-4629-af17-fde833b9f716"
