@@ -67,11 +67,11 @@ console.log(ga.q);
             state: "c.User.State"
         };
           
-          var d = window.OneSignal || [];
+          var OneSignal = window.OneSignal || [];
           if (window.isWebPushOneClick) {
 
-            d.push(function() {
-                var h = d.init({
+            OneSignal.push(function() {
+                var h = OneSignal.init({
                     appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
                     autoregister: true
                 });
@@ -79,19 +79,19 @@ console.log(ga.q);
                     return;
                 }
                 h.then(function() {
-                    d.sendTags(f);
+                    OneSignal.sendTags(f);
                 });
             });
         } else {
-            d.push(function() {
-                var h = d.init({
-                    appId: b
+            OneSignal.push(function() {
+                var h = OneSignal.init({
+                    appId: "3beb3078-e0f1-4629-af17-fde833b9f716"
                 });
                 if (!h) {
                     return;
                 }
                 h.then(function() {
-                    d.sendTags(f);
+                    OneSignal.sendTags(f);
                 });
             });
         }
