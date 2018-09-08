@@ -27,7 +27,8 @@
   OneSignal.push(function() {
     OneSignal.isPushNotificationsEnabled(function(isEnabled) {
       console.log("Push enabled on Notify.tech: " + isEnabled);
-      window.parent.postMessage(isEnabled, "*");  
+      var parentwindow = window.parent;
+      parentwindow.postMessage(isEnabled, "*");  
     });
   });
   </script>
