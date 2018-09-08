@@ -35,8 +35,11 @@
       // Make sure you are sending a string, and to stringify JSON
       window.parent.postMessage(msg, '*');
     };
+
+    sendMessage("TEST")
+    
     bindEvent(window, 'message', function(e) {
-      sendMessage("TEST")
+      
       OneSignal.isPushNotificationsEnabled(function(isEnabled){
         console.log("push is enabled on notify.tech site: " + isEnabled);
         sendMessage(isEnabled);
@@ -57,9 +60,12 @@
 -->
 <script>  
   function bindEvent(element, eventName, eventHandler) {
+    console.log("inside bind event")
     if (element.addEventListener){
+      console.log("inside 1")
         element.addEventListener(eventName, eventHandler, false);
     } else if (element.attachEvent) {
+      console.log("inside 2")
         element.attachEvent('on' + eventName, eventHandler);
     }
   }
