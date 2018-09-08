@@ -48,7 +48,13 @@
       // Send random message data on every button click
       bindEvent(messageButton, 'click', function (e) {
           var random = Math.random();
-          sendMessage('' + random);
+          //sendMessage('' + random);
+          OneSignal.push(function() {
+            OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+              sendMessage(isEnabled)   
+            });
+          });
       });
+      
   </script>
 </body>
