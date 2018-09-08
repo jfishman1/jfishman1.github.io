@@ -20,93 +20,35 @@
 
 </head>
 <body>
-<h1>OneSignal Example</h1>
+  <h1>Hello there, i'm an iframe</h1>
+  <p>Send Message: <button id="message_button">Hi parent</button></p>
+  <p>Got Message:</p>
+  <div id="results"></div>
 
-<iframe src="http://127.0.0.1:8080" style="display:none;" id='iframe' name='example'></iframe>
-<!--
-  var iframeSource = "https://notify.tech";
-  var iframe = document.createElement('iframe');
-  iframe.setAttribute('src', iframeSource);
-  iframe.setAttribute('id', 'the_iframe');
-  iframe.style.display = "none";
-  document.body.appendChild(iframe);
-
-
-  var iframeEl = document.getElementById('the_iframe'),
--->
-<script>  
-  
-  var receiver = document.getElementById('iframe').contentWindow;
-  receiver.postMessage("TEST", '*');
-  /*
-  function bindEvent(element, eventName, eventHandler) {
-    console.log("inside bind event")
-    if (element.addEventListener){
-      console.log("inside 1")
-      console.log("element: " + element)
-      console.log("eventName: " + eventName)
-      console.log("eventHandler: " + eventHandler)
-        element.addEventListener(eventName, eventHandler, false);
-    } else if (element.attachEvent) {
-      console.log("inside 2")
-        element.attachEvent('on' + eventName, eventHandler);
-    }
-  }
-  
-  bindEvent(window, 'message', function(e) {
-        console.log("here2")
-        var data = JSON.stringify(e)
-        console.log(data)
-        console.log("Is user subscribed on Notify.tech event: " + e.data);
-      })
-
-  OneSignal.push(function() {
-    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      console.log("Push enabled on github site: " + isEnabled);  
-      
-    });
-  });
-  */
-</script>
-
-
-
-
-<!-- Location Tracking on button click -->
-    <p><button onclick="geoFindMe()">Show my location</button></p>
-    <div id="out"></div>
-    <script>
-    	var output = document.getElementById("out");
-        function geoFindMe() {
-            if (!navigator.geolocation) {
-                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-                return;
-            }
-            output.innerHTML = "<p>Locating…</p>";
-            navigator.geolocation.getCurrentPosition(success, error);
-        }
-        function success(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-            OneSignal.push(function() {
-                OneSignal.sendTags({
-                    latitude: latitude,
-                    long: longitude
-                });
-            });
-
-            var img = new Image();
-            img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-            output.appendChild(img);
-        }
-
-        function error() {
-            output.innerHTML = "Unable to retrieve your location";
-        }
-    </script>
-<!-- END Location Tracking code -->
+  <script>
+      // addEventListener support for IE8
+      function bindEvent(element, eventName, eventHandler) {
+          if (element.addEventListener) {
+              element.addEventListener(eventName, eventHandler, false);
+          } else if (element.attachEvent) {
+              element.attachEvent('on' + eventName, eventHandler);
+          }
+      }
+      // Send a message to the parent
+      var sendMessage = function (msg) {
+          // Make sure you are sending a string, and to stringify JSON
+          window.parent.postMessage(msg, '*');
+      };
+      var results = document.getElementById('results'),
+          messageButton = document.getElementById('message_button');
+      // Listen to messages from parent window
+      bindEvent(window, 'message', function (e) {
+          results.innerHTML = e.data;
+      });
+      // Send random message data on every button click
+      bindEvent(messageButton, 'click', function (e) {
+          var random = Math.random();
+          sendMessage('' + random);
+      });
+  </script>
 </body>
