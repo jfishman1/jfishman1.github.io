@@ -24,8 +24,8 @@
 
 <iframe src="https://notify.tech" style="display:none;">
   <script>
-    var parentwindow = window.parent;
-    parentwindow.alert("inside the iframe")
+    var parentWindow = window.parent;
+    parentWindow.alert("inside the iframe")
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
         console.log("Push enabled on Notify.tech: " + isEnabled);
