@@ -21,6 +21,7 @@
 </head>
 <body>
 <h1>OneSignal Example</h1>
+
 <iframe src="https://notify.tech" style="display:none;">
   <script>
     function bindEvent(element, eventName, eventHandler) {
@@ -35,6 +36,7 @@
       window.parent.postMessage(msg, '*');
     };
     bindEvent(window, 'message', function(e) {
+      sendMessage("TEST")
       OneSignal.isPushNotificationsEnabled(function(isEnabled){
         console.log("push is enabled on notify.tech site: " + isEnabled);
         sendMessage(isEnabled);
@@ -69,7 +71,9 @@
       
       console.log("here1");
       bindEvent(window, 'message', function(e) {
-        console.log(e.data)
+        console.log("here2")
+        var data = JSON.stringify(e)
+        console.log(data)
         console.log("Is user subscribed on Notify.tech event: " + e.data);
       })
   
