@@ -23,33 +23,6 @@
 <h1>OneSignal Example</h1>
 
 <iframe src="http://127.0.0.1:8080" style="display:none;" name='example'>
-  <script>
-    let win = window.frames.example;
-    win.postMessage('message', '*')
-/*
-    function bindEvent(element, eventName, eventHandler) {
-      if (element.addEventListener){
-        element.addEventListener(eventName, eventHandler, false);
-      } else if (element.attachEvent) {
-        element.attachEvent('on' + eventName, eventHandler);
-      }
-    }
-    var sendMessage = function (msg) {
-      // Make sure you are sending a string, and to stringify JSON
-      window.parent.postMessage(msg, '*');
-    };
-
-    sendMessage("TEST")
-
-    bindEvent(window, 'message', function(e) {
-      
-      OneSignal.isPushNotificationsEnabled(function(isEnabled){
-        console.log("push is enabled on notify.tech site: " + isEnabled);
-        sendMessage(isEnabled);
-      })
-    })
-*/
-  </script>
 </iframe>
 <!--
   var iframeSource = "https://notify.tech";
@@ -63,6 +36,7 @@
   var iframeEl = document.getElementById('the_iframe'),
 -->
 <script>  
+  iframe.window.postMessage("TEST", '*');
   /*
   function bindEvent(element, eventName, eventHandler) {
     console.log("inside bind event")
