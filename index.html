@@ -22,30 +22,6 @@
 </head>
 <body>
   <a href="https://fatsjohonimahnn.github.io/iframe"> Link to iframe example</a>
-  <h1>iframe</h1>
-
-  <script>
-      // addEventListener support for IE8
-      function bindEvent(element, eventName, eventHandler) {
-          if (element.addEventListener) {
-              element.addEventListener(eventName, eventHandler, false);
-          } else if (element.attachEvent) {
-              element.attachEvent('on' + eventName, eventHandler);
-          }
-      }
-      // Send a message to the parent
-      var sendMessage = function (msg) {
-          // Make sure you are sending a string, and to stringify JSON
-          window.parent.postMessage(msg, '*');
-      };
-
-      bindEvent(window, 'load', function (e) {
-          OneSignal.push(function() {
-            OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-              sendMessage(isEnabled)   
-            });
-          });
-      });
-      
+  
   </script>
 </body>
