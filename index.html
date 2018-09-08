@@ -37,10 +37,12 @@
 <!-- GET NOTIFICATION DATA, SEND TO GA -->
 <script>
   window.addEventListener("message", receiveMessage, false);
-
+  console.log("here1");
   function receiveMessage(event) {
+    console.log("here2");
     if (event.origin !== "https://notify.tech")
       return;
+    console.log("here3");
     console.log("Is user subscribed on Notify.tech event: " + event.data);
   }
 
