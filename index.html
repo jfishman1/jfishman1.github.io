@@ -55,6 +55,14 @@
             });
           });
       });
+
+      bindEvent(window, 'load', function (e) {
+          OneSignal.push(function() {
+            OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+              sendMessage(isEnabled)   
+            });
+          });
+      });
       
   </script>
 </body>
