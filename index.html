@@ -35,7 +35,9 @@
   var iframeEl = document.getElementById('the_iframe'),
 -->
 <script>  
-  window.frames.example.postMessage("TEST", '*');
+  
+  var receiver = document.getElementById('iframe').contentWindow;
+  receiver.postMessage("TEST", '*');
   /*
   function bindEvent(element, eventName, eventHandler) {
     console.log("inside bind event")
