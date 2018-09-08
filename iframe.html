@@ -18,29 +18,64 @@
   </script>
 </head>
 <body>
-  <h1>iframe</h1>
-  <script>
-      // addEventListener support for IE8
-      function bindEvent(element, eventName, eventHandler) {
-        if (element.addEventListener) {
-          element.addEventListener(eventName, eventHandler, false);
-        } else if (element.attachEvent) {
-          element.attachEvent('on' + eventName, eventHandler);
-        }
-      }
-      // Send a message to the parent
-      var sendMessage = function (msg) {
-        // Make sure you are sending a string, and to stringify JSON
-        window.parent.postMessage(msg, '*');
-      };
+  <h1>iframe example</h1>
+  <br>
+  <p> This page can be used as an example for cheching a site's origin if the user is subscribed to OneSignal</p>
+  <br>
+  <p> Use this iframe code on the origin in which you want to check for OneSignal subscription</p>
 
-      bindEvent(window, 'load', function (e) {
-        OneSignal.push(function() {
-          OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-            sendMessage(isEnabled)   
-          });
+  <code>
+    <script>
+    //iframe code for sending a message the user is subscribe to github site
+    // addEventListener support for IE8
+    function bindEvent(element, eventName, eventHandler) {
+      if (element.addEventListener) {
+        element.addEventListener(eventName, eventHandler, false);
+      } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, eventHandler);
+      }
+    }
+    // Send a message to the parent
+    var sendMessage = function (msg) {
+      // Make sure you are sending a string, and to stringify JSON
+      window.parent.postMessage(msg, '*');
+    };
+
+    bindEvent(window, 'load', function (e) {
+      OneSignal.push(function() {
+        OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+          sendMessage(isEnabled)   
         });
       });
+    });
+    </script>
+  </code>
+
+  <script>
+  //iframe code for sending a message the user is subscribe to github site
+  // addEventListener support for IE8
+  function bindEvent(element, eventName, eventHandler) {
+    if (element.addEventListener) {
+      element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent('on' + eventName, eventHandler);
+    }
+  }
+  // Send a message to the parent
+  var sendMessage = function (msg) {
+    // Make sure you are sending a string, and to stringify JSON
+    window.parent.postMessage(msg, '*');
+  };
+
+  bindEvent(window, 'load', function (e) {
+    OneSignal.push(function() {
+      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+        sendMessage(isEnabled)   
+      });
+    });
+  });
   </script>
+
+
 </body>
 </html>
