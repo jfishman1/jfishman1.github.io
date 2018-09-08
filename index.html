@@ -35,6 +35,31 @@
 
 <!-- GET NOTIFICATION DATA, SEND TO GA -->
 <script>
+  function bindEvent(element, eventName, eventHandler) {
+    if (element.addEventListener) {
+      element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent('on' + eventName, eventHandler);
+    }
+  }
+  // Create message listener
+  bindEvent(window, 'message', function (e) {
+    console.log("e: " + e);
+    if (typeof e.data.status != 'undefined') {
+      console.log("e is unsubscribed");
+    }
+  });
+var iframe = document.getElementById('subscribe-status');
+if(iframe) {
+iframe.parentNode.removeChild(iframe);
+}
+iframe = document.createElement('iframe');
+iframe.setAttribute('id', 'subscribe-status');
+iframe.setAttribute('style', 'display: none;');
+iframe.setAttribute('src', 'https://localhost:8443/subscribe-status.php');
+document.body.appendChild(iframe);
+
+
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
     console.log("Received NotificationOpened:");
     console.log(data);
