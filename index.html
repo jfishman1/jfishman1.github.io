@@ -61,16 +61,17 @@
         element.attachEvent('on' + eventName, eventHandler);
     }
   }
-  bindEvent(window, 'message', function(e) {
-    console.log(e.data)
-    console.log("Is user subscribed on Notify.tech event: " + e.data);
-  })
+  
 
   OneSignal.push(function() {
     OneSignal.isPushNotificationsEnabled(function(isEnabled) {
       console.log("Push enabled on github site: " + isEnabled);
       
       console.log("here1");
+      bindEvent(window, 'message', function(e) {
+        console.log(e.data)
+        console.log("Is user subscribed on Notify.tech event: " + e.data);
+      })
   
       
     });
