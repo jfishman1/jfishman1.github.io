@@ -21,9 +21,9 @@
 </head>
 <body>
   <h1>Hello there, i'm an iframe</h1>
-  <p>Send Message: <button id="message_button">Hi parent</button></p>
+  <!-- <p>Send Message: <button id="message_button">Hi parent</button></p>
   <p>Got Message:</p>
-  <div id="results"></div>
+  <div id="results"></div> -->
 
   <script>
       // addEventListener support for IE8
@@ -39,22 +39,22 @@
           // Make sure you are sending a string, and to stringify JSON
           window.parent.postMessage(msg, '*');
       };
-      var results = document.getElementById('results'),
-          messageButton = document.getElementById('message_button');
-      // Listen to messages from parent window
-      bindEvent(window, 'message', function (e) {
-          results.innerHTML = e.data;
-      });
-      // Send random message data on every button click
-      bindEvent(messageButton, 'click', function (e) {
-          var random = Math.random();
-          //sendMessage('' + random);
-          OneSignal.push(function() {
-            OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-              sendMessage(isEnabled)   
-            });
-          });
-      });
+      // var results = document.getElementById('results'),
+      //     messageButton = document.getElementById('message_button');
+      // // Listen to messages from parent window
+      // bindEvent(window, 'message', function (e) {
+      //     results.innerHTML = e.data;
+      // });
+      // // Send random message data on every button click
+      // bindEvent(messageButton, 'click', function (e) {
+      //     var random = Math.random();
+      //     //sendMessage('' + random);
+      //     OneSignal.push(function() {
+      //       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      //         sendMessage(isEnabled)   
+      //       });
+      //     });
+      // });
 
       bindEvent(window, 'load', function (e) {
           OneSignal.push(function() {
