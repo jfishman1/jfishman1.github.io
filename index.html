@@ -22,7 +22,7 @@
 <body>
 <h1>OneSignal Example</h1>
 
-<iframe src="https://notify.tech" style="display:none;" name='example'>
+<iframe src="http://127.0.0.1:8080" style="display:none;" name='example'>
   <script>
     let win = window.frames.example;
     win.postMessage('message', '*')
@@ -92,9 +92,6 @@
     });
   });
   */
-  window.addEventListener("message", function(event) {
-    alert("received: " + event.data)
-  })
 </script>
 
 
