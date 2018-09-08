@@ -21,18 +21,30 @@
 </head>
 <body>
 <h1>OneSignal Example</h1>
-
-<iframe src="https://notify.tech" style="display:none;">
-  <script>
-    OneSignal.push(function() {
-      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        console.log("Push enabled on Notify.tech: " + isEnabled);
-        window.parent.postMessage(isEnabled, '*');  
+<script>
+  function bindEvent(element, eventName, eventHandler) {
+    if (element.addEventListener){
+      element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent('on' + eventName, eventHandler);
+    }
+  }
+  var iframeSource = "https://notify.tech";
+  var iframe = document.createElement('iframe');
+  iframe.setAttribute('src', iframeSource);
+  iframe.setAttribute('id', 'the_iframe');
+  iframe.style.display = "none";
+  document.body.appendChild(iframe);
+  
+  OneSignal.push(function() {
+    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      console.log("Push enabled on github site: " + isEnabled);
+      iframe.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+        console.log("push is enabled on notify.tech site: " + isEnabled)
       });
     });
-  </script>
-</iframe>
-
+  });
+</script>
 
 <!-- GET iFrame message-->
 <script>
