@@ -21,9 +21,8 @@
   <h1>iframe example</h1>
   <p> This page can be used as an example for cheching a site's origin if the user is subscribed to OneSignal</p>
   <p> Use this iframe code on the origin in which you want to check for OneSignal subscription</p>
-
-  <xmp>
-    //iframe code for sending a message the user is subscribe to github site
+  <pre>
+  <code>
     // addEventListener support for IE8
     function bindEvent(element, eventName, eventHandler) {
       if (element.addEventListener) {
@@ -34,7 +33,6 @@
     }
     // Send a message to the parent
     var sendMessage = function (msg) {
-      // Make sure you are sending a string, and to stringify JSON
       window.parent.postMessage(msg, '*');
     };
 
@@ -45,7 +43,8 @@
         });
       });
     });
-  </xmp>
+  </code>
+  </pre>
 
   <script>
   //iframe code for sending a message the user is subscribe to github site
