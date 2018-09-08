@@ -24,13 +24,14 @@
 
 <iframe src="https://notify.tech" style="display:none;">
   <script>
-  OneSignal.push(function() {
-    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      console.log("Push enabled on Notify.tech: " + isEnabled);
-      var parentwindow = window.parent;
-      parentwindow.postMessage(isEnabled, "*");  
+    var parentwindow = window.parent;
+    parentwindow.alert("inside the iframe")
+    OneSignal.push(function() {
+      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+        console.log("Push enabled on Notify.tech: " + isEnabled);
+        parentwindow.postMessage(isEnabled, "*");  
+      });
     });
-  });
   </script>
 </iframe>
 
