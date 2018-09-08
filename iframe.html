@@ -22,27 +22,22 @@
   <p> This page can be used as an example for cheching a site's origin if the user is subscribed to OneSignal</p>
   <p> Use this code on the origin in which you want to check for OneSignal subscription. Used on this origin for example:</p>
   <pre>
-  <code>
-    function bindEvent(element, eventName, eventHandler) {
-      if (element.addEventListener) {
+    <code>
+      function bindEvent(element, eventName, eventHandler) {
         element.addEventListener(eventName, eventHandler, false);
-      } else if (element.attachEvent) {
-        element.attachEvent('on' + eventName, eventHandler);
       }
-    }
-    // Send a message to the parent
-    var sendMessage = function (msg) {
-      window.parent.postMessage(msg, '*');
-    };
-
-    bindEvent(window, 'load', function (e) {
-      OneSignal.push(function() {
-        OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-          sendMessage(isEnabled)   
+      // Send a message to the parent
+      var sendMessage = function (msg) {
+        window.parent.postMessage(msg, '*');
+      };
+      bindEvent(window, 'load', function (e) {
+        OneSignal.push(function() {
+          OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+            sendMessage(isEnabled)   
+          });
         });
       });
-    });
-  </code>
+    </code>
   </pre>
 
   <script>
@@ -53,7 +48,6 @@
   var sendMessage = function (msg) {
     window.parent.postMessage(msg, '*');
   };
-
   bindEvent(window, 'load', function (e) {
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
@@ -64,6 +58,22 @@
   </script>
 
   <p>On the other origin in which you want to check subscription status here, open this URL in an iframe to check subscription status like so:</p>
+  <pre>
+    <code>
+      function bindEvent(element, eventName, eventHandler) {
+        element.addEventListener(eventName, eventHandler, false);
+      }
+      var iframeSource = 'https://fatsjohonimahnn.github.io/iframe';
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('src', iframeSource);
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      bindEvent(window, 'message', function (e) {
+        results.innerHTML = e.data;
+        console.log('user is subscribed: ', e.data);
+      });
+    </code>
+  </pre>
 
 
 </body>
