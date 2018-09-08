@@ -24,22 +24,21 @@
 
 <iframe src="https://notify.tech" style="display:none;">
   <script>
-    var parentWindow = window.parent;
-    parentWindow.alert("inside the iframe")
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
         console.log("Push enabled on Notify.tech: " + isEnabled);
-        parentwindow.postMessage(isEnabled, "*");  
+        window.parent.postMessage(isEnabled, '*');  
       });
     });
   </script>
 </iframe>
 
 
-<!-- GET NOTIFICATION DATA, SEND TO GA -->
+<!-- GET iFrame message-->
 <script>
-  window.addEventListener("message", receiveMessage, false);
+  window.addEventListener('message', receiveMessage, false);
   console.log("here1");
+  
   function receiveMessage(event) {
     console.log("here2");
     if (event.origin !== "https://notify.tech")
@@ -47,47 +46,7 @@
     console.log("here3");
     console.log("Is user subscribed on Notify.tech event: " + event.data);
   }
-
-OneSignal.push(["addListenerForNotificationOpened", function(data) {
-    console.log("Received NotificationOpened:");
-    console.log(data);
-    console.log(data.id);
-    console.log(data.heading);
-    OneSignal.getUserId( function(userId) {
-            console.log("OneSignal User ID:", userId);
-            // Make a POST call to your server with the notification data and userId
-            //ga('send', 'event', 'Notification_Clicked', data.id, userId);
-        });
-}]);
 </script>
-
-
-
-<!-- GET ONESIGNAL USERID -->
-<script>
-OneSignal.push(function() {
-    // Occurs when the user's subscription changes to a new value.
-    OneSignal.on('subscriptionChange', function (isSubscribed) {
-        console.log("The user's subscription status has change, isSubscribed:", isSubscribed);
-        OneSignal.getUserId( function(userId) {
-            console.log("OneSignal User ID:", userId);
-            // Make a POST call to your server with the user ID
-            ga('send', 'event', 'isUserSubscribed', isSubscribed, userId);
-        });
-    });
-});
-</script>
-
-
-<!-- <p><button onclick="provideUserConsent()">Provide User Consent</button></p>
-<script>
-    function provideUserConsent() {
-        OneSignal.push(function() {
-            OneSignal.provideUserConsent(true);
-        });
-    }
-</script> -->
-
 
 
 
