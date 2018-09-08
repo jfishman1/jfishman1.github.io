@@ -1,144 +1,39 @@
 <head>
-<!-- Google Tag Manager 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P42B6X9');</script>
-<!-- End Google Tag Manager --> -->
-
-<!-- Google Analytics -->
-<!-- <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-106423818-1', 'auto');
-ga('send', 'pageview');
-console.log(ga.q);
-</script> -->
-<!-- End Google Analytics -->
-
 <a href="momenta.html"></a>
-    
-    <!-- OneSignal Delay a prompt -->
-    <!-- <script data-cfasync="false">
-        window.OneSignal = window.OneSignal || [];
-        /* In milliseconds, time to wait before prompting user. This time is relative to right after the user presses <ENTER> on the address bar and navigates to your page */
-        var notificationPromptDelay = 30000;
-        /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
-        window.OneSignal.push(function() {
-            /* Use navigation timing to find out when the page actually loaded instead of using setTimeout() only which can be delayed by script execution */
-            var navigationStart = window.performance.timing.navigationStart;
-            /* Get current time */
-            var timeNow = Date.now();
-            /* Prompt the user if enough time has elapsed */
-            setTimeout(promptAndSubscribeUser, Math.max(notificationPromptDelay - (timeNow - navigationStart), 0));
-        });
-        function promptAndSubscribeUser() {
-            /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
-            window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-                if (!isEnabled) {
-                    //window.OneSignal.showHttpPrompt();
-                    window.OneSignal.registerForPushNotifications();
-                }
-            });
-        }
-    </script> -->
-    <!-- End OneSignal Delay prompt --> 
-
-    <!-- OS Typical Setup -->
-        <link rel="manifest" href="/manifest.json" />
-        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-        <script>
-          // var OneSignal = window.OneSignal || [];
-          // OneSignal.push(function() {
-          //   OneSignal.init({
-          //     appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-          //     //allowLocalhostAsSecureOrigin: true,
-          //   });
-          // });
-          var isWebPushOneClick = false;
-          var f = {
-            gmt: "c.UserInternal.GlobalMemberToken",
-            firstName: "c.User.FirstName",
-            city: "c.User.City",
-            state: "c.User.State"
-        };
-          
-          var OneSignal = window.OneSignal || [];
-          if (window.isWebPushOneClick) {
-            console.log("isWebPushOneClick: ", isWebPushOneClick);
-            OneSignal.push(function() {
-                var h = OneSignal.init({
-                    appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-                    autoregister: true
-                });
-                if (!h) {
-                    return;
-                }
-                h.then(function() {
-                    OneSignal.sendTags(f);
-                });
-            });
-        } else {
-          console.log("isWebPushOneClick: ", isWebPushOneClick);
-            OneSignal.push(function() {
-                var h = OneSignal.init({
-                    appId: "3beb3078-e0f1-4629-af17-fde833b9f716"
-                });
-                if (!h) {
-                    return;
-                }
-                h.then(function() {
-                    OneSignal.sendTags(f);
-                });
-            });
-        }
 
 
-        </script>
-    <!-- End OS Typical Setup -->
-
-   <!--  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-    <script>
-        var OneSignal = window.OneSignal || [];
-        OneSignal.push(["init", {
-            appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-            autoRegister: false,
-            notifyButton: {
-                enable: true /* Set to false to hide */
-            },
-            welcomeNotification: {
-                "title": "My Custom Title",
-                "message": "Thanks for subscribing!",
-                // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
-            },
-            requiresUserPrivacyConsent: true,
-            promptOptions: {
-                /* actionMessage limited to 90 characters */
-                actionMessage: "We'd like to show you notifications for the latest news and updates.",
-                /* acceptButtonText limited to 15 characters */
-                acceptButtonText: "ALLOW",
-                /* cancelButtonText limited to 15 characters */
-                cancelButtonText: "NO THANKS"
-            }
-        }]);
-        // OneSignal.push(function() {
-        //   OneSignal.showHttpPrompt();
-        // });
-    </script> -->
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+      autoRegister: false,
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
 
 
-
-
+</head>
 <body>
-    <!-- Google Tag Manager (noscript)
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P42B6X9"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 <h1>OneSignal Example</h1>
+
+<iframe src="https://notify.tech">
+  <script>
+  OneSignal.push(function() {
+    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      if (isEnabled)
+        console.log("Push notifications are enabled on Notify.tech!");
+      else
+        console.log("Push notifications are NOT enabled Notify.tech.");    
+    });
+  });
+  </script>
+</iframe>
 
 
 <!-- GET NOTIFICATION DATA, SEND TO GA -->
@@ -151,7 +46,7 @@ OneSignal.push(["addListenerForNotificationOpened", function(data) {
     OneSignal.getUserId( function(userId) {
             console.log("OneSignal User ID:", userId);
             // Make a POST call to your server with the notification data and userId
-            ga('send', 'event', 'Notification_Clicked', data.id, userId);
+            //ga('send', 'event', 'Notification_Clicked', data.id, userId);
         });
 }]);
 </script>
