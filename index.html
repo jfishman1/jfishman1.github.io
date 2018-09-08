@@ -22,8 +22,11 @@
 <body>
 <h1>OneSignal Example</h1>
 
-<iframe src="https://notify.tech" style="display:none;">
+<iframe src="https://notify.tech" style="display:none;" name='example'>
   <script>
+    let win = window.frames.example;
+    win.postMessage('message', '*')
+/*
     function bindEvent(element, eventName, eventHandler) {
       if (element.addEventListener){
         element.addEventListener(eventName, eventHandler, false);
@@ -45,6 +48,7 @@
         sendMessage(isEnabled);
       })
     })
+*/
   </script>
 </iframe>
 <!--
@@ -59,6 +63,7 @@
   var iframeEl = document.getElementById('the_iframe'),
 -->
 <script>  
+  /*
   function bindEvent(element, eventName, eventHandler) {
     console.log("inside bind event")
     if (element.addEventListener){
@@ -73,24 +78,24 @@
     }
   }
   
-
-  OneSignal.push(function() {
-    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      console.log("Push enabled on github site: " + isEnabled);
-      
-      console.log("here1");
-      bindEvent(window, 'message', function(e) {
+  bindEvent(window, 'message', function(e) {
         console.log("here2")
         var data = JSON.stringify(e)
         console.log(data)
         console.log("Is user subscribed on Notify.tech event: " + e.data);
       })
-  
+
+  OneSignal.push(function() {
+    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      console.log("Push enabled on github site: " + isEnabled);  
       
     });
   });
+  */
+  window.addEventListener("message", function(event) {
+    alert("received: " + event.data)
+  })
 </script>
-
 
 
 
