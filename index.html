@@ -21,43 +21,54 @@
 </head>
 <body>
 <h1>OneSignal Example</h1>
-<script>
-  function bindEvent(element, eventName, eventHandler) {
-    if (element.addEventListener){
-      element.addEventListener(eventName, eventHandler, false);
-    } else if (element.attachEvent) {
-      element.attachEvent('on' + eventName, eventHandler);
+<iframe src="https://notify.tech" style="display:none;">
+  <script>
+    function bindEvent(element, eventName, eventHandler) {
+      if (element.addEventListener){
+        element.addEventListener(eventName, eventHandler, false);
+      } else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, eventHandler);
+      }
     }
-  }
+    var sendMessage = function (msg) {
+      // Make sure you are sending a string, and to stringify JSON
+      window.parent.postMessage(msg, '*');
+    };
+    bindEvent(window, 'message', function(e) {
+      OneSignal.isPushNotificationsEnabled(function(isEnabled){
+        console.log("push is enabled on notify.tech site: " + isEnabled);
+        sendMessage(isEnabled);
+      })
+    })
+  </script>
+</iframe>
+<!--
   var iframeSource = "https://notify.tech";
   var iframe = document.createElement('iframe');
   iframe.setAttribute('src', iframeSource);
   iframe.setAttribute('id', 'the_iframe');
   iframe.style.display = "none";
   document.body.appendChild(iframe);
-  
+
+
+  var iframeEl = document.getElementById('the_iframe'),
+-->
+<script>  
   OneSignal.push(function() {
     OneSignal.isPushNotificationsEnabled(function(isEnabled) {
       console.log("Push enabled on github site: " + isEnabled);
-      iframe.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        console.log("push is enabled on notify.tech site: " + isEnabled)
+      window.addEventListener('message', receiveMessage, false);
+      console.log("here1");
+  
+      function receiveMessage(event) {
+        console.log("here2");
+        if (event.origin !== "https://notify.tech")
+          return;
+        console.log("here3");
+        console.log("Is user subscribed on Notify.tech event: " + event.data);
       });
     });
   });
-</script>
-
-<!-- GET iFrame message-->
-<script>
-  window.addEventListener('message', receiveMessage, false);
-  console.log("here1");
-  
-  function receiveMessage(event) {
-    console.log("here2");
-    if (event.origin !== "https://notify.tech")
-      return;
-    console.log("here3");
-    console.log("Is user subscribed on Notify.tech event: " + event.data);
-  }
 </script>
 
 
