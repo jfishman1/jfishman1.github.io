@@ -26,7 +26,8 @@
   <script>
   OneSignal.push(function() {
     OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      console.log("Push enabled on Notify.tech: " + isEnabled);    
+      console.log("Push enabled on Notify.tech: " + isEnabled);
+      window.parent.postMessage(isEnabled, "*");  
     });
   });
   </script>
@@ -35,30 +36,13 @@
 
 <!-- GET NOTIFICATION DATA, SEND TO GA -->
 <script>
-  function bindEvent(element, eventName, eventHandler) {
-    if (element.addEventListener) {
-      element.addEventListener(eventName, eventHandler, false);
-    } else if (element.attachEvent) {
-      element.attachEvent('on' + eventName, eventHandler);
-    }
-  }
-  // Create message listener
-  bindEvent(window, 'message', function (e) {
-    console.log("e: " + e);
-    if (typeof e.data.status != 'undefined') {
-      console.log("e is unsubscribed");
-    }
-  });
-var iframe = document.getElementById('subscribe-status');
-if(iframe) {
-iframe.parentNode.removeChild(iframe);
-}
-iframe = document.createElement('iframe');
-iframe.setAttribute('id', 'subscribe-status');
-iframe.setAttribute('style', 'display: none;');
-iframe.setAttribute('src', 'https://localhost:8443/subscribe-status.php');
-document.body.appendChild(iframe);
+  window.addEventListener("message", receiveMessage, false);
 
+  function receiveMessage(event) {
+    if (event.origin !== "https://notify.tech")
+      return;
+    console.log("Is user subscribed on Notify.tech event: " + event.data);
+  }
 
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
     console.log("Received NotificationOpened:");
