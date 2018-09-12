@@ -58,7 +58,7 @@
   bindEvent(window, 'message', function (e) {
     console.log("Message data: " + e.data)
     OneSignal.push(function() {
-      OneSignal.setSubscription(e.data);
+      OneSignal.setSubscription(false);
     });
   });
   //------------------------
