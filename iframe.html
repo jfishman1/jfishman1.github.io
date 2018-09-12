@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>iframe Example</title>
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
@@ -18,9 +17,9 @@
   </script>
 </head>
 <body>
-  <h1>iframe example</h1>
-  <p> This page can be used as an example for cheching a site's origin if the user is subscribed to OneSignal</p>
-  <p> Use this code on the origin in which you want to check for OneSignal subscription. Used on this origin for example:</p>
+  <h1>Cross-Origin Subscription Tracking Example</h1>
+  <p>This page can be used as an example for checking a site's origin if the user is subscribed to OneSignal.</p>
+  <p>Use this code on the origin in which you want to check for OneSignal subscription. Example:</p>
   <pre>
     <code>
       function bindEvent(element, eventName, eventHandler) {
@@ -51,13 +50,20 @@
   bindEvent(window, 'load', function (e) {
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        sendMessage(isEnabled)   
+        sendMessage(isEnabled)
       });
     });
   });
+  //--------------------------
+  bindEvent(window, 'message', function (e) {
+    OneSignal.push(function() {
+      OneSignal.setSubscription(false);
+    });
+  });
+  //------------------------
   </script>
 
-  <p>On the other origin in which you want to check subscription status here, open this URL in an iframe to check subscription status like so:</p>
+  <p>On the other/main origin in which you want to check subscription status here, open this URL in an iframe to check subscription status like so:</p>
   <pre>
     <code>
       function bindEvent(element, eventName, eventHandler) {
@@ -74,6 +80,9 @@
       });
     </code>
   </pre>
+
+  <p>Subscription Permission requests for push notifications must be perfomred at the top level window. Subscribing users to a different origin than the one currently on is not permitted by the browser.</p>
+  <p>If we are on a different origin then the one we want users to be subscribd to, we can open a new tab or window to the origin and prompt for subscription.</p>
 
 
 </body>
