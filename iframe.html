@@ -54,14 +54,13 @@
       });
     });
   });
-  //--------------------------
+  // receive a message from site2 to unsubscribe user from site1
   bindEvent(window, 'message', function (e) {
     console.log("Message data: " + e.data)
     OneSignal.push(function() {
       OneSignal.setSubscription(false);
     });
   });
-  //------------------------
   </script>
 
   <p>On the other/main origin in which you want to check subscription status here, open this URL in an iframe to check subscription status like so:</p>
