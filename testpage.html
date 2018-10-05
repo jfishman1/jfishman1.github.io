@@ -24,7 +24,7 @@ OneSignal.push(function() {
 
 OneSignal.push(function() {
   OneSignal.init({
-    appId: "13a16860-6085-4e4d-a9a7-25247ec888e6",
+    appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
     autoRegister: false,
     notifyButton: {
       enable: false,
@@ -47,9 +47,9 @@ OneSignal.push(function() {
 
 window.OneSignal = window.OneSignal || [];
 var PROMPT_FOR_NOTIFICATIONS_AFTER_MS = 20 * 1000;
-
+console.log("hasPromptedForOneSignalNotifications",hasPromptedForOneSignalNotifications)
 function promptForNotificationsOncePerSession() {
-  var hasPrompted = sessionStorage.getItem("hasPromptedForOneSignalNotifications");
+  var hasPrompted = sessionStorage.getItem();
   if (hasPrompted !== "true") {
     OneSignal.push(function() {
       OneSignal.showHttpPrompt({
