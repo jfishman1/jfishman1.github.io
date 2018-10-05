@@ -2,11 +2,83 @@
 <html>
 <head>
   <title></title>
-  <link rel="manifest" href="/manifest.json" />
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    var OneSignal=window.OneSignal||[];window.REGISTRATION||OneSignal.push(function(){OneSignal.init({appId:"3beb3078-e0f1-4629-af17-fde833b9f716",autoRegister:!0,notifyButton:{enable:!0}})})
-  </script>
+
+<!-- START TEST CODE -->
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+var OneSignal = window.OneSignal || [];
+OneSignal.push(function() {
+  OneSignal.on('subscriptionChange', function (isSubscribed) {
+    console.log("The user's subscription state is now:",isSubscribed);
+    OneSignal.push(function() {
+      OneSignal.sendTags({
+        Subscription_Page_URL: window.location.href
+      }).then(function(tagsSent) {
+        // Callback called when tags have finished sending
+        console.log(tagsSent);  
+      });
+    });
+  });
+});
+
+OneSignal.push(function() {
+  OneSignal.init({
+    appId: "13a16860-6085-4e4d-a9a7-25247ec888e6",
+    autoRegister: false,
+    notifyButton: {
+      enable: false,
+    },
+    welcomeNotification: {
+      disable: true
+    },
+    promptOptions: {
+      /* actionMessage limited to 90 characters */
+      actionMessage: "We'd like to show you notifications for the latest news and updates From UK UAT", //make sure to keep ""
+      /* acceptButtonText limited to 15 characters */
+      acceptButtonText: "Allow",
+      /* cancelButtonText limited to 15 characters */
+      cancelButtonText: "No Thanks"
+    }
+ });
+});
+</script>
+<script data-cfasync="false">
+
+window.OneSignal = window.OneSignal || [];
+var PROMPT_FOR_NOTIFICATIONS_AFTER_MS = 20 * 1000;
+
+function promptForNotificationsOncePerSession() {
+  var hasPrompted = sessionStorage.getItem("hasPromptedForOneSignalNotifications");
+  if (hasPrompted !== "true") {
+    OneSignal.push(function() {
+      OneSignal.showHttpPrompt({
+        force: true // Overrides OneSignal's back off limits.
+      });
+      sessionStorage.setItem("hasPromptedForOneSignalNotifications", "true");
+    });
+  }
+}
+
+$(window).ready(function() {
+  timePageLoaded = new Date().getTime();
+  var sessionTime = sessionStorage.getItem('sessionTime');
+  var promptAfter = PROMPT_FOR_NOTIFICATIONS_AFTER_MS - sessionTime;
+  if (promptAfter < 0)
+    promptAfter = 0;
+  setTimeout(promptForNotificationsOncePerSession, promptAfter);
+});
+
+window.addEventListener('beforeunload', function(e) {
+  var curTime = new Date().getTime();
+  var timeOnPage = curTime - timePageLoaded;
+  var sessionTime = Number(sessionStorage.getItem('sessionTime'));
+  var totalSessionTime = timeOnPage + sessionTime;
+  sessionStorage.setItem('sessionTime', totalSessionTime);
+
+});
+</script>
+<!-- END TEST CODE -->
 </head>
 <body>
 
