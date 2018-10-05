@@ -65,7 +65,8 @@ function promptForNotificationsOncePerSession() {
   }
 }
 
-$(window).ready(function() {
+//$(window).ready(function() {
+window.ready(function() {
   timePageLoaded = new Date().getTime();
   var sessionTime = sessionStorage.getItem('sessionTime');
   var promptAfter = PROMPT_FOR_NOTIFICATIONS_AFTER_MS - sessionTime;
