@@ -41,6 +41,10 @@ OneSignal.push(function() {
       cancelButtonText: "No Thanks"
     }
  });
+  // first check if browser permission is allowed
+  if (Notification.permission === "granted") {
+    OneSignal.registerForPushNotifications();
+  }
 });
 </script>
 <script data-cfasync="false">
@@ -49,10 +53,7 @@ window.OneSignal = window.OneSignal || [];
 var PROMPT_FOR_NOTIFICATIONS_AFTER_MS = 20 * 1000;
 
 function promptForNotificationsOncePerSession() {
-// first check if browser permission is allowed
-  if (Notification.permission === "Allow") {
-    OneSignal.registerForPushNotifications();
-  } else {
+
     var hasPrompted = sessionStorage.getItem();
     if (hasPrompted !== "true") {
       OneSignal.push(function() {
@@ -62,17 +63,20 @@ function promptForNotificationsOncePerSession() {
         sessionStorage.setItem("hasPromptedForOneSignalNotifications", "true");
       });
     }
-  }
 }
 
-//$(window).ready(function() {
+$(window).ready(function() {
+  // first check if browser permission is allowed
+  if (Notification.permission === "granted") {
+    return;
+  }
   timePageLoaded = new Date().getTime();
   var sessionTime = sessionStorage.getItem('sessionTime');
   var promptAfter = PROMPT_FOR_NOTIFICATIONS_AFTER_MS - sessionTime;
   if (promptAfter < 0)
     promptAfter = 0;
   setTimeout(promptForNotificationsOncePerSession, promptAfter);
-//});
+});
 
 window.addEventListener('beforeunload', function(e) {
   var curTime = new Date().getTime();
