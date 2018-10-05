@@ -47,16 +47,21 @@ OneSignal.push(function() {
 
 window.OneSignal = window.OneSignal || [];
 var PROMPT_FOR_NOTIFICATIONS_AFTER_MS = 20 * 1000;
-console.log("hasPromptedForOneSignalNotifications",hasPromptedForOneSignalNotifications)
+
 function promptForNotificationsOncePerSession() {
-  var hasPrompted = sessionStorage.getItem();
-  if (hasPrompted !== "true") {
-    OneSignal.push(function() {
-      OneSignal.showHttpPrompt({
-        force: true // Overrides OneSignal's back off limits.
+// first check if browser permission is allowed
+  if (Notification.permission === "Allow") {
+    OneSignal.registerForPushNotifications();
+  } else {
+    var hasPrompted = sessionStorage.getItem();
+    if (hasPrompted !== "true") {
+      OneSignal.push(function() {
+        OneSignal.showHttpPrompt({
+          force: true // Overrides OneSignal's back off limits.
+        });
+        sessionStorage.setItem("hasPromptedForOneSignalNotifications", "true");
       });
-      sessionStorage.setItem("hasPromptedForOneSignalNotifications", "true");
-    });
+    }
   }
 }
 
