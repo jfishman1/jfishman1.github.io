@@ -38,10 +38,14 @@ OneSignal.push(function() {
   }
   */
   });
-  OneSignal.on("addListenerForNotificationOpened", function(data) {
+  /*OneSignal.on("addListenerForNotificationOpened", function(data) {
     console.log("Received NotificationOpened:");
     console.log(data);
-  });
+  });*/
+  OneSignal.push(["addListenerForNotificationOpened", function(data) {
+    console.log("Received NotificationOpened:");
+    console.log(data);
+  }]);
 });
 
 
