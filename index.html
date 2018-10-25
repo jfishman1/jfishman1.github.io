@@ -20,6 +20,31 @@
   <h1> OneSignal Examples </h1>
   <a href="https://fatsjohonimahnn.github.io/iframe">Cross-origin Subscription tracking Example</a>
   <a href='https://fatsjohonimahnn.github.io/geolocation'>GeoLocation example</a>
-  
+ 
+
+
+
+<script type="text/javascript">
+OneSignal.push(function() {
+  OneSignal.on('notificationDisplay', function (event) {
+  console.log('OneSignal notification displayed:', event);
+  /*
+  {
+      "id": "ce31de29-e1b0-4961-99ee-080644677cd7",
+      "heading": "OneSignal Test Message",
+      "content": "This is an example notification.",
+      "url": "https://onesignal.com?_osp=do_not_open",
+      "icon": "https://onesignal.com/images/notification_logo.png"
+  }
+  */
+  });
+  OneSignal.on("addListenerForNotificationOpened", function(data) {
+    console.log("Received NotificationOpened:");
+    console.log(data);
+  });
+});
+
+
+
   </script>
 </body>
