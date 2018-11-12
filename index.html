@@ -1,6 +1,5 @@
 <head>
-<!--<a href="momenta.html"></a>-->
-
+  <title>OneSignal Examples Page</title>
 
 </head>
 <body>
@@ -14,19 +13,16 @@
 <script>
 OneSignal.push(function() {
   OneSignal.on('notificationDisplay', function (event) {
-  console.log('OneSignal notification displayed:', event);
-  /*
-  {
-      "id": "ce31de29-e1b0-4961-99ee-080644677cd7",
-      "heading": "OneSignal Test Message",
-      "content": "This is an example notification.",
-      "url": "https://onesignal.com?_osp=do_not_open",
-      "icon": "https://onesignal.com/images/notification_logo.png"
-  }
-  */
+    console.log('OneSignal notification displayed:', event);
+    console.log('OneSignal notification id:', event.id);
+    console.log('OneSignal notification title:', event.heading);
+    console.log('OneSignal notification content:', event.content);
+    console.log('OneSignal notification url:', event.url);
+    console.log('OneSignal notification icon:', event.icon);
   });
-  </script>
-  
+});
+</script>
+
   <div>
     <button type="button" onclick="buttonClick()">Tag Event Trigger</button>
   </div>
