@@ -25,17 +25,9 @@ OneSignal.push(function() {
   }
   */
   });
-  OneSignal.on("addListenerForNotificationOpened", function(data) {
-    console.log("Received NotificationOpened 1 :");
-    console.log(data);
-  });
-  OneSignal.push(["addListenerForNotificationOpened", function(data) {
-    console.log("Received NotificationOpened 2 :");
-    console.log(data);
-  }]);
-});
-
-
-
+  function buttonClick() {
+    alert("button Clicked");
+  }
   </script>
+  <button onclick="buttonClick()">Button Event Trigger</button>
 </body>
