@@ -24,6 +24,11 @@
     </ul>
   </div>
 <script>
+  OneSignal.push(["addListenerForNotificationOpened", function(data) {
+  console.log("Received NotificationOpened:");
+  console.log(data);
+}]);
+
 OneSignal.push(function() {
   OneSignal.on('notificationDisplay', function (event) {
     console.log('OneSignal notification displayed:', event);
