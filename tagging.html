@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OneSignal Tagging Example</title>
+
+<link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+    });
+  });
+</script>
+
+</head>
+<body>
+  <h1> OneSignal Tagging Examples </h1>
+
+  <script>
+    // Check subscription and add tag
+  </script>
+
+
+  <div>
+    <button type="button" onclick="tagButtonClick()">Tag User</button>
+    <button type="button" onclick="checkTagButtonClick()">Check Tags</button>
+    <button type="button" onclick="deleteTagButtonClick()">Delete Tags</button>
+  </div>
+
+  <script>
+    // Tag User
+    function tagButtonClick() {
+      console.log("Tag button clicked");
+    }
+
+    // Check Tags
+    function checkTagButtonClick() {
+      console.log("Check Tag button clicked");
+    }
+
+    // Delete Tags
+    function deleteTagButtonClick() {
+      console.log("Delete Tag button clicked");
+    }
+
+
+  </script>
+
+</body>
+</html>
