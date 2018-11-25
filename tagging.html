@@ -36,8 +36,8 @@
 
   <div>
     <button type="button" onclick="tagButtonClick()">Tag VIP User</button>
-    <button type="button" onclick="checkTagButtonClick()">Check Tags</button>
-    <button type="button" onclick="deleteTagButtonClick()">Delete VIP Tag</button>
+    <button type="button" onclick="checkTagButtonClick()">Check and Update Tags</button>
+    <button type="button" onclick="deleteTagButtonClick()">Delete Tag</button>
   </div>
 
   <script>
@@ -45,18 +45,23 @@
     function tagButtonClick() {
       console.log("VIP Tag button clicked");
       OneSignal.push(function() {
-        OneSignal.sendTag("vip", "1").then(function(tagsSent) {
+        OneSignal.sendTag("user_type", "vip").then(function(tagsSent) {
           console.log("tagsSent: " + tagsSent);
         });  
       });
     }
 
-    // Check Tags
+    // Check and update Tags
     function checkTagButtonClick() {
       console.log("Check Tag button clicked");
       OneSignal.push(function() {
         OneSignal.getTags(function(tags) {
           console.log("This user has tags: " + tags);
+          if (tags.user_type === "vip") {
+            OneSignal.sendTag("user_type", "basic");
+          } else if (tags.user_type === "basic") {
+            OneSignal.sendTag("user_type", "");
+          }
         });
       });
     }
@@ -65,7 +70,7 @@
     function deleteTagButtonClick() {
       console.log("Delete Tag button clicked");
       OneSignal.push(function() {
-        OneSignal.deleteTag("vip");
+        OneSignal.deleteTags(["user_type", "sub_url", "topic"]);
       });
     }
 
