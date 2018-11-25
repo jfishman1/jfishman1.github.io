@@ -46,7 +46,7 @@
       console.log("VIP Tag button clicked");
       OneSignal.push(function() {
         OneSignal.sendTag("user_type", "vip").then(function(tagsSent) {
-          console.log("tagsSent: " + tagsSent);
+          console.log("tagsSent: " + tagsSent.toString());
         });  
       });
     }
