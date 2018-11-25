@@ -27,7 +27,7 @@
           sub_url: window.location.href,
           topic: 'tags'
         }).then(function(tagsSent) {
-          console.log("tagsSent: " + tagsSent);
+          console.log("tagsSent: " + tagsSent.stringify);
         });
       });
     });
@@ -58,8 +58,10 @@
         OneSignal.getTags(function(tags) {
           console.log("This user has tags: " + tags);
           if (tags.user_type === "vip") {
+            console.log("change vip to basic");
             OneSignal.sendTag("user_type", "basic");
           } else if (tags.user_type === "basic") {
+            console.log("found basic, set to empty string to delete");
             OneSignal.sendTag("user_type", "");
           }
         });
