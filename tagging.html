@@ -27,7 +27,7 @@
           sub_url: window.location.href,
           topic: 'tags'
         }).then(function(tagsSent) {
-          console.log("tagsSent: " + tagsSent.stringify);
+          console.log("tagsSent: " + JSON.stringify(tagsSent));
         });
       });
     });
@@ -46,7 +46,7 @@
       console.log("VIP Tag button clicked");
       OneSignal.push(function() {
         OneSignal.sendTag("user_type", "vip").then(function(tagsSent) {
-          console.log("tagsSent: " + tagsSent.toString());
+          console.log("tagsSent: " + tagsSent.user_type;
         });  
       });
     }
@@ -56,7 +56,7 @@
       console.log("Check Tag button clicked");
       OneSignal.push(function() {
         OneSignal.getTags(function(tags) {
-          console.log("This user has tags: " + tags);
+          console.log("This user has tags: " + JSON.stringify(tags));
           if (tags.user_type === "vip") {
             console.log("change vip to basic");
             OneSignal.sendTag("user_type", "basic");
