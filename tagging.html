@@ -23,12 +23,14 @@
     OneSignal.push(function() {
       OneSignal.on('subscriptionChange', function (isSubscribed) {
         console.log("The user's subscription state is now:", isSubscribed);
-        OneSignal.sendTags({
-          sub_url: window.location.href,
-          topic: 'tags'
-        }).then(function(tagsSent) {
-          console.log("tagsSent: " + JSON.stringify(tagsSent));
-        });
+        if (isSubscribed === true) {
+          OneSignal.sendTags({
+            sub_url: window.location.href,
+            topic: 'tags'
+          }).then(function(tagsSent) {
+            console.log("tagsSent: " + JSON.stringify(tagsSent));
+          });
+        }
       });
     });
   </script>
@@ -46,7 +48,7 @@
       console.log("VIP Tag button clicked");
       OneSignal.push(function() {
         OneSignal.sendTag("user_type", "vip").then(function(tagsSent) {
-          console.log("tagsSent: " + tagsSent.user_type;
+          console.log("tagsSent: " + tagsSent.user_type);
         });  
       });
     }
