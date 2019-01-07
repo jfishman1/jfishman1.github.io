@@ -21,6 +21,17 @@
     OneSignal.init({
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
     });
+     if (Notification.permission === "granted") {
+        // Automatically subscribe user if deleted cookies and browser shows "Allow"
+        OneSignal.getUserId()
+          .then(function(userId) {
+            if (!userId) {
+              OneSignal.registerForPushNotifications();
+            }
+          })
+      } else {
+        OneSignal.showHttpPrompt();
+      }
   });
 </script>
 
@@ -30,6 +41,7 @@
   <div>
     <ul>
       <li><a href='https://fatsjohonimahnn.github.io/tagging'>Tagging example</a></li>
+      <li><a href='https://fatsjohonimahnn.github.io/ga'>Google Analytics example</a></li>
       <li><a href="https://fatsjohonimahnn.github.io/iframe">Cross-origin Subscription tracking Example</a></li>
       <li><a href='https://fatsjohonimahnn.github.io/geolocation'>GeoLocation example</a></li>
     </ul>
