@@ -52,9 +52,10 @@
 
 function tagUser() {
   OneSignal.push(function() {
-    OneSignal.sendTag("buttonPress", "true").then(function(tagsSent) {
+    let timestamp = Date.now();
+    OneSignal.sendTag("buttonPress", timestamp).then(function(tagsSent) {
       // Callback called when tags have finished sending
-      console.log("tags sent");
+      console.log("timestamp = ", timestamp);
     });
   })
 }
