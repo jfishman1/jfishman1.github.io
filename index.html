@@ -52,7 +52,10 @@
 
 function tagUser() {
   OneSignal.push(function() {
-    OneSignal.sendTag("buttonPress", "true");
+    OneSignal.sendTag("buttonPress", "true").then(function(tagsSent) {
+      // Callback called when tags have finished sending
+      console.log("tags sent");
+    });
   })
 }
   
