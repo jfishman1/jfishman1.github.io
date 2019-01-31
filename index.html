@@ -55,14 +55,7 @@ function tagUser() {
     OneSignal.sendTag("buttonPress", "true");
   })
 }
-  if (!navigator.geolocation) {
-      output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-      return;
-    }
-    output.innerHTML = "<p>Locating…</p>";
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
+  
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
   console.log("Received NotificationOpened:");
   console.log(data);
