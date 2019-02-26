@@ -38,7 +38,7 @@
             OneSignal.push(function() {
               OneSignal.sendTags({
                 lat: latitude,
-                key2: longitude,
+                long: longitude,
               }).then(function(tagsSent) {
               // Callback called when tags have finished sending
               console.log("tagsSent: ", tagsSent)    
