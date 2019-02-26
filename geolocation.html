@@ -18,40 +18,40 @@
   <h1>GeoLocation Example</h1>
   <!-- Location Tracking on button click -->
   <p><button onclick="geoFindMe()">Show my location</button></p>
-  <div id="out"></div>
-  <script>
-  var output = document.getElementById("out");
-  function geoFindMe() {
-    if (!navigator.geolocation) {
-      output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-      return;
-    }
-    output.innerHTML = "<p>Locating…</p>";
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-  function success(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
+    <div id="out"></div>
+    <script>
+      var output = document.getElementById("out");
+        function geoFindMe() {
+            if (!navigator.geolocation) {
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
+            }
+            output.innerHTML = "<p>Locating…</p>";
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
 
-    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+        function success(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
-    OneSignal.push(function() {
-      OneSignal.sendTags({
-        latitude: latitude,
-        long: longitude
-      });
-    });
+            OneSignal.push(function() {
+                OneSignal.sendTags({
+                    lat: latitude,
+                    long: longitude
+                });
+            });
 
-    var img = new Image();
-    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+            var img = new Image();
+            img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
-    output.appendChild(img);
-  }
+            output.appendChild(img);
+        }
 
-  function error() {
-      output.innerHTML = "Unable to retrieve your location";
-  }
-  </script>
+        function error() {
+            output.innerHTML = "Unable to retrieve your location";
+        }
+    </script>
 <!-- END Location Tracking code -->
 </body>
 </html>
