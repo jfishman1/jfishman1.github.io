@@ -13,36 +13,25 @@
   </script>
 
 
+<link rel="manifest" href="/manifest.json" />
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
   var OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "305df631-b228-4d33-b5f2-3b1b6d555ae3",
-      notifyButton: {
-        enable: true,
-      },
-      subdomainName: "fatsjohonimahnn",
-      // Do NOT call init() twice
-    // Your other init options here
-    promptOptions: {
-        /* Change bold title, limited to 30 characters */
-        siteName: 'OneSignal Documentation',
-        /* Subtitle, limited to 90 characters */
-        actionMessage: "We'd like to show you notifications for the latest news and updates.",
-        /* Example notification title */
-        exampleNotificationTitle: 'Example notification',
-        /* Example notification message */
-        exampleNotificationMessage: 'This is an example notification',
-        /* Text below example notification, limited to 50 characters */
-        exampleNotificationCaption: 'You can unsubscribe anytime',
-        /* Accept button text, limited to 15 characters */
-        acceptButtonText: "ALLOW",
-        /* Cancel button text, limited to 15 characters */
-        cancelButtonText: "NO THANKS",
-        autoAcceptTitle: 'Click Allow'
-    }
+      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
     });
+     if (Notification.permission === "granted") {
+        // Automatically subscribe user if deleted cookies and browser shows "Allow"
+        OneSignal.getUserId()
+          .then(function(userId) {
+            if (!userId) {
+              OneSignal.registerForPushNotifications();
+            }
+          })
+      } else {
+        OneSignal.showHttpPrompt();
+      }
   });
 </script>
 
