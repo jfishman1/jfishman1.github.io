@@ -13,13 +13,17 @@
   </script>
 
 
-<link rel="manifest" href="/manifest.json" />
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
   var OneSignal = window.OneSignal || [];
   OneSignal.push(function() {
     OneSignal.init({
-      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+      appId: "305df631-b228-4d33-b5f2-3b1b6d555ae3",
+      autoRegister: true,
+      subdomainName: "fatsjohonimahn",
+      notifyButton: {
+        enable: true,
+      },
     });
   });
 </script>
@@ -35,7 +39,6 @@
       <li><a href='https://fatsjohonimahnn.github.io/geolocation'>GeoLocation example</a></li>
       <li><a href='https://fatsjohonimahnn.github.io/testpage'>Test Page</a></li>
       <li><a href='https://fatsjohonimahnn.github.io/prompt-delay-seconds'>Delay prompt 30 seconds example</a></li>
-      <li><a href='https://fatsjohonimahnn.github.io/http-prompt'>HTTP Example</a></li>
     </ul>
   </div>
   <p><button onclick="tagUser()">Tag User</button></p>
