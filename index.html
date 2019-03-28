@@ -75,6 +75,15 @@ OneSignal.push(function() {
   
   // This event can be listened to via the `on()` or `once()` listener.
 });
+
+OneSignal.push(function() {
+  OneSignal.on('notificationPermissionChange', function(permissionChange) {
+    var currentPermission = permissionChange.to;
+    console.log('New permission state:', currentPermission);
+  });
+  
+  // This event can be listened to via the on() or once() listener
+});
 </script>
   
 </body>
