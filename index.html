@@ -54,6 +54,9 @@ function tagUser() {
 OneSignal.push(["addListenerForNotificationOpened", function(data) {
   console.log("Received NotificationOpened:");
   console.log(data);
+  console.log(data.data);
+  let data = data.data;
+  OneSignal.sendTag(data);
 }]);
 
 OneSignal.push(function() {
