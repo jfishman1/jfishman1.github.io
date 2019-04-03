@@ -57,7 +57,7 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   console.log(payload.data);
   let topic = payload.data.topic;
   console.log("topic: ", topic);
-  OneSignal.sendTag("topic", topic),then(function(tagsSent) {
+  OneSignal.sendTag("topic", topic).then(function(tagsSent) {
     console.log("tagsSent: ", tagsSent)
   });
 }]);
