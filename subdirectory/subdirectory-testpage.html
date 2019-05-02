@@ -10,15 +10,14 @@
    var OneSignal = window.OneSignal || [];
     var initConfig = {
         appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-        autoRegister: true,
         notifyButton: {
             enable: false
         },
     };
     OneSignal.push(function () {
-        OneSignal.SERVICE_WORKER_PARAM = { scope: '/skel/' };
-        OneSignal.SERVICE_WORKER_PATH = 'skel/OneSignalSDKWorker.js'
-        OneSignal.SERVICE_WORKER_UPDATER_PATH = 'skel/OneSignalSDKUpdaterWorker.js'
+        OneSignal.SERVICE_WORKER_PARAM = { scope: '/subdirectory/' };
+        OneSignal.SERVICE_WORKER_PATH = 'subdirectory/osupdatersw.js'
+        OneSignal.SERVICE_WORKER_UPDATER_PATH = 'subdirectory/ossw.js'
         OneSignal.init(initConfig);
     });
 </script>
