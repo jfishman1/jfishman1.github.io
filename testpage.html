@@ -15,6 +15,35 @@
 	</script>
 </head>
 <body>
+  <!-- Tag upon 3rd visit -->
+
+  <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
+  <script data-cfasync="false">
+  window.OneSignal = window.OneSignal || [];
+  var numVisitsTrigger = 3; /* Number of page visits before prompting user */
+  
+  /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
+  window.OneSignal.push(function() {
+    var numVisits = new Number(localStorage['numVisitsTrigger'] || 0);
+    numVisits += 1;
+    localStorage['numVisitsTrigger'] = numVisits;
+    if (numVisits >= numVisitsTrigger) {
+      tagUserWithPageTopic("key", "value");
+    }
+  });
+  
+  function tagUserWithPageTopic(key, value) {
+    /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
+    window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      if (!isEnabled) {        
+        window.OneSignal.sentTag(key, value);
+      }
+    });
+  }
+  </script>
+  
+  <!-- END TAG 3rd visit -->
+  <!-- Send push upon subscribe
 	<script>
 			OneSignal.push(function() {
   			// Occurs when the user's subscription changes to a new value.
@@ -37,6 +66,6 @@
   			});
 			});
 	</script>
-
+  -->
 </body>
 </html>
