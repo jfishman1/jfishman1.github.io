@@ -45,10 +45,12 @@
               });
             });
 
-            var img = new Image();
-            img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+            output.innerHTML = `<p>Latitude: ${latitude}, Longitude: ${longitude}</p>`;
 
-            output.appendChild(img);
+            //var img = new Image();
+            //img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+            //output.appendChild(img);
         }
 
         function error() {
