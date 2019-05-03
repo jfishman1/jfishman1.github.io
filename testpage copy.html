@@ -25,11 +25,11 @@
   
   /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
   window.OneSignal.push(function() {
-    var topicVisits = new Number(localStorage[topic] || 0);
-    topicVisits += 1;
-    localStorage[topic] = topicVisits;
-    if (topicVisits >= numVisitsTrigger) {
-      tagUserWithPageTopic(topic, topicVisits);
+    var numVisits = new Number(localStorage['numVisitsTrigger'] || 0);
+    numVisits += 1;
+    localStorage['numVisitsTrigger'] = numVisits;
+    if (numVisits >= numVisitsTrigger) {
+      tagUserWithPageTopic(topic, numVisits);
     }
   });
   
