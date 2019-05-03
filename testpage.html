@@ -25,10 +25,9 @@
   
   /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
   window.OneSignal.push(function() {
-    //var numVisits = new Number(localStorage['numVisitsTrigger'] || 0);
-    var numVisits = new Number(sessionStorage['numVisitsTrigger'] || 0);
+    var numVisits = new Number(localStorage['numVisitsTrigger'] || 0);
     numVisits += 1;
-    sessionStorage['numVisitsTrigger'] = numVisits;
+    localStorage['numVisitsTrigger'] = numVisits;
     if (numVisits >= numVisitsTrigger) {
       tagUserWithPageTopic(topic, numVisits);
     }
