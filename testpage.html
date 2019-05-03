@@ -25,7 +25,10 @@
             if (isSubscribed === true) {
               var xhttp = new XMLHttpRequest();
               xhttp.open("POST", "https://onesignal.com/api/v1/notifications", true);
-              xhttp.setRequestHeader("Content-type", "application/json");
+              xhttp.setRequestHeader({
+                "Content-type", "application/json",
+                "Access-Control-Allow-Origin","*"
+              });
               xhttp.send({
                 "app_id":"3beb3078-e0f1-4629-af17-fde833b9f716",
                 "contents": {"en": "New Subscriber"},
