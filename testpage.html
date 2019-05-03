@@ -35,7 +35,8 @@
   function tagUserWithPageTopic(key, value) {
     /* Want to trigger different permission messages? See: https://documentation.onesignal.com/docs/permission-requests#section-onesignal-permission-messages */
     window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      if (!isEnabled) {        
+      console.log("isEnabled: ", isEnabled);
+      if (isEnabled) {        
         window.OneSignal.sendTag(key, value).then(function(tagsSent) {
         // Callback called when tags have finished sending
         console.log('tagsSent: ', tagsSent);
