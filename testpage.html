@@ -26,7 +26,8 @@
   /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
   window.OneSignal.push(function() {
     //var topicVisits = new Number(localStorage[topic] || 0);
-    var topicVisits = localStorage.getItem(topic);
+    var topicVisits = new Number(localStorage.getItem(topic) || 0);
+    console.log('topicVisits: ', topicVisits);
     if (topicVisits !== NaN) {
       topicVisits += 1;
     } else {
