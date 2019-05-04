@@ -25,9 +25,17 @@
   
   /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
   window.OneSignal.push(function() {
-    var topicVisits = new Number(localStorage[topic] || 0);
-    topicVisits += 1;
-    localStorage[topic] = topicVisits;
+    //var topicVisits = new Number(localStorage[topic] || 0);
+    var topicVisits = localStorage.getItem(topic);
+    if (topicVisits !== NaN) {
+      topicVisits += 1;
+    } else {
+      topicVisits = 0;
+    }
+    
+    //localStorage[topic] = topicVisits;
+    localStorage.setItem(topic, topicVisit)
+
     if (topicVisits >= numVisitsTrigger) {
       tagUserWithPageTopic(topic, topicVisits);
     }
