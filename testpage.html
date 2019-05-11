@@ -34,7 +34,7 @@
             topicCount = 1;
           }
           OneSignal.sendTags({
-            topic: topicCount
+            $(topic): topicCount
           }).then(function(tagsSent) {
             console.log("tagsSent: ", JSON.stringify(tagsSent));
           });
