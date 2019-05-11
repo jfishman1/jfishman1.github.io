@@ -26,7 +26,7 @@
       let topic = payload.data.topic; // set topic in notification
       if (topic) {
         OneSignal.getTags().then(function(tags) {
-          var topicCount = tags[topic];
+          var topicCount = parseInt(tags[topic], 10);
           //var topicCount = parseInt(topicValue, 10);
           console.log("topicCount: ", topicCount);
           if (!isNaN(topicCount)) {
