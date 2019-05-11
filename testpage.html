@@ -15,13 +15,36 @@
 	</script>
 </head>
 <body>
-  <!-- Tag upon 3rd visit -->
-  <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
+  <!-- Tag upon notification click -->
+  <script>
+    OneSignal.push(["addListenerForNotificationOpened", function(payload) {
+      console.log("Received Payload Data: ", payload.data);
+      let topic = payload.data.topic;
+      console.log("topic: ", topic);
+      if (topic) {
+        OneSignal.getTags().then(function(tags) {
+          console.log("tags: ", JSON.stringify(tags));
+          var tagsObj = JSON.stringify(tags);
+          var topicCount = tagsObj.topic;
+          console.log("topicCount: ", topicCount);
+          if (topicCount && !isNaN(topicCount)) {
+            topicCount += 1;
+          } else {
+            topicCount = 1;
+          }
+          OneSignal.sendTag(topic, topicCount).then(function(tagsSent) {
+            console.log("tagsSent: ", JSON.stringify(tagsSent));
+          });
+        }
+      }
+    }]);
+  </script>
+  <!-- END Tag upon notification click -->
+  <!-- Tag upon 3rd visit
   <script data-cfasync="false">
   window.OneSignal = window.OneSignal || [];
   var numVisitsTrigger = 3; /* Number of page visits before tagging user */
   var topic = "sports"; /* The topic of the page */
-
   /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
   window.OneSignal.push(function() {
     var topicVisits = new Number(localStorage.getItem(topic) || 0);
@@ -49,7 +72,7 @@
     });
   }
   </script>
-  <!-- END TAG 3rd visit -->
+  END TAG 3rd visit -->
   <!-- Send push upon subscribe
 	<script>
 			OneSignal.push(function() {
