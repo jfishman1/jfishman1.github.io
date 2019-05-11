@@ -24,12 +24,11 @@
       if (topic) {
         OneSignal.getTags().then(function(tags) {
           console.log("tags: ", JSON.stringify(tags));
-          //var tagsObj = tags;
-          //console.log("tagsObj: ", tagsObj);
           var topicValue = tags[topic];
+          console.log('topicValue: ', topicValue);
           var topicCount = parseInt(topicValue, 10);
           console.log("topicCount: ", topicCount);
-          if (topicCount && !isNaN(topicCount)) {
+          if (!isNaN(topicCount)) {
             topicCount += 1;
           } else {
             topicCount = 1;
