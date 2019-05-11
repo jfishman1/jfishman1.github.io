@@ -25,7 +25,7 @@
         OneSignal.getTags().then(function(tags) {
           console.log('topic: ', topic);
           console.log("tags: ", JSON.stringify(tags));
-          var tagsObj = tags;
+          var tagsObj = JSON.stringify(tags);
           console.log("tagsObj: ", tagsObj);
           var topicCount = tagsObj.topic;
           console.log("topicCount: ", topicCount);
