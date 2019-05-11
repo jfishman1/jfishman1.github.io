@@ -18,20 +18,16 @@
   <!-- Tag upon notification click -->
   <script>
     OneSignal.push(["addListenerForNotificationOpened", function(payload) {
-      // Track last time clicked a notification (paid feature only)
+      // Track last notification click time (paid feature only)
       let timestamp = Math.floor(Date.now() / 1000);
-      OneSignal.sendTag("l_click", timestamp).then(function(tagsSent) {
-        console.log(JSON.stringify(tagsSent));
-      });
+      OneSignal.sendTag("ln_click", timestamp);
+
       console.log("Received Payload Data: ", payload.data);
-      let topic = payload.data.topic;
-      console.log("topic: ", topic);
+      let topic = payload.data.topic; // set topic in notification
       if (topic) {
         OneSignal.getTags().then(function(tags) {
-          console.log("tags: ", JSON.stringify(tags));
-          var topicValue = tags[topic];
-          console.log('topicValue: ', topicValue);
-          var topicCount = parseInt(topicValue, 10);
+          var topicCount = tags[topic];
+          //var topicCount = parseInt(topicValue, 10);
           console.log("topicCount: ", topicCount);
           if (!isNaN(topicCount)) {
             topicCount += 1;
