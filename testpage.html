@@ -23,6 +23,7 @@
       console.log("topic: ", topic);
       if (topic) {
         OneSignal.getTags().then(function(tags) {
+          console.log('topic: ', topic);
           console.log("tags: ", JSON.stringify(tags));
           var tagsObj = tags;
           console.log("tagsObj: ", tagsObj);
