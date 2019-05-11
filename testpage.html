@@ -33,7 +33,9 @@
           } else {
             topicCount = 1;
           }
-          OneSignal.sendTag(topic, topicCount).then(function(tagsSent) {
+          OneSignal.sendTags({
+            topic: topicCount
+          }).then(function(tagsSent) {
             console.log("tagsSent: ", JSON.stringify(tagsSent));
           });
         });
