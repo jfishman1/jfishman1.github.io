@@ -15,66 +15,10 @@
 	</script>
 </head>
 <body>
-  <!-- Tag upon notification click -->
-  <script>
-    OneSignal.push(["addListenerForNotificationOpened", function(payload) {
-      // Track last notification click time (paid feature only)
-      let timestamp = Math.floor(Date.now() / 1000);
-      OneSignal.sendTag("ln_click", timestamp);
+  
+ 
 
-      console.log("Received Payload Data: ", payload.data);
-      let topic = payload.data.topic; // set topic in notification
-      if (topic) {
-        OneSignal.getTags().then(function(tags) {
-          var topicCount = parseInt(tags[topic], 10);
-          //var topicCount = parseInt(topicValue, 10);
-          console.log("topicCount: ", topicCount);
-          if (!isNaN(topicCount)) {
-            topicCount += 1;
-          } else {
-            topicCount = 1;
-          }
-          OneSignal.sendTag(topic, topicCount).then(function(tagsSent) {
-            console.log("tagsSent: ", JSON.stringify(tagsSent));
-          });
-        });
-      }
-    }]);
-  </script>
-  <!-- END Tag upon notification click -->
-  <!-- Tag upon 3rd visit
-  <script data-cfasync="false">
-  window.OneSignal = window.OneSignal || [];
-  var numVisitsTrigger = 3; /* Number of page visits before tagging user */
-  var topic = "sports"; /* The topic of the page */
-  /* Why use .push? See: http://stackoverflow.com/a/38466780/555547 */
-  window.OneSignal.push(function() {
-    var topicVisits = new Number(localStorage.getItem(topic) || 0);
-    if (topicVisits !== NaN) {
-      topicVisits += 1;
-    } else {
-      topicVisits = 0;
-    }    
-    localStorage.setItem(topic, topicVisits)
-
-    if (topicVisits >= numVisitsTrigger) {
-      tagUserWithPageTopic(topic, topicVisits);
-    }
-  });
-
-  function tagUserWithPageTopic(key, value) {
-    window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      console.log("isEnabled: ", isEnabled);
-      if (isEnabled) {        
-        window.OneSignal.sendTag(key, value).then(function(tagsSent) {
-        // Callback called when tags have finished sending
-        console.log('tagsSent: ', tagsSent);
-        });  
-      }
-    });
-  }
-  </script>
-  END TAG 3rd visit -->
+  
   <!-- Send push upon subscribe
 	<script>
 			OneSignal.push(function() {

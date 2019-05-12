@@ -17,29 +17,36 @@
 </head>
 <body>
   <h1> OneSignal Tagging Examples </h1>
-
+  <!-- -------------------------------------------------------------- -->
+  <!-- Tag upon subscription -->
   <script>
-    // Check subscription and add tag
+    let page_author = 'the author';
+    let page_topic = 'the topic';
+
     OneSignal.push(function() {
-      OneSignal.on('subscriptionChange', function (isSubscribed) {
-        console.log("The user's subscription state is now:", isSubscribed);
-        if (isSubscribed === true) {
-          OneSignal.sendTags({
-            sub_url: window.location.href,
-            topic: 'tags'
-          }).then(function(tagsSent) {
-            console.log("tagsSent: " + JSON.stringify(tagsSent));
-          });
-        }
-      });
+        OneSignal.on('subscriptionChange', function(isSubscribed) {
+            if (isSubscribed === true) {
+                console.log('The user subscription state is now:', isSubscribed);
+                OneSignal.sendTags({
+                    "page_url": window.location.href,
+                    "author": page_author,
+                    "topic": page_topic,
+                }).then(function(tagsSent) {
+                    // Callback called when tags have finished sending
+                    console.log(tagsSent);
+                });
+            }
+        });
     });
   </script>
-
-
+  <!-- END Tag upon supbscription -->
+  <!-- -------------------------------------------------------------- -->
+  <!-- Tag upon button click -->
   <div>
     <button type="button" onclick="tagButtonClick()">Tag VIP User</button>
     <button type="button" onclick="checkTagButtonClick()">Check and Update Tags</button>
     <button type="button" onclick="deleteTagButtonClick()">Delete Tag</button>
+    <button type="button" onclick="tagButtonPress()">Time Operator</button>
   </div>
 
   <script>
@@ -78,8 +85,78 @@
       });
     }
 
-
+    // time operator
+    function tagButtonClick() {
+      console.log("Time Operator Tag button clicked");
+      OneSignal.push(function() {
+        let timestamp = Math.floor(Date.now() / 1000);
+        OneSignal.sendTag("event_key", timestamp).then(function(tagsSent) {
+          // Callback called when tags have finished sending
+          console.log(tagsSent);
+        });
+      });
+    }
   </script>
 
+
+  <!-- Tag upon notification click -->
+  <script type="text/javascript">
+    OneSignal.push(["addListenerForNotificationOpened", function(payload) {
+      // Track last notification click time (paid feature only)
+      let timestamp = Math.floor(Date.now() / 1000);
+      OneSignal.sendTag("ln_click", timestamp);
+
+      console.log("Received Payload Data: ", payload.data);
+      let topic = payload.data.topic; // set topic in notification
+      if (topic) {
+        OneSignal.getTags().then(function(tags) {
+          var topicCount = parseInt(tags[topic], 10);
+          console.log("topicCount: ", topicCount);
+          if (!isNaN(topicCount)) {
+            topicCount += 1;
+          } else {
+            topicCount = 1;
+          }
+          OneSignal.sendTag(topic, topicCount).then(function(tagsSent) {
+            console.log("tagsSent: ", JSON.stringify(tagsSent));
+          });
+        });
+      }
+    }]);
+  </script>
+  <!-- END Tag upon notificatin click -->
+  <!-- -------------------------------------------------------------- -->
+ <!-- Tag upon 3rd visit -->
+  <script>
+    //window.OneSignal = window.OneSignal || [];
+    var numVisitsTrigger = 3; /* Number of page visits before tagging user */
+    var topic = "sports"; /* The topic of the page */
+
+    function tagUserWithPageTopic(key, value) {
+      window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+        console.log("isEnabled: ", isEnabled);
+        if (isEnabled) {        
+          window.OneSignal.sendTag(key, value, function(tagsSent) {
+              // Callback called when tags have finished sending
+              console.log('tags sent: ', tagsSent);
+          });      
+        }
+      });
+    }
+    if (typeof localStorage !== "undefined") {
+      var topicVisits = parseInt(localStorage.getItem(topic), 10);
+      if (!isNaN(topicVisits)) {
+        topicVisits += 1;
+      } else {
+        topicVisits = 0;
+      }    
+      localStorage.setItem(topic, topicVisits)
+
+      if (topicVisits >= numVisitsTrigger) {
+        tagUserWithPageTopic(topic, topicVisits);
+      }
+    }
+  </script>
+  <!-- END TAG 3rd visit -->
 </body>
 </html>
