@@ -128,12 +128,12 @@
   <!-- -------------------------------------------------------------- -->
  <!-- Tag upon 3rd visit -->
   <script>
-    window.OneSignal = window.OneSignal || [];
+    //window.OneSignal = window.OneSignal || [];
     var numVisitsTrigger = 3; /* Number of page visits before tagging user */
     var topic = "sports"; /* The topic of the page */
 
     function tagUserWithPageTopic(key, value) {
-      window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
         console.log("isEnabled: ", isEnabled);
         if (isEnabled) {        
           window.OneSignal.sendTag(key, value, function(tagsSent) {
