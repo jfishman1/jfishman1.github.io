@@ -128,7 +128,6 @@
   <!-- -------------------------------------------------------------- -->
  <!-- Tag upon 3rd visit -->
   <script>
-    //window.OneSignal = window.OneSignal || [];
     var numVisitsTrigger = 3; /* Number of page visits before tagging user */
     var topic = "sports"; /* The topic of the page */
 
@@ -137,14 +136,13 @@
         OneSignal.isPushNotificationsEnabled(function(isEnabled) {
           console.log("isEnabled: ", isEnabled);
           if (isEnabled) {        
-            window.OneSignal.sendTag(key, value, function(tagsSent) {
+            OneSignal.sendTag(key, value, function(tagsSent) {
                 // Callback called when tags have finished sending
                 console.log('tags sent: ', tagsSent);
             });      
           }
         });
-      })
-        
+      })  
     }
 
     if (typeof localStorage !== "undefined") {
