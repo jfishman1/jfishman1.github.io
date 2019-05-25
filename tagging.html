@@ -133,16 +133,20 @@
     var topic = "sports"; /* The topic of the page */
 
     function tagUserWithPageTopic(key, value) {
-      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        console.log("isEnabled: ", isEnabled);
-        if (isEnabled) {        
-          window.OneSignal.sendTag(key, value, function(tagsSent) {
-              // Callback called when tags have finished sending
-              console.log('tags sent: ', tagsSent);
-          });      
-        }
-      });
+      OneSignal.push(function() {
+        OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+          console.log("isEnabled: ", isEnabled);
+          if (isEnabled) {        
+            window.OneSignal.sendTag(key, value, function(tagsSent) {
+                // Callback called when tags have finished sending
+                console.log('tags sent: ', tagsSent);
+            });      
+          }
+        });
+      })
+        
     }
+
     if (typeof localStorage !== "undefined") {
       var topicVisits = parseInt(localStorage.getItem(topic), 10);
       if (!isNaN(topicVisits)) {
