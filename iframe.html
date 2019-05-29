@@ -40,11 +40,13 @@
   </pre>
 
   <script>
+    console.log("1")
   function bindEvent(element, eventName, eventHandler) {
     element.addEventListener(eventName, eventHandler, false);
   }
   // Send a message to the parent
   var sendMessage = function (msg) {
+    console.log("2")
     window.parent.postMessage(msg, '*');
   };
   bindEvent(window, 'load', function (e) {
