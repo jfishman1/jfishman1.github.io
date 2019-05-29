@@ -52,6 +52,7 @@
   bindEvent(window, 'load', function (e) {
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+        console.log(`checking subscription from fats, it is ${isEnabled}`)
         sendMessage(isEnabled)
       });
     });
@@ -60,7 +61,6 @@
   bindEvent(window, 'message', function (e) {
     console.log("Message data: " + e.data)
     OneSignal.push(function() {
-      console.log('setSubscription on fats', e.data)
       OneSignal.setSubscription(false);
     });
   });
