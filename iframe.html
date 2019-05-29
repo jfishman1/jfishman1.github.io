@@ -45,7 +45,7 @@
   }
   // Send a message to the parent (localhost)
   var sendMessage = function (msg) {
-    console.log("Sending Message to localhost")
+    console.log("Fats is Sending Message to localhost")
     window.parent.postMessage(msg, '*');
   };
   bindEvent(window, 'load', function (e) {
