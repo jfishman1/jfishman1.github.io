@@ -45,9 +45,10 @@
   }
   // Send a message to the parent (localhost)
   var sendMessage = function (msg) {
-    console.log("Fats is Sending Message to localhost")
+    console.log(`Fats is Sending Message to localhost ${msg}`)
     window.parent.postMessage(msg, '*');
   };
+  //
   bindEvent(window, 'load', function (e) {
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
@@ -60,7 +61,7 @@
     console.log("Message data: " + e.data)
     OneSignal.push(function() {
       console.log('setSubscription on fats', e.data)
-      //OneSignal.setSubscription(!e);
+      OneSignal.setSubscription(false);
     });
   });
   </script>
