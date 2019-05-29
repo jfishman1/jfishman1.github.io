@@ -43,9 +43,9 @@
   function bindEvent(element, eventName, eventHandler) {
     element.addEventListener(eventName, eventHandler, false);
   }
-  // Send a message to the parent
+  // Send a message to the parent (localhost)
   var sendMessage = function (msg) {
-    console.log("Sending Message to fatsjohonimahnn")
+    console.log("Sending Message to localhost")
     window.parent.postMessage(msg, '*');
   };
   bindEvent(window, 'load', function (e) {
@@ -55,11 +55,12 @@
       });
     });
   });
-  // receive a message from site2 to unsubscribe user from site1
+  // receive a message from parent to unsubscribe user from site1
   bindEvent(window, 'message', function (e) {
     console.log("Message data: " + e.data)
     OneSignal.push(function() {
-      OneSignal.setSubscription(!e);
+      console.log('setSubscription on fats', e.data)
+      //OneSignal.setSubscription(!e);
     });
   });
   </script>
