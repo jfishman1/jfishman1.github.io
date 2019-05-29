@@ -45,23 +45,24 @@
   }
   // Send a message to the parent (localhost)
   var sendMessage = function (msg) {
-    console.log(`Fats is Sending Message to localhost ${msg}`)
+    console.log(`2 Fats is Sending Message to localhost ${msg}`)
     window.parent.postMessage(msg, '*');
   };
   //
   bindEvent(window, 'load', function (e) {
     OneSignal.push(function() {
       OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        console.log(`checking subscription from fats, it is ${isEnabled}`)
+        console.log(`1 checking subscription from fats, it is ${isEnabled}`)
         sendMessage(isEnabled)
       });
     });
   });
   // receive a message from parent to unsubscribe user from site1
   bindEvent(window, 'message', function (e) {
-    console.log("Message data: " + e.data)
+    console.log(`3 iframe received message data: ${e.data} setting subscription to fast as false`);
     OneSignal.push(function() {
-      OneSignal.setSubscription(false);
+      //OneSignal.setSubscription(false);
+      console.log(`setSubscription to ${e.data}`)
     });
   });
   </script>
