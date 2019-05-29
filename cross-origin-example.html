@@ -61,7 +61,7 @@
   bindEvent(window, 'message', function (e) {
     console.log(`3 iframe received message data: ${e.data}`);
     OneSignal.push(function() {
-      OneSignal.setSubscription(false);
+      OneSignal.setSubscription("false");
       //console.log(`setSubscription to ${e.data}`)
     });
   });
