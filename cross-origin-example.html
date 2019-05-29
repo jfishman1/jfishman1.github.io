@@ -59,7 +59,7 @@
   });
   // receive a message from parent to unsubscribe user from site1
   bindEvent(window, 'message', function (e) {
-    console.log(`3 iframe received message data: ${e.data} setting subscription to fats as ${e.data}`);
+    console.log(`3 iframe received message data: ${e.data} setting subscription to fats as ${!e.data}`);
     OneSignal.push(function() {
       //OneSignal.setSubscription(false);
       console.log(`setSubscription to ${e.data}`)
