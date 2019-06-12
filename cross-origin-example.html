@@ -40,31 +40,34 @@
   </pre>
 
   <script>
-  function bindEvent(element, eventName, eventHandler) {
-    element.addEventListener(eventName, eventHandler, false);
-  }
-  // Send a message to the parent (localhost)
-  var sendMessage = function (msg) {
-    console.log(`2 Fats is Sending Message to localhost ${msg}`)
-    window.parent.postMessage(msg, '*');
-  };
-  //
-  bindEvent(window, 'load', function (e) {
-    OneSignal.push(function() {
-      OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-        console.log(`1 checking subscription from fats, it is ${isEnabled}`)
-        sendMessage(isEnabled)
-      });
+function bindEvent(element, eventName, eventHandler) {
+  element.addEventListener(eventName, eventHandler, false);
+}
+// Send a message to the parent (localhost)
+var sendMessage = function (msg) {
+  console.log(`2 Fats is Sending Message to localhost ${msg}`)
+  window.parent.postMessage(msg, '*');
+};
+//
+bindEvent(window, 'load', function (e) {
+  OneSignal.push(function() {
+    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      console.log(`1 checking subscription from fats, it is ${isEnabled}`)
+      sendMessage(isEnabled)
     });
   });
-  // receive a message from parent to unsubscribe user from site1
-  bindEvent(window, 'message', function (e) {
-    console.log(`3 iframe received message data: ${e.data}`);
-    OneSignal.push(function() {
-      //OneSignal.setSubscription("false"); Doesn't work
-      console.log(`setSubscription to ${e.data}`)
-    });
+});
+
+
+/* receive a message from parent to unsubscribe user from site1
+bindEvent(window, 'message', function (e) {
+  console.log(`3 iframe received message data: ${e.data}`);
+  OneSignal.push(function() {
+    //OneSignal.setSubscription("false"); Doesn't work
+    console.log(`setSubscription to ${e.data}`)
   });
+});
+*/
   </script>
 
   <p>On the other/main origin in which you want to check subscription status here, open this URL in an iframe to check subscription status like so:</p>
