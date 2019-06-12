@@ -46,7 +46,7 @@
     <button type="button" onclick="tagButtonClick()">Tag VIP User</button>
     <button type="button" onclick="checkTagButtonClick()">Check and Update Tags</button>
     <button type="button" onclick="deleteTagButtonClick()">Delete Tag</button>
-    <button type="button" onclick="tagButtonPress()">Time Operator</button>
+    <button type="button" onclick="timeOperatorButtonPress()">Time Operator</button>
   </div>
 
   <script>
@@ -85,8 +85,8 @@
       });
     }
 
-    /* time operator
-    function tagButtonClick() {
+    // time operator
+    function timeOperatorButtonPress() {
       console.log("Time Operator Tag button clicked");
       OneSignal.push(function() {
         let timestamp = Math.floor(Date.now() / 1000);
@@ -95,7 +95,7 @@
           console.log(tagsSent);
         });
       });
-    }*/
+    }
   </script>
 
 
