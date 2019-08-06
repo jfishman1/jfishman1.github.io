@@ -10,9 +10,41 @@
     	OneSignal.init({
       	appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
     	});
-    	OneSignal.showSlidedownPrompt();
   	});
 	</script>
+  <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
+<script data-cfasync="false">
+var numVisitsTrigger = 0; /* Number of page visits before tagging user */
+var topic = "bi_prime"; /* The topic of the page */
+
+function tagUserWithPageTopic(key, value) {
+  OneSignal.push(function() {
+    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      console.log("isEnabled: ", isEnabled);
+      if (isEnabled) {        
+        OneSignal.sendTag(key, value, function(tagsSent) {
+            // Callback called when tags have finished sending
+            console.log('tags sent: ', tagsSent);
+        });      
+      }
+    });
+  });
+}
+
+if (typeof localStorage !== "undefined") {
+  var topicVisits = parseInt(localStorage.getItem(topic), 10);
+  if (!isNaN(topicVisits)) {
+    topicVisits += 1;
+  } else {
+    topicVisits = 0;
+  }    
+  localStorage.setItem(topic, topicVisits)
+
+  if (topicVisits >= numVisitsTrigger) {
+    tagUserWithPageTopic(topic, topicVisits);
+  }
+}
+</script>
 </head>
 <body>
   
