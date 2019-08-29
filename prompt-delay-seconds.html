@@ -34,7 +34,7 @@
   function promptAndSubscribeUser() {
     window.OneSignal.isPushNotificationsEnabled(function(isEnabled) {
       if (!isEnabled) {
-        window.OneSignal.showHttpPrompt();
+        window.OneSignal.showNativePrompt();
       }
      });
   }
