@@ -40,6 +40,7 @@
     </ul>
   </div>
   <p><button onclick="tagUser()">Tag User</button></p>
+  <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
 <script>
 
 function tagUser() {
@@ -50,6 +51,12 @@ function tagUser() {
       console.log("timestamp = ", timestamp);
     });
   })
+}
+
+function sendSelfNotification() {
+  OneSignal.push(function() {
+    OneSignal.sendSelfNotification();
+  });
 }
   
 OneSignal.push(["addListenerForNotificationOpened", function(payload) {
