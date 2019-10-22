@@ -62,22 +62,22 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   console.log("OneSignal Notification Clicked Paylaod:");
   console.log(payload);
   console.log(payload.data);
-  var topic = payload.data.topic;
+  /*var topic = payload.data.topic;
   console.log("topic: ", topic);
   OneSignal.sendTag("topic", topic).then(function(tagsSent) {
     console.log("tagsSent: ", tagsSent)
-  });
+  });*/
   OneSignal.getUserId( function(userId) {
     console.log("OneSignal User ID:", userId);
     // Make a POST call to GA with the notification data and userId aka playerId
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#hitcallback
     ga('send', {
       hitType: 'event', 
-      eventCategory: 'os_notification_clicked', 
+      eventCategory: 'os_addListenerForNotificationOpened', 
       eventAction: 'u_id ' + userId, 
       eventLabel: 'n_id ' + payload.id,
       hitCallback: function() {
-        console.log("ga notification click callback");
+        console.log("ga os_addListenerForNotificationOpened callback");
       }
     });
   });
@@ -91,11 +91,11 @@ OneSignal.push(function() {
       OneSignal.getUserId( function(userId) {
         ga('send', {
           hitType: 'event',
-          eventCategory: 'os_notification_permission_change',
-          eventAction: currentPermission,
-          eventLabel: 'u_id ' + userId, 
+          eventCategory: 'os_notificationPermissionChange',
+          eventAction: 'u_id ' + userId,
+          eventLabel: currentPermission, 
           hitCallback: function() {
-            console.log("ga permission change callback");
+            console.log("ga os_notificationPermissionChange callback");
           }
         });
       });
@@ -104,16 +104,34 @@ OneSignal.push(function() {
 
 OneSignal.push(function() {
   // Occurs when native browser prompt is shown
-  OneSignal.on('os_permissionPromptDisplay', function() {
+  OneSignal.on('permissionPromptDisplay', function() {
     console.log("The native prompt displayed");
     ga('send', {
       hitType: 'event',
-      eventCategory: 'notification_prompt',
+      eventCategory: 'os_permissionPromptDisplay',
       eventAction: 'displayed',
       hitCallback: function() {
-        console.log("ga permission display callback");
+        console.log("ga os_permissionPromptDisplay callback");
       }
     });
+  });
+});
+
+OneSignal.push(function() {
+  // Occurs when the user's subscription changes to a new value.
+  OneSignal.on('subscriptionChange', function (isSubscribed) {
+    console.log("The user's subscription state is now:", isSubscribed);
+    OneSignal.getUserId( function(userId) {
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'os_subscriptionChange',
+        eventAction: 'u_id ' + userId,
+        eventLabel: isSubscribed,
+        hitCallback: function() {
+          console.log("ga os_subscriptionChange callback");
+        }
+      });
+    })
   });
 });
 
@@ -126,15 +144,6 @@ OneSignal.push(function() {
     console.log('OneSignal notification url:', event.url);
     console.log('OneSignal notification icon:', event.icon);
   });
-});
-
-OneSignal.push(function() {
-  // Occurs when the user's subscription changes to a new value.
-  OneSignal.on('subscriptionChange', function (isSubscribed) {
-    console.log("The user's subscription state is now:", isSubscribed);
-  });
-  
-  // This event can be listened to via the `on()` or `once()` listener.
 });
 
 </script>
