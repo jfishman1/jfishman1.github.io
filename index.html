@@ -74,8 +74,8 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
     ga('send', {
       hitType: 'event', 
       eventCategory: 'notification_clicked', 
-      eventAction: 'u_id ' + userId, 
-      eventLabel: 'n_id ' + payload.id, {
+      eventAction: userId, 
+      eventLabel: payload.id, {
       hitCallback: function() {
         console.log("ga notification click callback");
       }
@@ -93,7 +93,7 @@ OneSignal.push(function() {
           hitType: 'event',
           eventCategory: 'notification_permission_change',
           eventAction: currentPermission,
-          eventLabel: 'u_id ' + userId, {
+          eventLabel: userId, {
           hitCallback: function() {
             console.log("ga permission change callback");
           }
