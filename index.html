@@ -75,7 +75,10 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
       hitType: 'event', 
       eventCategory: 'notification_clicked', 
       eventAction: userId, 
-      eventLabel: payload.id
+      eventLabel: payload.id,
+      hitCallback: function() {
+        console.log("ga notification click callback");
+      }
     });
   });
 }]);
