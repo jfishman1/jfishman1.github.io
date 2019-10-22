@@ -93,7 +93,7 @@ OneSignal.push(function() {
           hitType: 'event',
           eventCategory: 'notification_permission_change',
           eventAction: currentPermission,
-          eventLabel: userId, 
+          eventLabel: 'u_id ' + userId, 
           hitCallback: function() {
             console.log("ga permission change callback");
           }
