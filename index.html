@@ -71,9 +71,10 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   OneSignal.getUserId( function(userId) {
     console.log("OneSignal User ID:", userId);
     // Make a POST call to GA with the notification data and userId aka playerId
-    ga('send', 'event', 'notification_clicked', payload.id, userId).then() => {
-      console.log("push clicked event");
-    };
+    ga('send', 'event', 'notification_clicked', payload.id, userId, {
+    hitCallback: function() {
+      console.log("ga callback");
+    });
   });
 }]);
 
