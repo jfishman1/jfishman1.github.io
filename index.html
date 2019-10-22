@@ -74,8 +74,8 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
     ga('send', {
       hitType: 'event', 
       eventCategory: 'notification_clicked', 
-      eventAction: userId, 
-      eventLabel: payload.id,
+      eventAction: 'u_id ' + userId, 
+      eventLabel: 'n_id ' + payload.id,
       hitCallback: function() {
         console.log("ga notification click callback");
       }
