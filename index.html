@@ -70,10 +70,16 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   OneSignal.getUserId( function(userId) {
     console.log("OneSignal User ID:", userId);
     // Make a POST call to GA with the notification data and userId aka playerId
-    ga('send', 'event', 'notification_clicked', payload.id, userId, {
-    hitCallback: function() {
-      console.log("ga callback");
-    }});
+    // https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#hitcallback
+    ga('send', {
+      hitType: 'event', 
+      eventCategory: 'notification_clicked', 
+      eventAction: 'u_id ' + userId, 
+      eventLabel: 'n_id ' + payload.id, {
+      hitCallback: function() {
+        console.log("ga notification click callback");
+      }
+    });
   });
 }]);
 
@@ -82,11 +88,16 @@ OneSignal.push(function() {
     OneSignal.on('notificationPermissionChange', function(permissionChange) {
       var currentPermission = permissionChange.to;
       console.log('New permission state:', currentPermission);
-      ga('send', {
-        hitType: 'event',
-        eventCategory: 'notification_permission_change',
-        eventAction: currentPermission,
-        eventLabel: 'native_browser_prompt'
+      OneSignal.getUserId( function(userId) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'notification_permission_change',
+          eventAction: currentPermission,
+          eventLabel: 'u_id ' + userId, {
+          hitCallback: function() {
+            console.log("ga permission change callback");
+          }
+        });
       });
    });
 });
