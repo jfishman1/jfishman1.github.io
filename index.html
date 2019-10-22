@@ -59,7 +59,7 @@ function sendSelfNotification() {
 }
   
 OneSignal.push(["addListenerForNotificationOpened", function(payload) {
-  console.log("Received NotificationOpened:");
+  console.log("OneSignal Notification Clicked Paylaod:");
   console.log(payload);
   console.log(payload.data);
   var topic = payload.data.topic;
@@ -100,6 +100,21 @@ OneSignal.push(function() {
         });
       });
    });
+});
+
+OneSignal.push(function() {
+  // Occurs when native browser prompt is shown
+  OneSignal.on('permissionPromptDisplay', function() {
+    console.log("The native prompt displayed");
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'notification_prompt',
+      eventAction: 'displayed',
+      hitCallback: function() {
+        console.log("ga permission display callback");
+      }
+    });
+  });
 });
 
 OneSignal.push(function() {
