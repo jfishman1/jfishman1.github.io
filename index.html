@@ -73,7 +73,7 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#hitcallback
     ga('send', {
       hitType: 'event', 
-      eventCategory: 'notification_clicked', 
+      eventCategory: 'os_notification_clicked', 
       eventAction: 'u_id ' + userId, 
       eventLabel: 'n_id ' + payload.id,
       hitCallback: function() {
@@ -91,7 +91,7 @@ OneSignal.push(function() {
       OneSignal.getUserId( function(userId) {
         ga('send', {
           hitType: 'event',
-          eventCategory: 'notification_permission_change',
+          eventCategory: 'os_notification_permission_change',
           eventAction: currentPermission,
           eventLabel: 'u_id ' + userId, 
           hitCallback: function() {
@@ -104,7 +104,7 @@ OneSignal.push(function() {
 
 OneSignal.push(function() {
   // Occurs when native browser prompt is shown
-  OneSignal.on('permissionPromptDisplay', function() {
+  OneSignal.on('os_permissionPromptDisplay', function() {
     console.log("The native prompt displayed");
     ga('send', {
       hitType: 'event',
