@@ -63,7 +63,7 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   console.log("Received NotificationOpened:");
   console.log(payload);
   console.log(payload.data);
-  let topic = payload.data.topic;
+  var topic = payload.data.topic;
   console.log("topic: ", topic);
   OneSignal.sendTag("topic", topic).then(function(tagsSent) {
     console.log("tagsSent: ", tagsSent)
@@ -71,9 +71,24 @@ OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   OneSignal.getUserId( function(userId) {
     console.log("OneSignal User ID:", userId);
     // Make a POST call to GA with the notification data and userId aka playerId
-    ga('send', 'event', 'notification_clicked', payload.id, userId);
+    ga('send', 'event', 'notification_clicked', payload.id, userId).then({
+      console.log("push clicked event");
+    });
   });
 }]);
+
+OneSignal.push(function() {
+    // Occurs when the user's subscription changes to a new value.
+    OneSignal.on('notificationPermissionChange', function(permissionChange) {
+      var currentPermission = permissionChange.to;
+      console.log('New permission state:', currentPermission);
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'notification_permission_change',
+        eventAction: currentPermission
+      });
+   });
+});
 
 OneSignal.push(function() {
   OneSignal.on('notificationDisplay', function (event) {
