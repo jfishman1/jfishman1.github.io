@@ -50,7 +50,6 @@ function onLoginButton() {
     OneSignal.push(function() {
       OneSignal.setExternalUserId(userId);
       console.log("called setExternalUserId to add external_user_id in OneSignal with id: ", userId);
-      console.log("OneSignal Player Id: ", await OneSignal.getUserId());
     });
     document.querySelector('#loginbutton').textContent = "Log Out"
   } else if (document.querySelector('#loginbutton').textContent === "Log Out") {
