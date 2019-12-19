@@ -40,7 +40,26 @@ ga('send', 'pageview');
   </div>
   <p><button onclick="tagUser()">Tag User</button></p>
   <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
+  <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
 <script>
+
+function onLoginButton() {
+  if (document.querySelector('#loginbutton').textContent === "Login") {
+    //Make server call to validate user in database and fetch user id
+    console.log(Math.floor(1000000000 + Math.random() * 9000000000));
+    var userId = Math.floor(1000000000 + Math.random() * 9000000000);
+    OneSignal.push(function() {
+      OneSignal.setExternalUserId(userId);
+    });
+    document.querySelector('#loginbutton').textContent = "Log Out"
+  } else if (document.querySelector('#loginbutton').textContent === "Log Out") {
+    OneSignal.push(function() {
+      OneSignal.removeExternalUserId();
+    });
+    document.querySelector('#loginbutton').textContent = "Login";
+  }
+
+}
 
 function tagUser() {
   OneSignal.push(function() {
