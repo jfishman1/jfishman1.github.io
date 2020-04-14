@@ -42,7 +42,16 @@ ga('send', 'pageview');
   <p><button onclick="tagUser()">Tag User</button></p>
   <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
   <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
+  <p><button onclick="sendOutcom()">Send Outcome</button></p>
+
 <script>
+
+  function sendOutcome() {
+    OneSignal.push(function() {
+      OneSignal.sendOutcome("web_click_send_outcome");
+      console.log("Outcome sent");
+    })
+  }
 
 function onLoginButton() {
   if (document.querySelector('#loginbutton').textContent === "Login") {
