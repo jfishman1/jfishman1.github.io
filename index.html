@@ -43,12 +43,19 @@ ga('send', 'pageview');
   <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
   <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
   <p><button onclick="sendOutcome()">Send Outcome</button></p>
-
+  <p><button onclick="sendOutcomeWithValue()">Send Outcome With Value 10</button></p>
 <script>
 
   function sendOutcome() {
     OneSignal.push(function() {
       OneSignal.sendOutcome("web_click_send_outcome");
+      console.log("Outcome sent");
+    })
+  }
+
+    function sendOutcomeWithValue() {
+    OneSignal.push(function() {
+      OneSignal.sendOutcome("outcome_value_10", 10);
       console.log("Outcome sent");
     })
   }
