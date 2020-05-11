@@ -18,6 +18,7 @@ ga('send', 'pageview');
   OneSignal.push(function() {
     OneSignal.init({
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+      requiresUserPrivacyConsent: true,
     });
   });
 </script>
@@ -44,6 +45,7 @@ ga('send', 'pageview');
   <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
   <p><button onclick="sendOutcome()">Send Button Click Outcome</button></p>
   <p><button onclick="sendOutcomeWithValue()">Purchase for $100</button></p>
+  <p><button id="trackCookiesButton" onclick="onTrackCookiesButton()">OK to track cookies</button></p>
 <script>
 
   function sendOutcome() {
@@ -58,6 +60,22 @@ ga('send', 'pageview');
       OneSignal.sendOutcome("purchase", 100);
       console.log("Outcome sent");
     })
+  }
+
+  function onTrackCookiesButton() {
+    if (document.querySelector('#trackCookiesButton').textContent === "OK to track cookies") {
+        OneSignal.push(function() {
+          console.log("consent provided: true");
+          OneSignal.provideUserConsent(true);
+        });
+      document.querySelector('#trackCookiesButton').textContent = "Disable Cookie Tracking";
+    } else if (document.querySelector('#trackCookiesButton').textContent === "Disable Cookie Tracking") {
+      OneSignal.push(function() {
+          console.log("consent provided: false");
+          OneSignal.provideUserConsent(false);
+        });
+      document.querySelector('#trackCookiesButton').textContent = "OK to track cookies";
+    }
   }
 
 function onLoginButton() {
