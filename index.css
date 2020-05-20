@@ -1,11 +1,6 @@
-.column {
-    column-count:3;
-    column-gap: 40px;
-    column-rule-style: solid;
-    column-rule-width: 1px;
-    column-rule-color: lightblue;
-    column-rule: 1px solid gray;
-    /*column-span: all;*/
-    column-width: 100px;
-
+/* Responsive layout - when the screen is less than 600px wide, make the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
 }

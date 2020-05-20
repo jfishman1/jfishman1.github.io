@@ -29,6 +29,7 @@
 <body>
   <h1> OneSignal Examples </h1>
   <div class="columns">
+    <h2>Example Links</h2>
     <ul>
       <li><a href='https://jfishman1.github.io/gtm'>Google Tag Manager example</a></li>
       <li><a href='https://jfishman1.github.io/tagging'>Tagging example</a></li>
@@ -41,11 +42,14 @@
       <li><a href='https://jfishman1.github.io/prompt-delay-visits'>Delay prompt 3 visits example</a></li>
       <!--<li><a href='https://jfishman1.github.io/http-setup'>HTTP Example</a></li>-->
     </ul>
-  </div>
-  <div class="columns">
+    
+    <h2>Tag & External User Id Example</h2>
+    <p><button id="loginbutton" onclick="onLoginButton()">Login/SetExternalUserId</button></p>
     <p><button onclick="tagUser()">Tag User</button></p>
+    
+
+    <h2>Outcomes and Other action methods</h2>
     <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
-    <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
     <p><button onclick="sendOutcome()">Send Button Click Outcome</button></p>
     <p><button onclick="sendOutcomeWithValue()">Purchase for $100</button></p>
     <p><button id="trackCookiesButton" onclick="onTrackCookiesButton()">OK to track cookies</button></p>
@@ -211,7 +215,7 @@ OneSignal.push(function() {
 
 </script>
 
-<!-- Custom Button Code -->
+<!-- Custom Button Code
     <a href="#" id="my-notification-button" style="display: none;">Subscribe to Notifications</a>
     <script>
     function onManageWebPushSubscriptionButtonClicked(event) {
@@ -287,7 +291,7 @@ OneSignal.push(function() {
             updateMangeWebPushSubscriptionButton(buttonSelector);
         });
     });
-    </script>
+    </script> -->
   
 </body>
 </html>
