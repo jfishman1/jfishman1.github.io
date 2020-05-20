@@ -20,17 +20,17 @@
   <!-- -------------------------------------------------------------- -->
   <!-- Tag upon subscription -->
   <script>
-    let page_author = 'the author';
-    let page_topic = 'sports';
+    let page_author = document.getElementById("author").value;
+    let page_topic = document.getElementById("topic").value;
 
     OneSignal.push(function() {
         OneSignal.on('subscriptionChange', function(isSubscribed) {
             if (isSubscribed === true) {
                 console.log('The user subscription state is now:', isSubscribed);
                 OneSignal.sendTags({
-                    "page_url": window.location.href,
-                    "author": page_author,
-                    "topic": page_topic,
+                    "sub_page": window.location.pathname,
+                    "sub_author": page_author,
+                    "sub_topic": page_topic,
                 }).then(function(tagsSent) {
                     // Callback called when tags have finished sending
                     console.log(tagsSent);
@@ -39,6 +39,16 @@
         });
     });
   </script>
+  <form>
+    <label>Page Author:</label>
+      <input type = "text"
+             id = "author"
+             value = "Mark Twain" />
+    <label>Page Topic:</label>
+      <input type = "text"
+             id = "topic"
+             value = "American Classics" />
+  </form>
   <!-- END Tag upon supbscription -->
   <!-- -------------------------------------------------------------- -->
   <!-- Tag upon button click -->

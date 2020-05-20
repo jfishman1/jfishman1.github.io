@@ -33,14 +33,12 @@
       <h2>Example Links</h2>
       <ul>
         <li><a href='https://jfishman1.github.io/gtm'>Google Tag Manager example</a></li>
-        <li><a href='https://jfishman1.github.io/tagging'>Tagging example</a></li>
+        <li><a href='https://jfishman1.github.io/tagging'>More Tagging Example</a></li>
         <li><a href='https://jfishman1.github.io/ga'>Google Analytics example</a></li>
         <li><a href="https://jfishman1.github.io/cross-origin-example">Cross-origin Subscription tracking Example</a></li>
         <li><a href='https://jfishman1.github.io/geolocation'>GeoLocation example</a></li>
         <li><a href='https://jfishman1.github.io/subdirectory/subdirectory-testpage'>Subdirectory Test Page</a></li>
         <li><a href='https://jfishman1.github.io/testpage'>Test Page</a></li>
-        <li><a href='https://jfishman1.github.io/prompt-delay-seconds'>Delay prompt 30 seconds example</a></li>
-        <li><a href='https://jfishman1.github.io/prompt-delay-visits'>Delay prompt 3 visits example</a></li>
         <!--<li><a href='https://jfishman1.github.io/http-setup'>HTTP Example</a></li>-->
       </ul>
     </div>
@@ -52,9 +50,9 @@
                id = "tagText"
                value = "Tag Value Here" />
       </form>
-      <p><img src="sunglasses.jpg" alt="Girl in a jacket" width="50" height="33"><button onclick="tagUser()">Tag User With Field Value</button></p>
+      <p><button onclick="tagUser()">Tag User With Field Value</button></p>
       
-      <p><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
+      <p><img src="sunglasses.jpg" alt="Girl in a jacket" width="50" height="33"><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
 
       <p><button id="loginbutton" onclick="onLoginButton()">Login/SetExternalUserId</button></p>
     </div>
@@ -123,7 +121,7 @@ function tagUser() {
   }
 
 function onLoginButton() {
-  if (document.querySelector('#loginbutton').textContent === "Login") {
+  if (document.querySelector('#loginbutton').textContent === "Login/SetExternalUserId") {
     //Make server call to validate user in database and fetch user id
     var userId = Math.floor(1000000000 + Math.random() * 9000000000);
     OneSignal.push(function() {
@@ -133,8 +131,8 @@ function onLoginButton() {
         console.log("OneSignal User ID:", userId);  
       });
     });
-    document.querySelector('#loginbutton').textContent = "Log Out"
-  } else if (document.querySelector('#loginbutton').textContent === "Log Out") {
+    document.querySelector('#loginbutton').textContent = "Log Out/RemoveExternalUserId"
+  } else if (document.querySelector('#loginbutton').textContent === "Log Out/RemoveExternalUserId") {
     OneSignal.push(function() {
       OneSignal.removeExternalUserId();
       console.log("called removeExternalUserId to remove external_user_id from OneSignal record");
