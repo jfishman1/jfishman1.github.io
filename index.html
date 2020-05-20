@@ -47,6 +47,7 @@
     <div class="column">
       <h2>Tag & External User Id Example</h2>
       <p><button id="loginbutton" onclick="onLoginButton()">Login/SetExternalUserId</button></p>
+      <p><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
       <p><button onclick="tagUser()">Tag User</button></p>
     </div>
     <div class="column">
@@ -58,8 +59,22 @@
     </div>
   </div>
 
-
 <script>
+/*Tag Examples*/
+function onAddToCartButton() {
+  OneSignal.push(function() {
+    let timestamp = Math.floor(Date.now() / 1000);
+    OneSignal.sendTags({
+      cart_item: 'Sunglasses',
+      cart_update: timestamp,
+    }).then(function(tagsSent) {
+      // Callback called when tags have finished sending 
+      console.log("tagsSent: ", tagsSent);   
+    });
+  });
+}
+
+
   function sendOutcome() {
     OneSignal.push(function() {
       OneSignal.sendOutcome("clicked_button");
@@ -109,17 +124,6 @@ function onLoginButton() {
     });
     document.querySelector('#loginbutton').textContent = "Login";
   }
-
-}
-
-function tagUser() {
-  OneSignal.push(function() {
-    let timestamp = Math.floor(Date.now() / 1000);
-    OneSignal.sendTag("buttonPress", timestamp).then(function(tagsSent) {
-      // Callback called when tags have finished sending
-      console.log("timestamp = ", timestamp);
-    });
-  })
 }
 
 function sendSelfNotification() {
@@ -127,6 +131,7 @@ function sendSelfNotification() {
     OneSignal.sendSelfNotification();
   });
 }
+
   
 OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   console.log("OneSignal Notification Clicked Paylaod:");
