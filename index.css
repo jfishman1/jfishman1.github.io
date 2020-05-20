@@ -5,7 +5,7 @@
     column-rule-width: 1px;
     column-rule-color: lightblue;
     column-rule: 1px solid gray;
-    //column-span: all;
+    /*column-span: all;*/
     column-width: 100px;
 
 }

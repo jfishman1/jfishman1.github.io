@@ -28,7 +28,7 @@
 </head>
 <body>
   <h1> OneSignal Examples </h1>
-  <div>
+  <div class="columns">
     <ul>
       <li><a href='https://jfishman1.github.io/gtm'>Google Tag Manager example</a></li>
       <li><a href='https://jfishman1.github.io/tagging'>Tagging example</a></li>
@@ -50,8 +50,9 @@
     <p><button onclick="sendOutcomeWithValue()">Purchase for $100</button></p>
     <p><button id="trackCookiesButton" onclick="onTrackCookiesButton()">OK to track cookies</button></p>
   </div>
-<script>
 
+
+<script>
   function sendOutcome() {
     OneSignal.push(function() {
       OneSignal.sendOutcome("clicked_button");
