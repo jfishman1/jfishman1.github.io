@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="index.css">
   <title>OneSignal Examples Page</title>
-<!-- Google Analytics -->
-<script>
+  <!-- Google Analytics -->
+  <script>
   // Used from: https://developers.google.com/analytics/devguides/collection/analyticsjs
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-106423818-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<!-- End Google Analytics -->
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-106423818-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
 
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
@@ -41,12 +42,14 @@ ga('send', 'pageview');
       <!--<li><a href='https://jfishman1.github.io/http-setup'>HTTP Example</a></li>-->
     </ul>
   </div>
-  <p><button onclick="tagUser()">Tag User</button></p>
-  <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
-  <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
-  <p><button onclick="sendOutcome()">Send Button Click Outcome</button></p>
-  <p><button onclick="sendOutcomeWithValue()">Purchase for $100</button></p>
-  <p><button id="trackCookiesButton" onclick="onTrackCookiesButton()">OK to track cookies</button></p>
+  <div class="columns">
+    <p><button onclick="tagUser()">Tag User</button></p>
+    <p><button onclick="sendSelfNotification()">Send Self Notification</button></p>
+    <p><button id="loginbutton" onclick="onLoginButton()">Login</button></p>
+    <p><button onclick="sendOutcome()">Send Button Click Outcome</button></p>
+    <p><button onclick="sendOutcomeWithValue()">Purchase for $100</button></p>
+    <p><button id="trackCookiesButton" onclick="onTrackCookiesButton()">OK to track cookies</button></p>
+  </div>
 <script>
 
   function sendOutcome() {
