@@ -46,9 +46,15 @@
     </div>
     <div class="column">
       <h2>Tag & External User Id Example</h2>
+      <form>
+        <label>Text box</label>
+        <input type = "text"
+               id = "tagText"
+               value = "Tag Value Here" />
+      </form>
+      <p><button onclick="tagUser()">Tag User With Field Value</button></p>
       <p><button id="loginbutton" onclick="onLoginButton()">Login/SetExternalUserId</button></p>
       <p><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
-      <p><button onclick="tagUser()">Tag User</button></p>
     </div>
     <div class="column">
       <h2>Outcomes and Other action methods</h2>
@@ -72,6 +78,12 @@ function onAddToCartButton() {
       console.log("tagsSent: ", tagsSent);   
     });
   });
+}
+
+function tagUser() {
+  OneSignal.push(function() {
+    OneSignal.sendTag("buttonPress", document.getElementById("tagText").value;)
+  })
 }
 
 
