@@ -18,6 +18,16 @@
 <body>
   <h1> OneSignal Tagging Examples </h1>
   <!-- -------------------------------------------------------------- -->
+  <form>
+    <label>Page Author:</label>
+      <input type = "text"
+             id = "author"
+             value = "Mark Twain" />
+    <label>Page Topic:</label>
+      <input type = "text"
+             id = "topic"
+             value = "American Classics" />
+  </form>
   <!-- Tag upon subscription -->
   <script>
     let page_author = document.getElementById("author").value;
@@ -39,16 +49,7 @@
         });
     });
   </script>
-  <form>
-    <label>Page Author:</label>
-      <input type = "text"
-             id = "author"
-             value = "Mark Twain" />
-    <label>Page Topic:</label>
-      <input type = "text"
-             id = "topic"
-             value = "American Classics" />
-  </form>
+
   <!-- END Tag upon supbscription -->
   <!-- -------------------------------------------------------------- -->
   <!-- Tag upon button click -->
