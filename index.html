@@ -45,15 +45,19 @@
     <div class="column">
       <h2>Tag & External User Id Example</h2>
       <form>
-        <label>Tag key "buttonPress", Tag value:</label>
+        <label>Tag key:</label>
         <input type = "text"
-               id = "tagText"
-               value = "Tag Value Here" />
+               id = "tagKey"
+               value = "tag_key_here" />
+        <label>Tag value:</label>
+        <input type = "text"
+               id = "tagValue"
+               value = "tag_value_here" />
       </form>
       <p><button onclick="tagUser()">Tag User With Field Value</button></p>
       
       <p><img src="sunglasses.jpg" alt="Girl in a jacket" width="50" height="33"><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
-      <p><button onclick="deleteCartTags()">Purchase or Remove Item From Cart</p>
+      <p><button onclick="deleteCartTags()">Purchase or Remove Item From Cart</button></p>
 
       <p><button id="loginbutton" onclick="onLoginButton()">Login/SetExternalUserId</button></p>
     </div>
@@ -83,7 +87,7 @@ function onAddToCartButton() {
 
 function tagUser() {
   OneSignal.push(function() {            
-    OneSignal.sendTag("buttonPress", document.getElementById("tagText").value).then(function(tagsSent) {
+    OneSignal.sendTag(document.getElementById("tagKey").value, document.getElementById("tagValue").value).then(function(tagsSent) {
       // Callback called when tags have finished sending
       console.log("tagsSent: ", tagsSent);  
     }); 
