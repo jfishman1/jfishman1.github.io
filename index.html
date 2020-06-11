@@ -161,6 +161,10 @@ function sendSelfNotification() {
   });
 }
 
+OneSignal.push(["getNotificationPermission", function(permission) {    
+  console.log("Site Notification Permission:", permission);
+  // (Output) Site Notification Permission: default
+}]);
   
 OneSignal.push(["addListenerForNotificationOpened", function(payload) {
   console.log("OneSignal Notification Clicked Paylaod:");
