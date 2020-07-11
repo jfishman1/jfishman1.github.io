@@ -21,6 +21,14 @@
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
       //requiresUserPrivacyConsent: true
     });
+    var isPushSupported = OneSignal.isPushNotificationsSupported();
+    console.log("isPushSupported: ", isPushSupported);
+    if (isPushSupported) {
+      window.alert("Push is supported");
+    } else {
+      window.alert("Push is not supported");
+    }
+   
   });
 </script>
 
@@ -210,8 +218,7 @@ OneSignal.push(function() {
       });
    });
 
-   var isPushSupported = OneSignal.isPushNotificationsSupported();
-   console.log("isPushSupported: ", isPushSupported);
+   
 
 });
 
