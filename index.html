@@ -209,6 +209,10 @@ OneSignal.push(function() {
         });
       });
    });
+
+   var isPushSupported = OneSignal.isPushNotificationsSupported();
+   console.log("isPushSupported: ", isPushSupported);
+
 });
 
 OneSignal.push(function() {
