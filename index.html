@@ -49,6 +49,8 @@
         <!--<li><a href='https://jfishman1.github.io/http-setup'>HTTP Example</a></li>-->
       </ul>
       <div class='onesignal-customlink-container'></div>
+      <br>
+      <p><button onclick="showCategorySlidedown()">Show Categories</button></p>
     </div>
 
     <div class="column">
@@ -168,6 +170,12 @@ function sendSelfNotification() {
   OneSignal.push(function() {
     OneSignal.sendSelfNotification();
   });
+}
+
+function showCategorySlidedown() {
+  OneSignal.push(function() {
+    OneSignal.showCategorySlidedown();
+  })
 }
 
 OneSignal.push(["getNotificationPermission", function(permission) {    
