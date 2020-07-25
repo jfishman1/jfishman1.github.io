@@ -283,6 +283,27 @@ OneSignal.push(function() {
   });
 });
 
+OneSignal.push(function() {
+  OneSignal.on('popoverShown', function() {
+    console.log('Slide Prompt Shown');
+  });
+});
+OneSignal.push(function() {
+  OneSignal.on('popoverAllowClick', function() {
+    console.log('Slide Prompt Allowed');
+  });
+});
+OneSignal.push(function () {
+  OneSignal.on('popoverCancelClick', function () {
+  console.log('Slide Prompt Canceled');
+});
+  OneSignal.push(function() {
+  OneSignal.on('popoverClosed', function() {
+    console.log('Slide Prompt Closed');
+  });
+});
+
+
 </script>
 
 <!-- Custom Button Code
