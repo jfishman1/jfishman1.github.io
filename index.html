@@ -19,15 +19,28 @@
   OneSignal.push(function() {
     OneSignal.init({
       appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+      notifyButton: {
+      	enable: false,
+      },
       //requiresUserPrivacyConsent: true
     });
-    var isPushSupported = OneSignal.isPushNotificationsSupported();
-    console.log("isPushSupported: ", isPushSupported);
-    if (isPushSupported) {
-      console.log("Push is supported");
-    } else {
-      console.log("Push is not supported");
-    }
+    // var isPushSupported = OneSignal.isPushNotificationsSupported();
+    // console.log("isPushSupported: ", isPushSupported);
+    // if (isPushSupported) {
+    //   console.log("Push is supported");
+    // } else {
+    //   console.log("Push is not supported");
+    // }
+    OneSignal.on('permissionPromptDisplay', function() {
+		console.log("permissionPromptDisplay")
+	});
+	OneSignal.on('notificationPermissionChange', async function(permissionChange) {
+		if(permissionChange.to === 'granted'){
+			let userId = await OneSignal.getUserId();
+			console.log("player_id permission change to granted: ", userId)
+		}
+	});
+	OneSignal.registerForPushNotifications();
 
   });
 </script>
