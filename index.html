@@ -22,6 +22,12 @@
       notifyButton: {
       	enable: false,
       },
+      promptOptions: {
+        autoPrompt: false,
+        actionMessage: "This is the Action Message",
+        acceptButtonText: "Fo' sho'",
+        cancelButtonText: "Nah bra'"
+      },
       //requiresUserPrivacyConsent: true
     });
     // var isPushSupported = OneSignal.isPushNotificationsSupported();
@@ -31,16 +37,7 @@
     // } else {
     //   console.log("Push is not supported");
     // }
-    OneSignal.on('permissionPromptDisplay', function() {
-		console.log("permissionPromptDisplay")
-	});
-	OneSignal.on('notificationPermissionChange', async function(permissionChange) {
-		if(permissionChange.to === 'granted'){
-			let userId = await OneSignal.getUserId();
-			console.log("player_id permission change to granted: ", userId)
-		}
-	});
-	OneSignal.registerForPushNotifications();
+	
 
   });
 </script>
