@@ -14,22 +14,29 @@
       },
       subdomainName: "jfishmanhttp",
       promptOptions: {
-    /* Change bold title, limited to 30 characters */
-    siteName: 'OneSignal Documentation',
-    /* Subtitle, limited to 90 characters */
-    actionMessage: "We'd like to show you notifications for the latest news and updates.",
-    /* Example notification title */
-    exampleNotificationTitle: 'Example notification',
-    /* Example notification message */
-    exampleNotificationMessage: 'This is an example notification',
-    /* Text below example notification, limited to 50 characters */
-    exampleNotificationCaption: 'You can unsubscribe anytime',
-    /* Accept button text, limited to 15 characters */
-    acceptButtonText: "ALLOW",
-    /* Cancel button text, limited to 15 characters */
-    cancelButtonText: "NO THANKS",
-    autoAcceptTitle: 'Click Allow'
-}
+        slidedown: {
+          prompts: [
+            {
+              autoprompt:false,
+            }
+          ]
+        },
+        /* Change bold title, limited to 30 characters */
+        siteName: 'OneSignal Documentation',
+        /* Subtitle, limited to 90 characters */
+        actionMessage: "We'd like to show you notifications for the latest news and updates.",
+        /* Example notification title */
+        exampleNotificationTitle: 'Example notification',
+        /* Example notification message */
+        exampleNotificationMessage: 'This is an example notification',
+        /* Text below example notification, limited to 50 characters */
+        exampleNotificationCaption: 'You can unsubscribe anytime',
+        /* Accept button text, limited to 15 characters */
+        acceptButtonText: "ALLOW PU",
+        /* Cancel button text, limited to 15 characters */
+        cancelButtonText: "NO THANKS PU",
+        autoAcceptTitle: 'Click Allow'
+      }
     });
   });
 </script>
