@@ -185,13 +185,13 @@
 
     function showCategorySlidedown() {
       OneSignal.push(function() {
-        OneSignal.showCategorySlidedown();
+        OneSignal.showCategorySlidedown({force: true});
       })
     }
 
     function showSmsAndEmailSlidedown() {
       OneSignal.push(function() {
-        OneSignal.showSmsAndEmailSlidedown();
+        OneSignal.showSmsAndEmailSlidedown({force: true});
       })
     }
 
