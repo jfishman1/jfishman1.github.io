@@ -31,17 +31,7 @@
       },
         
       },
-      //requiresUserPrivacyConsent: true
     });
-    // var isPushSupported = OneSignal.isPushNotificationsSupported();
-    // console.log("isPushSupported: ", isPushSupported);
-    // if (isPushSupported) {
-    //   console.log("Push is supported");
-    // } else {
-    //   console.log("Push is not supported");
-    // }
-	
-
   });
 </script>
 
@@ -81,7 +71,7 @@
       </form>
       <p><button onclick="tagUser()">Tag User With Field Values</button></p>
       
-      <p><img src="sunglasses.jpg" alt="Girl in a jacket" width="50" height="33"><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
+      <p><img src="sunglasses.jpg" alt="Sunglasses" width="50" height="33"><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
       <p><button onclick="deleteCartTags()">Purchase or Remove Item From Cart</button></p>
 
       <p><button id="loginbutton" onclick="onLoginButton()">Login/SetExternalUserId</button></p>
@@ -164,7 +154,8 @@
         //Make server call to validate user in database and fetch user id
         var userId = Math.floor(1000000000 + Math.random() * 9000000000);
         OneSignal.push(function() {
-          OneSignal.setExternalUserId(userId);
+          //OneSignal.setExternalUserId(userId);
+          OneSignal.setExternalUserId("JonF");
           console.log("called setExternalUserId to add external_user_id in OneSignal with id: ", userId);
           OneSignal.getUserId(function(userId) {
             console.log("OneSignal User ID:", userId);  
