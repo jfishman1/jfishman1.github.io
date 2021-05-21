@@ -80,7 +80,7 @@
         value = "123456789" />
       </form>
 
-      <p><button id="loginbutton" onclick="setExternalUserId()">SetExternalUserId/LoginExample)</button></p>
+      <p><button id="loginbutton" onclick="setExternalUserId()">SetExternalUserId/LoginExample</button></p>
     </div>
     <div class="column">
       <h2>Outcomes and Other action methods</h2>
@@ -259,13 +259,8 @@
     // Occurs when the user's subscription changes to a new value.
     OneSignal.on('subscriptionChange', function (isSubscribed) {
       console.log("The user's subscription state is now:", isSubscribed);
-      var userId = Math.floor(1000000000 + Math.random() * 9000000000);
-      OneSignal.push(function() {
-        OneSignal.setExternalUserId(userId);
-        console.log("called setExternalUserId to add external_user_id in OneSignal with id: ", userId);
-        OneSignal.getUserId(function(userId) {
-          console.log("OneSignal User ID:", userId);  
-        });
+      OneSignal.getExternalUserId().then(function(externalUserId){
+        console.log("externalUserId: ", externalUserId);
       });
       OneSignal.getUserId( function(userId) {
         ga('send', {
@@ -274,11 +269,10 @@
           eventAction: 'u_id ' + userId,
           eventLabel: isSubscribed,
           hitCallback: function() {
-            console.log("ga os_subscriptionChange callback");
+            console.log("ga os_subscriptionChange callback, OS Player ID: ", userId);
           }
         });
-        console.log(userId);
-      })
+      });
     });
 
     OneSignal.on('notificationDisplay', function (event) {
