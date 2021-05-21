@@ -64,6 +64,7 @@
       <div class='onesignal-customlink-container'></div>
       <br>
       <p><button onclick="showCategorySlidedown()">Show Categories</button></p>
+      <p><button onclick="showSmsAndEmailSlidedown()">Show SMS And Email Slidedown</button></p>
     </div>
 
     <div class="column">
@@ -188,6 +189,12 @@
     function showCategorySlidedown() {
       OneSignal.push(function() {
         OneSignal.showCategorySlidedown();
+      })
+    }
+
+    function showSmsAndEmailSlidedown() {
+      OneSignal.push(function() {
+        OneSignal.showSmsAndEmailSlidedown();
       })
     }
 
