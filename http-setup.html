@@ -45,6 +45,12 @@
 <body>
   <h1> OneSignal HTTP Example </h1>
 <script>
+  <p><button onclick="showHTTPPrompt()">Show Push Prompt</button></p>
+
+function showHTTPPrompt() {
+OneSignal.push(["registerForPushNotifications"]);
+event.preventDefault();
+}
 
 function tagUser() {
   OneSignal.push(function() {
