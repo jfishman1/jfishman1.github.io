@@ -19,7 +19,7 @@
     var OneSignal = window.OneSignal || [];
     OneSignal.push(function () {
       OneSignal.init({
-        appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+        appId: "3beb3078-e0f1-4629-af17-fde833b9f716",// "0bd432c6-b55c-49d0-8373-22badb459fff",
         notifyButton: {
           enable: false,
         },
@@ -58,10 +58,14 @@
       <br>
       <p><button onclick="showCategorySlidedown()">Show Categories</button></p>
       <p><button onclick="showSmsAndEmailSlidedown()">Show SMS And Email Slidedown</button></p>
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
+
+      <div class="toggle">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="toggleSwitch" onClick="checkboxChange(this)" />
+          <label class="custom-control-label" for="toggleSwitch">
+            Is Push Enabled?</label>
+        </div>
+      </div>
     </div>
 
     <div class="column">
@@ -261,6 +265,11 @@
       // Occurs when the user's subscription changes to a new value.
       OneSignal.on('subscriptionChange', function (isSubscribed) {
         console.log("The user's subscription state is now:", isSubscribed);
+        if (isSubscribed) {
+          document.getElementById("toggleSwitch").checked = true;
+        } else {
+          document.getElementById("toggleSwitch").checked = false;
+        }
         OneSignal.getExternalUserId().then(function (externalUserId) {
           console.log("externalUserId: ", externalUserId);
         });
@@ -300,7 +309,37 @@
       });
     });
 
+    OneSignal.push(function () {
+      OneSignal.isPushNotificationsEnabled(function (isEnabled) {
+        if (isEnabled) {
+          console.log("Push notifications are enabled!");
+          document.getElementById("toggleSwitch").checked = true;
+        }
+        else {
+          console.log("Push notifications are not enabled yet.");
+          document.getElementById("toggleSwitch").checked = false;
+        }
 
+      });
+    });
+
+    function checkboxChange(checkbox) {
+      if (!checkbox.checked) {
+        if (confirm('Are you sure you want to disable push?')) {
+          OneSignal.push(function () {
+            OneSignal.setSubscription(false);
+          })
+        } else {
+          OneSignal.push(function () {
+            OneSignal.setSubscription(true);
+          })
+        }
+      } else {
+        OneSignal.push(function () {
+          OneSignal.setSubscription(true);
+        })
+      }
+    }
   </script>
 </body>
 
