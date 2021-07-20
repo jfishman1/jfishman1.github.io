@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="stylesheet" type="text/css" href="index.css">
   <title>OneSignal Examples Page</title>
   <!-- Google Analytics -->
   <script>
-  // Used from: https://developers.google.com/analytics/devguides/collection/analyticsjs
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', 'UA-106423818-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-<!-- End Google Analytics -->
+    // Used from: https://developers.google.com/analytics/devguides/collection/analyticsjs
+    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+    ga('create', 'UA-106423818-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  <!-- End Google Analytics -->
 
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  var OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
-      notifyButton: {
-      	enable: false,
-      },
-      promptOptions: {
-        slidedown: {
-          autoPrompt: false,
-        actionMessage: "This is the Action Message",
-        acceptButtonText: "Fo' sho'",
-        cancelButtonText: "Nah bra'"
-      },
-        
-      },
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: "3beb3078-e0f1-4629-af17-fde833b9f716",
+        notifyButton: {
+          enable: false,
+        },
+        promptOptions: {
+          slidedown: {
+            autoPrompt: false,
+            actionMessage: "This is the Action Message",
+            acceptButtonText: "Fo' sho'",
+            cancelButtonText: "Nah bra'"
+          },
+
+        },
+      });
     });
-  });
-</script>
+  </script>
 
 </head>
+
 <body>
   <h1> OneSignal Examples </h1>
   <div class="row">
@@ -45,7 +47,8 @@
         <li><a href='https://jfishman1.github.io/gtm'>Google Tag Manager example</a></li>
         <li><a href='https://jfishman1.github.io/tagging'>More Tagging Example</a></li>
         <li><a href='https://jfishman1.github.io/ga'>Google Analytics example</a></li>
-        <li><a href="https://jfishman1.github.io/cross-origin-example">Cross-origin Subscription tracking Example</a></li>
+        <li><a href="https://jfishman1.github.io/cross-origin-example">Cross-origin Subscription tracking Example</a>
+        </li>
         <li><a href='https://jfishman1.github.io/geolocation'>GeoLocation example</a></li>
         <li><a href='https://jfishman1.github.io/subdirectory/subdirectory-testpage'>Subdirectory Test Page</a></li>
         <li><a href='https://jfishman1.github.io/testpage'>Test Page</a></li>
@@ -55,29 +58,28 @@
       <br>
       <p><button onclick="showCategorySlidedown()">Show Categories</button></p>
       <p><button onclick="showSmsAndEmailSlidedown()">Show SMS And Email Slidedown</button></p>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
     </div>
 
     <div class="column">
       <h2>Tag & External User Id Example</h2>
       <form>
         <label>Tag key:</label>
-        <input type = "text"
-        id = "tagKey"
-        value = "tag_key_here" />
+        <input type="text" id="tagKey" value="tag_key_here" />
         <label>Tag value:</label>
-        <input type = "text"
-        id = "tagValue"
-        value = "tag_value_here" />
+        <input type="text" id="tagValue" value="tag_value_here" />
       </form>
       <p><button onclick="tagUser()">Tag User With Field Values</button></p>
-      
-      <p><img src="sunglasses.jpg" alt="Sunglasses" width="50" height="33"><button onclick="onAddToCartButton()">Add Sunglasses To Cart</button></p>
+
+      <p><img src="sunglasses.jpg" alt="Sunglasses" width="50" height="33"><button onclick="onAddToCartButton()">Add
+          Sunglasses To Cart</button></p>
       <p><button onclick="deleteCartTags()">Purchase or Remove Item From Cart</button></p>
       <form>
         <label>External User Id:</label>
-        <input type = "text"
-        id = "external_user_id"
-        value = "123456789" />
+        <input type="text" id="external_user_id" value="123456789" />
       </form>
 
       <p><button id="loginbutton" onclick="setExternalUserId()">SetExternalUserId/LoginExample</button></p>
@@ -94,25 +96,25 @@
   <script>
     /*Tag Examples*/
     function onAddToCartButton() {
-      OneSignal.push(function() {
+      OneSignal.push(function () {
         let timestamp = Math.floor(Date.now() / 1000);
         OneSignal.sendTags({
           cart_item: 'Sunglasses',
           cart_update: timestamp,
-        }).then(function(tagsSent) {
-        // Callback called when tags have finished sending 
-        console.log("tagsSent: ", tagsSent);   
+        }).then(function (tagsSent) {
+          // Callback called when tags have finished sending 
+          console.log("tagsSent: ", tagsSent);
         });
       });
     }
 
     function tagUser() {
-      OneSignal.push(function() {            
+      OneSignal.push(function () {
         OneSignal.sendTag(document.getElementById("tagKey").value, document.getElementById("tagValue").value)
-          .then(function(tagsSent) {
+          .then(function (tagsSent) {
             // Callback called when tags have finished sending
-            console.log("tagsSent: ", tagsSent);  
-          }); 
+            console.log("tagsSent: ", tagsSent);
+          });
       });
     }
 
@@ -121,16 +123,16 @@
         //Make server call to validate user in database and fetch user id
         //var userId = Math.floor(1000000000 + Math.random() * 9000000000);
         var userId = document.getElementById("external_user_id").value;
-        OneSignal.push(function() {
+        OneSignal.push(function () {
           OneSignal.setExternalUserId(userId);
           console.log("called setExternalUserId to add external_user_id in OneSignal with id: ", userId);
-          OneSignal.getUserId(function(playerId) {
-            console.log("OneSignal User ID:", playerId);  
+          OneSignal.getUserId(function (playerId) {
+            console.log("OneSignal User ID:", playerId);
           });
         });
         document.querySelector('#loginbutton').textContent = "Log Out/RemoveExternalUserId"
       } else if (document.querySelector('#loginbutton').textContent === "SetExternalUserId/LoginExample") {
-        OneSignal.push(function() {
+        OneSignal.push(function () {
           OneSignal.removeExternalUserId();
           console.log("called removeExternalUserId to remove external_user_id from OneSignal record");
         });
@@ -139,8 +141,8 @@
     }
 
     function deleteCartTags() {
-      OneSignal.push(function() {
-        OneSignal.deleteTags(["cart_item", "cart_update"], function(tagsDeleted) {
+      OneSignal.push(function () {
+        OneSignal.deleteTags(["cart_item", "cart_update"], function (tagsDeleted) {
           // Callback called when tags have been deleted    
           console.log("tagsDeleted: ", tagsDeleted);
         });
@@ -148,14 +150,14 @@
     }
 
     function sendOutcome() {
-      OneSignal.push(function() {
+      OneSignal.push(function () {
         OneSignal.sendOutcome("clicked_button");
         console.log("Outcome sent");
       })
     }
 
     function sendOutcomeWithValue() {
-      OneSignal.push(function() {
+      OneSignal.push(function () {
         OneSignal.sendOutcome("purchase", 100);
         console.log("Outcome sent");
       })
@@ -163,13 +165,13 @@
 
     function onTrackCookiesButton() {
       if (document.querySelector('#trackCookiesButton').textContent === "OK to track cookies") {
-        OneSignal.push(function() {
+        OneSignal.push(function () {
           console.log("consent provided: true");
           OneSignal.provideUserConsent(true);
         });
         document.querySelector('#trackCookiesButton').textContent = "Disable Cookie Tracking";
       } else if (document.querySelector('#trackCookiesButton').textContent === "Disable Cookie Tracking") {
-        OneSignal.push(function() {
+        OneSignal.push(function () {
           console.log("consent provided: false");
           OneSignal.provideUserConsent(false);
         });
@@ -178,29 +180,29 @@
     }
 
     function sendSelfNotification() {
-      OneSignal.push(function() {
+      OneSignal.push(function () {
         OneSignal.sendSelfNotification("Custom Title", "Custom Message", "https://jfishman1.github.io/tagging");
       });
     }
 
     function showCategorySlidedown() {
-      OneSignal.push(function() {
-        OneSignal.showCategorySlidedown({force: true});
+      OneSignal.push(function () {
+        OneSignal.showCategorySlidedown({ force: true });
       })
     }
 
     function showSmsAndEmailSlidedown() {
-      OneSignal.push(function() {
-        OneSignal.showSmsAndEmailSlidedown({force: true});
+      OneSignal.push(function () {
+        OneSignal.showSmsAndEmailSlidedown({ force: true });
       })
     }
 
-    OneSignal.push(["getNotificationPermission", function(permission) {    
+    OneSignal.push(["getNotificationPermission", function (permission) {
       console.log("Site Notification Permission:", permission);
       // (Output) Site Notification Permission: default
     }]);
 
-    OneSignal.push(["addListenerForNotificationOpened", function(payload) {
+    OneSignal.push(["addListenerForNotificationOpened", function (payload) {
       console.log("OneSignal Notification Clicked Paylaod:");
       console.log(payload);
       console.log(payload.data);
@@ -209,96 +211,97 @@
       OneSignal.sendTag("topic", topic).then(function(tagsSent) {
         console.log("tagsSent: ", tagsSent)
       });*/
-      OneSignal.getUserId( function(userId) {
+      OneSignal.getUserId(function (userId) {
         console.log("OneSignal User ID:", userId);
         // Make a POST call to GA with the notification data and userId aka playerId
         // https://developers.google.com/analytics/devguides/collection/analyticsjs/sending-hits#hitcallback
         ga('send', {
-          hitType: 'event', 
-          eventCategory: 'os_addListenerForNotificationOpened', 
-          eventAction: 'u_id ' + userId, 
+          hitType: 'event',
+          eventCategory: 'os_addListenerForNotificationOpened',
+          eventAction: 'u_id ' + userId,
           eventLabel: 'n_id ' + payload.id,
-          hitCallback: function() {
+          hitCallback: function () {
             console.log("ga os_addListenerForNotificationOpened callback");
           }
         });
       });
     }]);
 
-  OneSignal.push(function() {
-    // Occurs when the user's subscription changes to a new value.
-    OneSignal.on('notificationPermissionChange', function(permissionChange) {
-      var currentPermission = permissionChange.to;
-      console.log('New permission state:', currentPermission);
-      OneSignal.getUserId( function(userId) {
+    OneSignal.push(function () {
+      // Occurs when the user's subscription changes to a new value.
+      OneSignal.on('notificationPermissionChange', function (permissionChange) {
+        var currentPermission = permissionChange.to;
+        console.log('New permission state:', currentPermission);
+        OneSignal.getUserId(function (userId) {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'os_notificationPermissionChange',
+            eventAction: 'u_id ' + userId,
+            eventLabel: currentPermission,
+            hitCallback: function () {
+              console.log("ga os_notificationPermissionChange callback");
+            }
+          });
+        });
+      });
+
+      // Occurs when native browser prompt is shown
+      OneSignal.on('permissionPromptDisplay', function () {
+        console.log("The native prompt displayed");
         ga('send', {
           hitType: 'event',
-          eventCategory: 'os_notificationPermissionChange',
-          eventAction: 'u_id ' + userId,
-          eventLabel: currentPermission, 
-          hitCallback: function() {
-            console.log("ga os_notificationPermissionChange callback");
+          eventCategory: 'os_permissionPromptDisplay',
+          eventAction: 'displayed',
+          hitCallback: function () {
+            console.log("ga os_permissionPromptDisplay callback");
           }
         });
       });
-    });
 
-    // Occurs when native browser prompt is shown
-    OneSignal.on('permissionPromptDisplay', function() {
-      console.log("The native prompt displayed");
-      ga('send', {
-        hitType: 'event',
-        eventCategory: 'os_permissionPromptDisplay',
-        eventAction: 'displayed',
-        hitCallback: function() {
-          console.log("ga os_permissionPromptDisplay callback");
-        }
-      });
-    });
-
-    // Occurs when the user's subscription changes to a new value.
-    OneSignal.on('subscriptionChange', function (isSubscribed) {
-      console.log("The user's subscription state is now:", isSubscribed);
-      OneSignal.getExternalUserId().then(function(externalUserId){
-        console.log("externalUserId: ", externalUserId);
-      });
-      OneSignal.getUserId( function(userId) {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'os_subscriptionChange',
-          eventAction: 'u_id ' + userId,
-          eventLabel: isSubscribed,
-          hitCallback: function() {
-            console.log("ga os_subscriptionChange callback, OS Player ID: ", userId);
-          }
+      // Occurs when the user's subscription changes to a new value.
+      OneSignal.on('subscriptionChange', function (isSubscribed) {
+        console.log("The user's subscription state is now:", isSubscribed);
+        OneSignal.getExternalUserId().then(function (externalUserId) {
+          console.log("externalUserId: ", externalUserId);
+        });
+        OneSignal.getUserId(function (userId) {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'os_subscriptionChange',
+            eventAction: 'u_id ' + userId,
+            eventLabel: isSubscribed,
+            hitCallback: function () {
+              console.log("ga os_subscriptionChange callback, OS Player ID: ", userId);
+            }
+          });
         });
       });
+
+      OneSignal.on('notificationDisplay', function (event) {
+        console.log('OneSignal notification displayed:', event);
+        console.log('OneSignal notification id:', event.id);
+        console.log('OneSignal notification title:', event.heading);
+        console.log('OneSignal notification content:', event.content);
+        console.log('OneSignal notification url:', event.url);
+        console.log('OneSignal notification icon:', event.icon);
+      });
+
+      OneSignal.on('popoverShown', function () {
+        console.log('Slide Prompt Shown');
+      });
+      OneSignal.on('popoverAllowClick', function () {
+        console.log('Slide Prompt Allowed');
+      });
+      OneSignal.on('popoverCancelClick', function () {
+        console.log('Slide Prompt Canceled');
+      });
+      OneSignal.on('popoverClosed', function () {
+        console.log('Slide Prompt Closed');
+      });
     });
 
-    OneSignal.on('notificationDisplay', function (event) {
-      console.log('OneSignal notification displayed:', event);
-      console.log('OneSignal notification id:', event.id);
-      console.log('OneSignal notification title:', event.heading);
-      console.log('OneSignal notification content:', event.content);
-      console.log('OneSignal notification url:', event.url);
-      console.log('OneSignal notification icon:', event.icon);
-    });
 
-    OneSignal.on('popoverShown', function() {
-      console.log('Slide Prompt Shown');
-    });
-    OneSignal.on('popoverAllowClick', function() {
-      console.log('Slide Prompt Allowed');
-    });
-    OneSignal.on('popoverCancelClick', function () {
-      console.log('Slide Prompt Canceled');
-    });
-    OneSignal.on('popoverClosed', function() {
-      console.log('Slide Prompt Closed');
-    });
-  });
-
-
-</script>  
+  </script>
 </body>
+
 </html>
