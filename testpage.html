@@ -1,79 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Page</title>
-	<link rel="manifest" href="/manifest.json" />
+	<title>Jon App Test Page</title>
 	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 	<script>
   	var OneSignal = window.OneSignal || [];
   	OneSignal.push(function() {
     	OneSignal.init({
-      	appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2",
+      	appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
     	});
   	});
 	</script>
-  <!-- data-cfasync: Ignore CloudFlare's Rocket Loader, which may impact the triggering of the DOMContentLoaded event (see: https://goo.gl/CvZewv) -->
-<script data-cfasync="false">
-var numVisitsTrigger = 0; /* Number of page visits before tagging user */
-var topic = "bi_prime"; /* The topic of the page */
-
-function tagUserWithPageTopic(key, value) {
-  OneSignal.push(function() {
-    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
-      console.log("isEnabled: ", isEnabled);
-      if (isEnabled) {        
-        OneSignal.sendTag(key, value, function(tagsSent) {
-            // Callback called when tags have finished sending
-            console.log('tags sent: ', tagsSent);
-        });      
-      }
-    });
-  });
-}
-
-if (typeof localStorage !== "undefined") {
-  var topicVisits = parseInt(localStorage.getItem(topic), 10);
-  if (!isNaN(topicVisits)) {
-    topicVisits += 1;
-  } else {
-    topicVisits = 0;
-  }    
-  localStorage.setItem(topic, topicVisits)
-
-  if (topicVisits >= numVisitsTrigger) {
-    tagUserWithPageTopic(topic, topicVisits);
-  }
-}
-</script>
-</head>
-<body>
-  
- 
-
-  
-  <!-- Send push upon subscribe
-	<script>
-			OneSignal.push(function() {
-  			// Occurs when the user's subscription changes to a new value.
-  			OneSignal.on('subscriptionChange', function (isSubscribed) {
-    			console.log("The user's subscription state is now:", isSubscribed);
-          OneSignal.getUserId(function(id) {
-            console.log(id);
-            if (isSubscribed === true) {
-              var xhttp = new XMLHttpRequest();
-              xhttp.open("POST", "https://onesignal.com/api/v1/notifications", true);
-              xhttp.setRequestHeader("Content-type", "application/json");
-              xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-              xhttp.send({
-                "app_id":"3beb3078-e0f1-4629-af17-fde833b9f716",
-                "contents": {"en": "New Subscriber"},
-                "include_player_ids":[id]
-              });
-            }
-          })
-  			});
-			});
-	</script>
-  -->
+  <body>
 </body>
 </html>
