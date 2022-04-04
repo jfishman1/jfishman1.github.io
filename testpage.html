@@ -20,9 +20,15 @@ MIXPANEL_CUSTOM_LIB_URL:"file:"===f.location.protocol&&"//cdn.mxpnl.com/libs/mix
 // but it's recommended you remove it for production
 mixpanel.init('3873d7ecd93955e389df787d23563cc0', {debug: true}); 
 mixpanel.track('Sign up');
-mixpanel.identify("jon");
-OneSignal.setExternalUserId("jon");
+
 </script>
   <body>
+  	<script>
+  	OneSignal.push(function() {
+  		OneSignal.setExternalUserId("jon");
+  		mixpanel.identify("jon");
+  		mixpanel.people.set({ "$user_id": "jon" });
+		});
+	</script>
 </body>
 </html>
