@@ -19,7 +19,7 @@
     var OneSignal = window.OneSignal || [];
     OneSignal.push(function () {
       OneSignal.init({
-        appId: "3beb3078-e0f1-4629-af17-fde833b9f716",// "0bd432c6-b55c-49d0-8373-22badb459fff",
+        appId: "1db1662c-7609-4a90-b0ad-15b45407d628",// "0bd432c6-b55c-49d0-8373-22badb459fff",
         notifyButton: {
           enable: false,
         },
@@ -48,6 +48,7 @@
       <div class='onesignal-customlink-container'></div>
       <br>
       <p><button onclick="showCategorySlidedown()">Show Categories</button></p>
+      <p><button onclick="showNativePrompt()">Show Native Prompt</button></p>
       <p><button onclick="showSmsAndEmailSlidedown()">Show SMS And Email Slidedown</button></p>
 
       <div class="toggle">
@@ -183,6 +184,12 @@
     function showCategorySlidedown() {
       OneSignal.push(function () {
         OneSignal.showCategorySlidedown({ force: true });
+      })
+    }
+
+    function showNativePrompt() {
+      OneSignal.push(function () {
+        OneSignal.showNativePrompt();
       })
     }
 
