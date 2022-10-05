@@ -314,6 +314,8 @@
               var anonUserId = Math.floor(1000000000 + Math.random() * 9000000000);
               console.log("externalUserId: ", anonUserId);
               OneSignal.setExternalUserId(anonUserId);
+            } else {
+              console.log("externalUserId: ", externalUserId);
             }
           });
         }
