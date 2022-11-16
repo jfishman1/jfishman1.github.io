@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>OneSignal Store Demo</title>
+    <!-- OneSignal Init-->
+    <script src="OneSignalMethods.js"></script>
+    <script src="app.js"></script>
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div style="padding: 10px">
+      <a href="/">< Back to OneSignal Store Demo</a>
+    </div>
+    <div style="padding-left: 100px; padding-top: 10px">
+      <h3>Total Items : <span class="checkout-items-total">0</span></h3>
+      <h3>Total Due : $ <span class="checkout-price-total">0</span></h3>
+    </div>
+
+    <div class="checkout-form" id="checkout-form">
+      <div>
+        <label for="creditCard">Card Number</label>
+        <input
+          type="text"
+          name="creditCard"
+          id="creditCard"
+          value="************4722"
+        />
+      </div>
+
+      <div>
+        <label for="cvv">Security Code</label>
+        <input type="text" name="cvv" id="cvv" value="***" />
+      </div>
+
+      <div>
+        <label for="Expiration">Exp. (MM/YYYY)</label>
+        <input
+          type="text"
+          name="exp-month"
+          id="exp-month"
+          size="2"
+          value="02"
+        />
+        <span> / </span>
+        <input
+          type="text"
+          name="exp-year"
+          id="exp-year"
+          size="4"
+          value="3000"
+        />
+      </div>
+
+      <button class="submit-payment">Submit Payment</button>
+    </div>
+  </body>
+</html>

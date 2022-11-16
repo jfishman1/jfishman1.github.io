@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "sys": { "id": "1" },
+      "fields": {
+        "title": "Orange Lense Aviators",
+        "price": 150.99,
+        "image": { "fields": { "file": { "url": "./images/s1.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "2" },
+      "fields": {
+        "title": "Dark Lense Aviators",
+        "price": 120.99,
+        "image": { "fields": { "file": { "url": "./images/s2.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "3" },
+      "fields": {
+        "title": "Blue Sporty Frames",
+        "price": 100.99,
+        "image": { "fields": { "file": { "url": "./images/s3.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "4" },
+      "fields": {
+        "title": "Clear Frames",
+        "price": 220.99,
+        "image": { "fields": { "file": { "url": "./images/s4.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "5" },
+      "fields": {
+        "title": "Cat Eyes",
+        "price": 188.99,
+        "image": { "fields": { "file": { "url": "./images/s5.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "6" },
+      "fields": {
+        "title": "Gold Aviators",
+        "price": 320.99,
+        "image": { "fields": { "file": { "url": "./images/s6.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "7" },
+      "fields": {
+        "title": "Black Sporty Frames",
+        "price": 145.99,
+        "image": { "fields": { "file": { "url": "./images/s7.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "8" },
+      "fields": {
+        "title": "Wood Frames",
+        "price": 233.99,
+        "image": { "fields": { "file": { "url": "./images/s8.jpg" } } }
+      }
+    }
+  ]
+}
