@@ -77,7 +77,7 @@
       MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; d = c.getElementsByTagName("script")[0]; d.parentNode.insertBefore(b, d)
   }
 })(document, window.mixpanel || []);
-mixpanel.init("d810d40cdbc7dead2ff901838c696ccb", { batch_requests: true })
+mixpanel.init("3873d7ecd93955e389df787d23563cc0", { batch_requests: true })
 
 // -------------------------------- Segment.com Init -------------------------------- //
 
