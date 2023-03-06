@@ -1,22 +1,14 @@
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>OneSignal Store Demo</title>
-        <!-- OneSignal Init-->
-        <script src="OneSignalMethods.js"></script>
-        <!--End OneSignal Init-->
-        <!-- font awesome-->
-        <script
-          src="https://kit.fontawesome.com/b198ccf02e.js"
-          crossorigin="anonymous"
-        ></script>
-        <!-- custom css -->
-        <link rel="stylesheet" href="styles.css" />
-      </head>
       <body>
-        <script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
+    });
+  });
+
             // Make sure OneSignal Init code is on this page
             function bindEvent(element, eventName, eventHandler) {
               element.addEventListener(eventName, eventHandler, false);
