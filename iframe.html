@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>OneSignal Store Demo</title>
+        <!-- OneSignal Init-->
+        <script src="OneSignalMethods.js"></script>
+        <!--End OneSignal Init-->
+        <!-- font awesome-->
+        <script
+          src="https://kit.fontawesome.com/b198ccf02e.js"
+          crossorigin="anonymous"
+        ></script>
+        <!-- custom css -->
+        <link rel="stylesheet" href="styles.css" />
+      </head>
+      <body>
+        <script>
+            // Make sure OneSignal Init code is on this page
+            function bindEvent(element, eventName, eventHandler) {
+              element.addEventListener(eventName, eventHandler, false);
+            }
+            // Accessed within iframe on subdomain.site
+            // Sends a message to mainsite
+            var sendMessage = function (msg) {
+              console.log(`2 Mainsite is Sending Message to subdomain.site ${msg}`)
+              // postMessage: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+              window.parent.postMessage(msg, 'https://onesignaldemo.github.io');
+            };
+            bindEvent(window, 'load', function (e) {
+              OneSignal.push(function() {
+                OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+                  console.log(`1 subdomain.site iframe checking subscription from mainsite, it is ${isEnabled}`)
+                  sendMessage(isEnabled)
+                });
+              });
+            });
+            
+            </script>
+      </body>
+</html>
