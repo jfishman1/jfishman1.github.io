@@ -9,7 +9,7 @@
       OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
-        appId: "bd9487ac-4ebf-4e8e-8b92-f75f5458eef1",//"1db1662c-7609-4a90-b0ad-15b45407d628", //main
+        appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
         promptOptions: {
           slidedown: {
             autoPrompt: true,
