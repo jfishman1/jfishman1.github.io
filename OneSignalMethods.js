@@ -94,26 +94,13 @@ window.addEventListener("load", () => {
   OneSignalDeferred.push(function () {
     var isPushSupported = OneSignal.Notifications.isPushSupported();
     console.log("Push Supported on Browser: ", isPushSupported);
-    OneSignal.permission(function (isEnabled) {
-      if (isEnabled) {
-        console.log("Push notifications are enabled!");
-        console.log("OneSignal Push Subscription ID:", OneSignal.User.PushSubscription.id);
-        console.log("OneSignal Email Subscription ID:", OneSignal.User.EmailSubscription.id);
-        console.log("OneSignal SMS Subscription ID:", OneSignal.User.SmsSubscription.id);
-        
-        OneSignal.getExternalUserId().then(function(externalUserId){
-          if (externalUserId == null){
-            var anonUserId = Math.floor(1000000000 + Math.random() * 9000000000);
-            console.log("externalUserId: ", anonUserId);
-            OneSignal.login(anonUserId);
-          } else {
-            console.log("externalUserId: ", externalUserId);
-          }
-        });
-      }
-      else
-        console.log("Push notifications are not enabled yet.");
-    });
+    var isPushPermissionAllowed = OneSignal.Notifications.permission;
+    if (isPushPermissionAllowed) {
+      console.log("Push notifications are enabled!");
+      console.log("OneSignal Push Subscription ID:", OneSignal.User.PushSubscription.id);
+    } else {
+      console.log("Push notifications are not enabled yet.");
+    }
 
     // SUBSCRIPTION CHANGE EVENT
     OneSignal.User.PushSubscription.addEventListener("SubscriptionChangeEvent", function (isSubscribed) {
