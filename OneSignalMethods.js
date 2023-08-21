@@ -4,7 +4,7 @@
   script.type = "application/javascript";
   script.async = true;
   script.onload = function () {
-    window.OneSignal = window.OneSignal || [];
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(function () {
       OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
