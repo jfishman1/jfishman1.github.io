@@ -92,7 +92,7 @@ mixpanel.init("3873d7ecd93955e389df787d23563cc0", { batch_requests: true })
 window.addEventListener("load", () => {
   // -------------------------------- OneSignal Examples -------------------------------- //
   OneSignalDeferred.push(function () {
-    var isPushSupported = OneSignal.isPushSupported();
+    var isPushSupported = OneSignal.Notifications.isPushSupported();
     console.log("Push Supported on Browser: ", isPushSupported);
     OneSignal.permission(function (isEnabled) {
       if (isEnabled) {
@@ -430,18 +430,14 @@ function osSetExternalUserId(userId) {
 function osSetEmail(email) {
   console.log("about to setEmail: ", email)
   OneSignal.User.addEmail(email)
-    .then(function (emailId) {
-      // Callback called when email have finished sending
-      console.log("email PlayerId: ", emailId);
-      mixpanel.people.set({
-        $email: email
-      });
-      //segment.com set traits
-      analytics.identify({
-        email: email
-      });
-      console.log("email sent to Mixpanel and Segment.com")
-    });
+  mixpanel.people.set({
+    $email: email
+  });
+  //segment.com set traits
+  analytics.identify({
+    email: email
+  });
+  console.log("email sent to Mixpanel and Segment.com")
 }
 
 function setAnalyticsProperties(firstName, lastName) {
