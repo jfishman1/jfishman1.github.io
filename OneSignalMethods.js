@@ -5,7 +5,7 @@
   script.async = true;
   script.onload = function () {
     window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function () {
+    OneSignalDeferred.push(function () {
       OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
@@ -39,16 +39,16 @@
     });
 
     //------------------Push Notification Events
-    window.OneSignal.push(async () => {
-      window.OneSignal.addListenerForNotificationOpened(notification => {
+    window.OneSignalDeferred.push(async () => {
+      OneSignal.Notifications.addEventListener("click",notification => {
         console.log("notification: ", notification);
         let timestamp = Math.floor(Date.now() / 1000);
         OneSignal.sendTag("last_notification_click", timestamp);
       });
-      OneSignal.on('notificationDisplay', function (event) {
+      OneSignal.Notifications.addEventListener('foregroundWillDisplay', function (event) {
         console.warn('OneSignal notification displayed:', event);
       });
-      OneSignal.on('notificationDismiss', function (event) {
+      OneSignal.Notifications.addEventListener('dismiss', function (event) {
         console.warn('OneSignal notification dismissed:', event);
       });
     });
@@ -56,7 +56,7 @@
 
 
   };
-  script.src = "https://cdn.onesignal.com/sdks/OneSignalSDK.js";
+  script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
   d.getElementsByTagName("head")[0].appendChild(script);
 
 })(document);
@@ -91,23 +91,21 @@ mixpanel.init("3873d7ecd93955e389df787d23563cc0", { batch_requests: true })
 
 window.addEventListener("load", () => {
   // -------------------------------- OneSignal Examples -------------------------------- //
-  OneSignal.push(function () {
-    var isPushSupported = OneSignal.isPushNotificationsSupported();
+  OneSignalDeferred.push(function () {
+    var isPushSupported = OneSignal.isPushSupported();
     console.log("Push Supported on Browser: ", isPushSupported);
-    OneSignal.isPushNotificationsEnabled(function (isEnabled) {
+    OneSignal.permission(function (isEnabled) {
       if (isEnabled) {
         console.log("Push notifications are enabled!");
-        OneSignal.getUserId(function (userId) {
-          console.log("OneSignal Push User ID:", userId);
-        });
-        OneSignal.getEmailId(function (emailId) {
-          console.log("OneSignal Email User ID:", emailId)
-        })
+        console.log("OneSignal Push Subscription ID:", OneSignal.User.PushSubscription.id);
+        console.log("OneSignal Email Subscription ID:", OneSignal.User.EmailSubscription.id);
+        console.log("OneSignal SMS Subscription ID:", OneSignal.User.SmsSubscription.id);
+        
         OneSignal.getExternalUserId().then(function(externalUserId){
           if (externalUserId == null){
             var anonUserId = Math.floor(1000000000 + Math.random() * 9000000000);
             console.log("externalUserId: ", anonUserId);
-            OneSignal.setExternalUserId(anonUserId);
+            OneSignal.login(anonUserId);
           } else {
             console.log("externalUserId: ", externalUserId);
           }
@@ -118,7 +116,7 @@ window.addEventListener("load", () => {
     });
 
     // SUBSCRIPTION CHANGE EVENT
-    OneSignal.on("subscriptionChange", function (isSubscribed) {
+    OneSignal.User.PushSubscription.addEventListener("SubscriptionChangeEvent", function (isSubscribed) {
       console.log("The user's subscription state is now:", isSubscribed);
       mixpanel.track(
         "Push Subscription Changed",
@@ -128,12 +126,10 @@ window.addEventListener("load", () => {
       analytics.track('Push Subscription Changed', {
         isSubscribed: isSubscribed
       });
-      OneSignal.getUserId(function (userId) {
-        console.log("OneSignal User ID:", userId);
-      });
+      console.log("OneSignal Push Subscription ID:", OneSignal.User.PushSubscription.id);
     });
 
-    OneSignal.on('notificationPermissionChange', function (permissionChange) {
+    OneSignal.Notifications.addEventListener('permissionChange', function (permissionChange) {
       var currentPermission = permissionChange.to;
       console.log('New permission state:', currentPermission);
       mixpanel.track(
@@ -153,7 +149,7 @@ window.addEventListener("load", () => {
     updateEmailWithFieldsButton != null
   ) {
     updateEmailWithFieldsButton.addEventListener("click", () => {
-      OneSignal.push(function () {
+      OneSignalDeferred.push(function () {
         let email = document.getElementById("email_field").value
         console.log("about to setEmail: ", email)
         osSetEmail(email);
@@ -167,8 +163,8 @@ window.addEventListener("load", () => {
     tagUserWithFieldsButton != null
   ) {
     tagUserWithFieldsButton.addEventListener("click", () => {
-      OneSignal.push(function () {
-        OneSignal.sendTag(document.getElementById("tagKey").value, document.getElementById("tagValue").value)
+      OneSignalDeferred.push(function () {
+        OneSignal.User.addTag(document.getElementById("tagKey").value, document.getElementById("tagValue").value)
           .then(function (tagsSent) {
             // Callback called when tags have finished sending
             console.log("tagsSent: ", tagsSent);
@@ -201,7 +197,7 @@ window.addEventListener("load", () => {
     showCategorySlidePrompt != null
   ) {
     showCategorySlidePrompt.addEventListener("click", () => {
-      OneSignal.push(function () {
+      OneSignalDeferred.push(function () {
         OneSignal.showCategorySlidedown({ force: true });
       });
     })
@@ -213,8 +209,8 @@ window.addEventListener("load", () => {
     showSmsAndEmailSlidedown != null
   ) {
     showSmsAndEmailSlidedown.addEventListener("click", () => {
-      OneSignal.push(function () {
-        OneSignal.showSmsAndEmailSlidedown({ force: true });
+      OneSignalDeferred.push(function () {
+        OneSignal.slidedown.promptSmsAndEmail({ force: true });
       });
     })
   }
@@ -232,9 +228,9 @@ window.addEventListener("load", () => {
       let productImageURL = document.querySelector(".product-img").src;
       //console.log("productImageURL: ", productImageURL);
       addToCartButton.addEventListener("click", () => {
-        OneSignal.push(function () {
+        OneSignalDeferred.push(function () {
           let timestamp = Math.floor(Date.now() / 1000);
-          OneSignal.sendTags({
+          OneSignal.User.addTags({
             cart_update: timestamp,
             product_name: productName,
             product_image: productImageURL,
@@ -267,9 +263,9 @@ window.addEventListener("load", () => {
           let productImageURL = document.getElementById(`product-img-id-${id}`)
             .src;
           //console.log("productImageURL: ", productImageURL);
-          OneSignal.push(function () {
+          OneSignalDeferred.push(function () {
             let timestamp = Math.floor(Date.now() / 1000);
-            OneSignal.sendTags({
+            OneSignal.User.addTags({
               cart_update: timestamp,
               product_name: productName,
               product_image: productImageURL,
@@ -298,9 +294,9 @@ window.addEventListener("load", () => {
         // replace ".cart-product-img" with the class name of your product img element
         let productImageURL = document.querySelector(".cart-product-img").src;
         console.log("productImageURL: ", productImageURL);
-        OneSignal.push(function () {
+        OneSignalDeferred.push(function () {
           let timestamp = Math.floor(Date.now() / 1000);
-          OneSignal.sendTags({
+          OneSignal.User.addTags({
             cart_update: timestamp,
             product_name: productName,
             product_image: productImageURL,
@@ -311,7 +307,7 @@ window.addEventListener("load", () => {
         });
       } else {
         mixpanel.people.set("$items_in_cart", "false");
-        OneSignal.sendTags({
+        OneSignal.User.addTags({
           purchase_made: "true",
           cart_update: "",
           product_name: "",
@@ -360,36 +356,36 @@ window.addEventListener("load", () => {
   }
 });
 
-function updateOSOnCartPurchase(checkoutPriceTotal, checkoutItemsTotal) {
-  let purchasePriceTotal = parseInt(checkoutPriceTotal);
-  let purchasedItemCount = parseInt(checkoutItemsTotal);
+// function updateOSOnCartPurchase(checkoutPriceTotal, checkoutItemsTotal) {
+//   let purchasePriceTotal = parseInt(checkoutPriceTotal);
+//   let purchasedItemCount = parseInt(checkoutItemsTotal);
 
-  OneSignal.push(function () {
-    OneSignal.getTags(function (tags) {
-      var purchase_amount = 0;
-      if (tags.purchase_amount) {
-        purchase_amount = parseInt(tags.purchase_amount)
-      }
-      console.log("current purchase_amount: ", purchase_amount);
-      purchase_amount += purchasePriceTotal
-      OneSignal.sendTags({
-        purchase_made: "true",
-        purchase_amount: purchase_amount,
-        cart_update: "",
-        product_name: "",
-        product_image: "",
-      }).then(function (tagsSent) {
-        // Callback called when tags have finished sending
-        console.log(tagsSent);
-      });
-      OneSignal.sendOutcome("Purchase", purchasePriceTotal);
-      OneSignal.sendOutcome("Purchased Item Count", purchasedItemCount);
-      console.log("Purchase made! Outcomes sent:");
-      console.log("Purchase ", purchasePriceTotal);
-      console.log("Purchased Item Count ", purchasedItemCount);
-    })
-  });
-}
+//   OneSignalDeferred.push(function () {
+//     OneSignal.getTags(function (tags) {
+//       var purchase_amount = 0;
+//       if (tags.purchase_amount) {
+//         purchase_amount = parseInt(tags.purchase_amount)
+//       }
+//       console.log("current purchase_amount: ", purchase_amount);
+//       purchase_amount += purchasePriceTotal
+//       OneSignal.User.addTags({
+//         purchase_made: "true",
+//         purchase_amount: purchase_amount,
+//         cart_update: "",
+//         product_name: "",
+//         product_image: "",
+//       }).then(function (tagsSent) {
+//         // Callback called when tags have finished sending
+//         console.log(tagsSent);
+//       });
+//       OneSignal.sendOutcome("Purchase", purchasePriceTotal);
+//       OneSignal.sendOutcome("Purchased Item Count", purchasedItemCount);
+//       console.log("Purchase made! Outcomes sent:");
+//       console.log("Purchase ", purchasePriceTotal);
+//       console.log("Purchased Item Count ", purchasedItemCount);
+//     })
+//   });
+// }
 
 // -------------------------------- Google SignIn Example -------------------------------- //
 
@@ -414,13 +410,13 @@ function onSignIn(googleUser) {
 function onSignOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
-    OneSignal.removeExternalUserId();
+    OneSignal.logout();
     console.log('User signed out.');
   });
 }
 
 function osSetExternalUserId(userId) {
-  OneSignal.setExternalUserId(userId).then(function () {
+  OneSignal.login(userId).then(function () {
     console.log("externalUserId set after subscription change: ", userId);
     //mixpanel identify
     mixpanel.identify(userId)
@@ -433,7 +429,7 @@ function osSetExternalUserId(userId) {
 
 function osSetEmail(email) {
   console.log("about to setEmail: ", email)
-  OneSignal.setEmail(email)
+  OneSignal.User.addEmail(email)
     .then(function (emailId) {
       // Callback called when email have finished sending
       console.log("email PlayerId: ", emailId);

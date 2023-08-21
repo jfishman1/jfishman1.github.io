@@ -6,12 +6,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>OneSignal Store Demo</title>
-  <!-- OneSignal Init
-  <script src="OneSignalMethods.js"></script>-->
-  <!-- font awesome-->
   
+  <!-- Migration Testing
+    Comment OneSignalMethods.js
+    Uncommnet Notix code, subscribe
+    Comment Notix code, uncomment OneSignal code
+    Return to site, you should be transferred to OneSignal 
+  -->
   
-  <!-- <script id="script">
+<!-- OneSignal Init-->
+  <script src="OneSignalMethods.js"></script>
+
+  <!-- NOTIX Code (for migration testing)
+    <script id="script">
     var s = document.createElement("script")
     s.src = "https://notix.io/ent/current/enot.min.js"
     s.onload = function (sdk) {
@@ -23,21 +30,11 @@
       )
     }
     document.head.append(s)
-      </script> -->
- 
- 
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer></script>
- <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
-    });
-   });
- </script>
+      </script>
+    -->
 
 
-
+<!-- font awesome-->
   <script src="https://kit.fontawesome.com/b198ccf02e.js" crossorigin="anonymous"></script>
 
   <link rel="manifest" href="manifest.json"/>
