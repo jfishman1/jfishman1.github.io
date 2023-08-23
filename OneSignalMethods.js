@@ -116,9 +116,8 @@ window.addEventListener("load", () => {
       console.log("OneSignal Push Subscription ID:", OneSignal.User.PushSubscription.id);
     });
 
-    OneSignal.Notifications.addEventListener('permissionChange', function (permissionChange) {
-      var currentPermission = permissionChange.to;
-      console.log('New permission state:', currentPermission);
+    OneSignal.Notifications.addEventListener('permissionChanged', function (permissionChanged) {
+      console.log('New permission state:', permissionChanged);
       mixpanel.track(
         "Notification Permission Changed",
         { "currentPermission": currentPermission }
