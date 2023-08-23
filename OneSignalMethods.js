@@ -399,6 +399,7 @@ function onSignOut() {
   auth2.signOut().then(function () {
     OneSignal.logout();
     console.log('User signed out.');
+    OneSignal.User.removeAlias("google_id");
   });
 }
 
