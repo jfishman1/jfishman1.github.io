@@ -407,6 +407,7 @@ function osSetExternalUserId(userId) {
   OneSignal.login(userId).then(function () {
     console.log("OS External ID set after login: ", userId);
     console.log("OS Subscription ID: ", OneSignal.User.PushSubscription.id);
+    OneSignal.User.addAlias("google_id", userId);
     //mixpanel identify
     mixpanel.identify(userId)
     mixpanel.people.set("$onesignal_user_id", userId);
@@ -414,7 +415,6 @@ function osSetExternalUserId(userId) {
     analytics.identify(userId);
     console.log("Identified External User ID to Analytics");
   })
-  OneSignal.User.addAlias("google_id", userId);
 }
 
 function osSetEmail(email) {
