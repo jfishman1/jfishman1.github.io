@@ -120,11 +120,11 @@ window.addEventListener("load", () => {
       console.log('New permission state:', permissionChange);
       mixpanel.track(
         "Notification Permission Changed",
-        { "currentPermission": currentPermission }
+        { "currentPermission": permissionChange }
       );
       //segment.com
       analytics.track('Notification Permission Changed', {
-        currentPermission: currentPermission
+        currentPermission: permissionChange
       });
     });
   });
