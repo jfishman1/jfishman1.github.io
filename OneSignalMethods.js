@@ -11,7 +11,7 @@
         allowLocalhostAsSecureOrigin: true,
         appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
         serviceWorkerParam: { scope: "/push/onesignal/" },
-        serviceWorkerPath: "/push/onesignal/OneSignalSDKWorker.js",
+        serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js",
         promptOptions: {
           slidedown: {
             autoPrompt: true,
