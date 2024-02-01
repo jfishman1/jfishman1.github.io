@@ -39,24 +39,6 @@
         },
       });
     });
-
-    //------------------Push Notification Events
-    window.OneSignalDeferred.push(async () => {
-      OneSignal.Notifications.addEventListener("click",notification => {
-        console.log("notification: ", notification);
-        let timestamp = Math.floor(Date.now() / 1000);
-        OneSignal.sendTag("last_notification_click", timestamp);
-      });
-      OneSignal.Notifications.addEventListener('foregroundWillDisplay', function (event) {
-        console.warn('OneSignal notification displayed:', event);
-      });
-      OneSignal.Notifications.addEventListener('dismiss', function (event) {
-        console.warn('OneSignal notification dismissed:', event);
-      });
-    });
-    //------------------End Push Notification Events
-
-
   };
   script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
   d.getElementsByTagName("head")[0].appendChild(script);
@@ -94,30 +76,39 @@ mixpanel.init("3873d7ecd93955e389df787d23563cc0", { batch_requests: true })
 window.addEventListener("load", () => {
   // -------------------------------- OneSignal Examples -------------------------------- //
   OneSignalDeferred.push(function () {
-    var isPushSupported = OneSignal.Notifications.isPushSupported();
-    console.log("Push Supported on Browser: ", isPushSupported);
-    var isPushPermissionAllowed = OneSignal.Notifications.permission;
-    if (isPushPermissionAllowed) {
-      console.log("Push notifications are enabled!");
-      console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
-    } else {
-      console.log("Push notifications are not enabled yet.");
-    }
+    // var isPushSupported = OneSignal.Notifications.isPushSupported();
+    // console.log("Push Supported on Browser: ", isPushSupported);
+    // var isPushPermissionAllowed = OneSignal.Notifications.permission;
+    // if (isPushPermissionAllowed) {
+    //   console.log("Push notifications are enabled!");
+    //   console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
+    // } else {
+    //   console.log("Push notifications are not enabled yet.");
+    // }
 
     // SUBSCRIPTION CHANGE EVENT
-    OneSignal.User.PushSubscription.addEventListener("SubscriptionChangeEvent", function (isSubscribed) {
-      console.log("The user's subscription state is now:", isSubscribed);
-      console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
+    OneSignal.User.PushSubscription.addEventListener("change", pushSubscriptionChangeListener);
+    function pushSubscriptionChangeListener(event) {
+      console.log("The user is subscribed to push: ", event.current.optedIn);
       mixpanel.track(
         "Push Subscription Changed",
-        { "isSubscribed": isSubscribed }
+        { "isSubscribed": event.current.optedIn }
       );
       //segment.com
       analytics.track('Push Subscription Changed', {
-        isSubscribed: isSubscribed
+        isSubscribed: event.current.optedIn
       });
-      console.log("OneSignal Push Subscription ID:", OneSignal.User.PushSubscription.id);
-    });
+      console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
+      if (event.current.optedIn) {
+        OneSignal.login("temporary-jon");
+        const tags = { 
+         KEY_01: "VALUE_01",
+         KEY_02: "VALUE_02",
+         KEY_03: "VALUE_03"
+        };
+        OneSignal.User.addTags(tags);
+      }
+    }
 
     OneSignal.Notifications.addEventListener('permissionChange', function (permissionChange) {
       console.log('New permission state:', permissionChange);
