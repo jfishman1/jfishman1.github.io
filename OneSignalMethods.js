@@ -99,15 +99,6 @@ window.addEventListener("load", () => {
         isSubscribed: event.current.optedIn
       });
       console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
-      if (event.current.optedIn) {
-        OneSignal.login("temporary-jon");
-        const tags = { 
-         KEY_01: "VALUE_01",
-         KEY_02: "VALUE_02",
-         KEY_03: "VALUE_03"
-        };
-        OneSignal.User.addTags(tags);
-      }
     }
 
     OneSignal.Notifications.addEventListener('permissionChange', function (permissionChange) {
