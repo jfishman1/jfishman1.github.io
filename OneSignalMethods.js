@@ -217,13 +217,12 @@ window.addEventListener("load", () => {
       buttonsDOM = addToCartButtons;
       addToCartButtons.forEach((addToCartButton) => {
 
-        OneSignal.setConsentGiven(true);
-
         // this example adds the product id witin each "add-to-cart" button
         // this creates unique id attributes for each product to identify them
         // this example assumes you use unique id attributes for the product title and image
         let id = addToCartButton.dataset.id;
         addToCartButton.addEventListener("click", () => {
+          OneSignal.setConsentGiven(true);
           // replace `product-title-id-${id}` with the id of the element containing your product name
           let productName = document.getElementById(`product-title-id-${id}`)
             .innerHTML;
