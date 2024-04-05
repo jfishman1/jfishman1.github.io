@@ -6,6 +6,7 @@
   script.onload = function () {
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(function () {
+      OneSignal.setConsentRequired(true);
       OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
@@ -215,6 +216,9 @@ window.addEventListener("load", () => {
       ];
       buttonsDOM = addToCartButtons;
       addToCartButtons.forEach((addToCartButton) => {
+
+        OneSignal.setConsentGiven(true);
+
         // this example adds the product id witin each "add-to-cart" button
         // this creates unique id attributes for each product to identify them
         // this example assumes you use unique id attributes for the product title and image
