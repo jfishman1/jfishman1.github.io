@@ -6,7 +6,7 @@
   script.onload = function () {
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(function () {
-      OneSignal.setConsentRequired(true);
+      //OneSignal.setConsentRequired(true);
       OneSignal.init({
         //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
         allowLocalhostAsSecureOrigin: true,
@@ -222,7 +222,7 @@ window.addEventListener("load", () => {
         // this example assumes you use unique id attributes for the product title and image
         let id = addToCartButton.dataset.id;
         addToCartButton.addEventListener("click", () => {
-          OneSignal.setConsentGiven(true);
+          //OneSignal.setConsentGiven(true);
           // replace `product-title-id-${id}` with the id of the element containing your product name
           let productName = document.getElementById(`product-title-id-${id}`)
             .innerHTML;
