@@ -6,6 +6,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>OneSignal Store Demo</title>
+
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
+    });
+  });
+</script>
   
   <!-- Migration Testing
     Comment OneSignalMethods.js
@@ -14,8 +24,8 @@
     Return to site, you should be transferred to OneSignal 
   -->
   
-<!-- OneSignal Init-->
-  <script src="OneSignalMethods.js"></script>
+<!-- OneSignal Init
+  <script src="OneSignalMethods.js"></script>-->
 
   <!-- NOTIX Code (for migration testing)
     <script id="script">
