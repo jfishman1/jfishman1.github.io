@@ -15,6 +15,22 @@
       appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
     });
   });
+
+  OneSignalDeferred.push(function() {
+    OneSignal.User.addEventListener('change', function (event) {
+      console.log('change', { event });
+    });
+  });
+
+  OneSignalDeferred.push(function() {
+    OneSignal.Slidedown.addEventListener('slidedownShown', function (event) {
+      console.log('slidedownShown', { event });
+    });
+  });
+
+
+
+
 </script>
   
   <!-- Migration Testing
