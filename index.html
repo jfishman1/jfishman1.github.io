@@ -7,15 +7,26 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>OneSignal Store Demo</title>
 
-  <!-- v16 SDK
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <!-- v15 SDK -->
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
+window.OneSignal = window.OneSignal || [];
+OneSignal.push(function() {
+    OneSignal.init({
+      appId: "1db1662c-7609-4a90-b0ad-15b45407d628"
     });
+});
+</script>
+
+  <!-- v16 SDK
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({
+    appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
   });
+});
 
   OneSignalDeferred.push(function() {
     OneSignal.User.addEventListener('change', function (event) {
@@ -30,16 +41,7 @@
   });
 </script>
 -->
-<!-- v15 SDK -->
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-<script>
-window.OneSignal = window.OneSignal || [];
-OneSignal.push(function() {
-    OneSignal.init({
-      appId: "1db1662c-7609-4a90-b0ad-15b45407d628"
-    });
-});
-</script>
+
   
   <!-- Migration Testing
     Comment OneSignalMethods.js
