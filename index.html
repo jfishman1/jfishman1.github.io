@@ -7,7 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>OneSignal Store Demo</title>
 
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script src="OneSignalMethods.js"></script>
+
+  <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 OneSignalDeferred.push(async function(OneSignal) {
@@ -27,7 +29,7 @@ OneSignalDeferred.push(async function(OneSignal) {
       console.log('slidedownShown', { event });
     });
   });
-</script>
+</script> -->
 
   <!--SDK v15-->
 <!-- <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
@@ -49,12 +51,6 @@ OneSignal.push(function() {
 
   <!-- custom css -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Google SignIn-->
-  <meta name="google-signin-scope" content="profile email">
-  <meta name="google-signin-client_id"
-    content="388536902528-eh74tcn8rd9beutdv6gs775n2aq71gd1.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </head>
 
@@ -87,13 +83,16 @@ OneSignal.push(function() {
       <h3 style="margin-top: 30px; padding-left: 100px; padding-top: 30px; padding-bottom: 10px;">Quick Examples</h3>
       <hr>
       <div class="left-overlay-content">
-        <h4>SignIn & SetExternalUserId</h4>
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+        <h4>Login</h4>
+        <form style="padding: 10px;">
+          <label>External ID:</label>
+          <input type="text" id="external_id" value="external_id_here" />
+        </form>
+        <button id="loginWithFieldsButton">Login</button>
 
-        <h4>SignOut & RemoveExternalUserId</h4>
+        <h4>Logout</h4>
         <button id="logOutRemoveExternalUserId" style="background-color: red; color:white;"
-          onclick="onSignOut()">SignOut &
-          RemoveExternalUserId</button>
+          onclick="onSignOut()">Logout</button>
 
         <h4>Show Category Slidedown Prompt</h4>
         <button id="showCategorySlidePrompt">Show Category Slidedown Prompt</button>
@@ -101,7 +100,7 @@ OneSignal.push(function() {
         <h4>Show SMS & Email Slidedown Prompt</h4>
         <button id="showSmsAndEmailSlidedown">Show SMS & Email Slidedown Prompt</button>
 
-        <h4>Get Email Updates</h4>
+        <h4>Add Email</h4>
         <form style="padding: 10px;">
           <label>Email Address: </label>
           <input type="email" id="email_field" value="your_email@email.com" />

@@ -8,34 +8,68 @@
     OneSignalDeferred.push(function () {
       //OneSignal.setConsentRequired(true);
       OneSignal.init({
-        //appId: "380dc082-5231-4cc2-ab51-a03da5a0e4c2", // testing
+        //appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
         allowLocalhostAsSecureOrigin: true,
         appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
         serviceWorkerParam: { scope: "/push/onesignal/js/" },
         serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js",
         promptOptions: {
           slidedown: {
-            autoPrompt: true,
-            enabled: true,
-            actionMessage: "Get Updated on our products?",
-            acceptButtonText: "Of course!",
-            cancelButtonText: "Maybe later",
-            categories: {
-              tags: [
-                {
-                  tag: "prefer_newitems",
-                  label: "New Items 🛒"
+            prompts: [{
+                type: "smsAndEmail",
+                autoPrompt: false,
+                text: {
+                  emailLabel: "Insert Email Address",
+                  smsLabel: "Insert Phone Number",
+                  acceptButton: "Submit",
+                  cancelButton: "No Thanks",
+                  actionMessage: "Receive the latest news, updates and offers as they happen.",
+                  updateMessage: "Update your push notification subscription preferences.",
+                  confirmMessage: "Thank You!",
+                  positiveUpdateButton: "Save Preferences",
+                  negativeUpdateButton: "Cancel",
                 },
-                {
-                  tag: "prefer_saleitems",
-                  label: "Sale Items 💳"
+                delay: {
+                  pageViews: 1,
+                  timeDelay: 20
                 },
-                {
-                  tag: "prefer_limiteditems",
-                  label: "Limited Items ⭐"
-                }
-              ]
-            }
+              },
+              {
+                type: "category",
+                autoPrompt: true,
+                text: {
+                  actionMessage: "We'd like to show you notifications for the latest news and updates.",
+                  acceptButton: "Allow",
+                  cancelButton: "Cancel",
+    
+                  /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
+                  negativeUpdateButton: "Cancel",
+                  positiveUpdateButton: "Save Preferences",
+                  updateMessage: "Update your push notification subscription preferences.",
+                },
+                delay: {
+                  pageViews: 3,
+                  timeDelay: 20
+                },
+                categories: [{
+                    tag: "politics",
+                    label: "Politics"
+                  },
+                  {
+                    tag: "local_news",
+                    label: "Local News"
+                  },
+                  {
+                    tag: "world_news",
+                    label: "World News",
+                  },
+                  {
+                    tag: "culture",
+                    label: "Culture"
+                  },
+                ]
+              }
+            ]
           }
         },
       });
@@ -77,15 +111,6 @@ mixpanel.init("3873d7ecd93955e389df787d23563cc0", { batch_requests: true })
 window.addEventListener("load", () => {
   // -------------------------------- OneSignal Examples -------------------------------- //
   OneSignalDeferred.push(function () {
-    // var isPushSupported = OneSignal.Notifications.isPushSupported();
-    // console.log("Push Supported on Browser: ", isPushSupported);
-    // var isPushPermissionAllowed = OneSignal.Notifications.permission;
-    // if (isPushPermissionAllowed) {
-    //   console.log("Push notifications are enabled!");
-    //   console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
-    // } else {
-    //   console.log("Push notifications are not enabled yet.");
-    // }
 
     // SUBSCRIPTION CHANGE EVENT
     OneSignal.User.PushSubscription.addEventListener("change", pushSubscriptionChangeListener);
@@ -115,6 +140,20 @@ window.addEventListener("load", () => {
       });
     });
   });
+
+  const loginWithFieldsButton = document.getElementById("loginWithFieldsButton");
+  if (
+    typeof loginWithFieldsButton != "undefined" &&
+    loginWithFieldsButton != null
+  ) {
+    loginWithFieldsButton.addEventListener("click", () => {
+      OneSignalDeferred.push(function () {
+        let external_id = document.getElementById("external_id").value
+        console.log("external_id in field to set: ", external_id);
+        OneSignal.login(external_id);
+      });
+    })
+  }
 
   const updateEmailWithFieldsButton = document.getElementById("updateEmailWithFieldsButton");
   if (
@@ -167,7 +206,7 @@ window.addEventListener("load", () => {
   ) {
     showCategorySlidePrompt.addEventListener("click", () => {
       OneSignalDeferred.push(function () {
-        OneSignal.showCategorySlidedown({ force: true });
+        OneSignal.Slidedown.promptPushCategories({ force: true });
       });
     })
   }
@@ -179,7 +218,7 @@ window.addEventListener("load", () => {
   ) {
     showSmsAndEmailSlidedown.addEventListener("click", () => {
       OneSignalDeferred.push(function () {
-        OneSignal.slidedown.promptSmsAndEmail({ force: true });
+        OneSignal.Slidedown.promptSmsAndEmail({ force: true });
       });
     })
   }
@@ -333,61 +372,6 @@ function updateOSOnCartPurchase(checkoutPriceTotal, checkoutItemsTotal) {
     console.log("Purchase ", purchasePriceTotal);
     console.log("Purchased Item Count ", purchasedItemCount);
   });
-}
-
-// -------------------------------- Google SignIn Example -------------------------------- //
-
-function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  let googleUserId = profile.getId();
-  console.log("googleUserId: ", googleUserId);
-  osSetExternalUserId(googleUserId);
-  let email = profile.getEmail();
-  console.log("email: ", email);
-  osSetEmail(email);
-  let firstName = profile.getGivenName();
-  let lastName = profile.getFamilyName();
-  console.log("givenName: " + firstName + " familyName: " + lastName)
-  console.log('Google Name: ' + profile.getName());
-  console.log("Image URL: " + profile.getImageUrl());
-  // The ID token you need to pass to your backend:
-  //var id_token = googleUser.getAuthResponse().id_token;
-  //console.log("ID Token: " + id_token);
-}
-
-function onSignOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    OneSignal.User.removeAlias("google_id");
-    OneSignal.logout();
-    console.log('User signed out.');
-  });
-}
-
-function osSetExternalUserId(userId) {
-  OneSignal.login(userId)
-  console.log("OS External ID set after login: ", userId);
-  console.log("OS Subscription ID: ", OneSignal.User.PushSubscription.id);
-  //OneSignal.User.addAlias("google_id", userId);
-  //console.log("Setting Alias google_id: ", userId);
-  //mixpanel identify
-  mixpanel.identify(userId)
-  mixpanel.people.set("$onesignal_user_id", userId);
-  //segment.com identify
-  analytics.identify(userId);
-}
-
-function osSetEmail(email) {
-  console.log("about to setEmail: ", email)
-  OneSignal.User.addEmail(email)
-  mixpanel.people.set({
-    $email: email
-  });
-  //segment.com set traits
-  analytics.identify({
-    email: email
-  });
-  console.log("email sent to Mixpanel and Segment.com")
 }
 
 function setAnalyticsProperties(firstName, lastName) {
