@@ -8,9 +8,9 @@
     OneSignalDeferred.push(function () {
       //OneSignal.setConsentRequired(true);
       OneSignal.init({
-        //appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
+        appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
         allowLocalhostAsSecureOrigin: true,
-        appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
+        //appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
         serviceWorkerParam: { scope: "/push/onesignal/js/" },
         serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js",
         promptOptions: {
@@ -112,20 +112,26 @@ window.addEventListener("load", () => {
   // -------------------------------- OneSignal Examples -------------------------------- //
   OneSignalDeferred.push(function () {
 
-    // SUBSCRIPTION CHANGE EVENT
-    OneSignal.User.PushSubscription.addEventListener("change", pushSubscriptionChangeListener);
+    // SUBSCRIPTION CHANGE EVENT LISTENER
     function pushSubscriptionChangeListener(event) {
-      console.log("The user is subscribed to push: ", event.current.optedIn);
+      console.log("event.previous.id", event.previous.id);
+      console.log("event.current.id", event.current.id);
+      console.log("event.previous.token", event.previous.token);
+      console.log("event.current.token", event.current.token);
+      console.log("event.previous.optedIn", event.previous.optedIn);
+      console.log("event.current.optedIn", event.current.optedIn);
+
       mixpanel.track(
         "Push Subscription Changed",
         { "isSubscribed": event.current.optedIn }
       );
+
       //segment.com
       analytics.track('Push Subscription Changed', {
         isSubscribed: event.current.optedIn
       });
-      console.log("OneSignal.User.PushSubscription.id: ", OneSignal.User.PushSubscription.id)
     }
+    OneSignal.User.PushSubscription.addEventListener("change", pushSubscriptionChangeListener);
 
     OneSignal.Notifications.addEventListener('permissionChange', function (permissionChange) {
       console.log('New permission state:', permissionChange);
@@ -155,6 +161,19 @@ window.addEventListener("load", () => {
     })
   }
 
+  const logOutRemoveExternalUserId = document.getElementById("logOutRemoveExternalUserId");
+  if (
+    typeof logOutRemoveExternalUserId != "undefined" &&
+    logOutRemoveExternalUserId != null
+  ) {
+    logOutRemoveExternalUserId.addEventListener("click", () => {
+      console.log("logOutRemoveExternalUserId clicked");
+      OneSignalDeferred.push(function () {
+        OneSignal.logout();
+      });
+    })
+  }
+
   const updateEmailWithFieldsButton = document.getElementById("updateEmailWithFieldsButton");
   if (
     typeof updateEmailWithFieldsButton != "undefined" &&
@@ -164,7 +183,7 @@ window.addEventListener("load", () => {
       OneSignalDeferred.push(function () {
         let email = document.getElementById("email_field").value
         console.log("about to setEmail: ", email)
-        osSetEmail(email);
+        OneSignal.User.addEmail(email);
       });
     })
   }
