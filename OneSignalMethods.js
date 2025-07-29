@@ -8,9 +8,9 @@
     OneSignalDeferred.push(function () {
       //OneSignal.setConsentRequired(true);
       OneSignal.init({
-        appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
+        //appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
         allowLocalhostAsSecureOrigin: true,
-        //appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
+        appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
         serviceWorkerParam: { scope: "/push/onesignal/js/" },
         serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js",
         promptOptions: {
