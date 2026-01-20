@@ -16,59 +16,59 @@
         promptOptions: {
           slidedown: {
             prompts: [{
-                type: "smsAndEmail",
-                autoPrompt: false,
-                text: {
-                  emailLabel: "Insert Email Address",
-                  smsLabel: "Insert Phone Number",
-                  acceptButton: "Submit",
-                  cancelButton: "No Thanks",
-                  actionMessage: "Receive the latest news, updates and offers as they happen.",
-                  updateMessage: "Update your push notification subscription preferences.",
-                  confirmMessage: "Thank You!",
-                  positiveUpdateButton: "Save Preferences",
-                  negativeUpdateButton: "Cancel",
-                },
-                delay: {
-                  pageViews: 1,
-                  timeDelay: 20
-                },
+              type: "smsAndEmail",
+              autoPrompt: false,
+              text: {
+                emailLabel: "Insert Email Address",
+                smsLabel: "Insert Phone Number",
+                acceptButton: "Submit",
+                cancelButton: "No Thanks",
+                actionMessage: "Receive the latest news, updates and offers as they happen.",
+                updateMessage: "Update your push notification subscription preferences.",
+                confirmMessage: "Thank You!",
+                positiveUpdateButton: "Save Preferences",
+                negativeUpdateButton: "Cancel",
+              },
+              delay: {
+                pageViews: 1,
+                timeDelay: 20
+              },
+            },
+            {
+              type: "category",
+              autoPrompt: true,
+              text: {
+                actionMessage: "We'd like to show you notifications for the latest news and updates.",
+                acceptButton: "Allow",
+                cancelButton: "Cancel",
+
+                /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
+                negativeUpdateButton: "Cancel",
+                positiveUpdateButton: "Save Preferences",
+                updateMessage: "Update your push notification subscription preferences.",
+              },
+              delay: {
+                pageViews: 3,
+                timeDelay: 20
+              },
+              categories: [{
+                tag: "politics",
+                label: "Politics"
               },
               {
-                type: "category",
-                autoPrompt: true,
-                text: {
-                  actionMessage: "We'd like to show you notifications for the latest news and updates.",
-                  acceptButton: "Allow",
-                  cancelButton: "Cancel",
-    
-                  /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
-                  negativeUpdateButton: "Cancel",
-                  positiveUpdateButton: "Save Preferences",
-                  updateMessage: "Update your push notification subscription preferences.",
-                },
-                delay: {
-                  pageViews: 3,
-                  timeDelay: 20
-                },
-                categories: [{
-                    tag: "politics",
-                    label: "Politics"
-                  },
-                  {
-                    tag: "local_news",
-                    label: "Local News"
-                  },
-                  {
-                    tag: "world_news",
-                    label: "World News",
-                  },
-                  {
-                    tag: "culture",
-                    label: "Culture"
-                  },
-                ]
-              }
+                tag: "local_news",
+                label: "Local News"
+              },
+              {
+                tag: "world_news",
+                label: "World News",
+              },
+              {
+                tag: "culture",
+                label: "Culture"
+              },
+              ]
+            }
             ]
           }
         },
@@ -156,7 +156,7 @@ window.addEventListener("load", () => {
       OneSignalDeferred.push(function () {
         let external_id = document.getElementById("external_id").value
         console.log("external_id in field to set: ", external_id);
-        OneSignal.login(external_id);
+        //OneSignal.login(external_id);
       });
     })
   }
@@ -377,7 +377,7 @@ function updateOSOnCartPurchase(checkoutPriceTotal, checkoutItemsTotal) {
   let purchasePriceTotal = parseInt(checkoutPriceTotal);
   let purchasedItemCount = parseInt(checkoutItemsTotal);
 
-  OneSignalDeferred.push(function () {  
+  OneSignalDeferred.push(function () {
     OneSignal.User.addTags({
       purchase_made: "true",
       purchase_amount: purchasePriceTotal,
