@@ -6,48 +6,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>OneSignal Store Demo</title>
+  <!--<script src="OneSignalMethods.js"></script>-->
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KHTGGHM');</script>
+  <!-- More Google Tag Manager code in body -->
 
-  <script src="OneSignalMethods.js"></script>
-
-  <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-OneSignalDeferred.push(async function(OneSignal) {
-  await OneSignal.init({
-    appId: "1db1662c-7609-4a90-b0ad-15b45407d628",
-  });
-});
-
-  OneSignalDeferred.push(function() {
-    OneSignal.User.addEventListener('change', function (event) {
-      console.log('change', { event });
-    });
-  });
-
-  OneSignalDeferred.push(function() {
-    OneSignal.Slidedown.addEventListener('slidedownShown', function (event) {
-      console.log('slidedownShown', { event });
-    });
-  });
-</script> -->
-
-  <!--SDK v15-->
-<!-- <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-window.OneSignal = window.OneSignal || [];
-OneSignal.push(function() {
-    OneSignal.init({
-      appId: "1db1662c-7609-4a90-b0ad-15b45407d628"
-    });
-});
-</script> -->
-
-
-
-<!-- font awesome-->
+  <!-- font awesome-->
   <script src="https://kit.fontawesome.com/b198ccf02e.js" crossorigin="anonymous"></script>
 
-  <link rel="manifest" href="manifest.json"/>
+  <link rel="manifest" href="manifest.json" />
 
   <!-- custom css -->
   <link rel="stylesheet" href="styles.css" />
@@ -55,6 +29,10 @@ OneSignal.push(function() {
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHTGGHM" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <div class="grid-container">
     <header class="header">
       <div class="left-menu">
