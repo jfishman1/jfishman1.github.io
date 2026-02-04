@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>OneSignal Store Demo</title>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "9bd59616-47ac-4356-a633-a3f8e27cbc3a",
+    });
+  });
+</script>
   <!--<script src="OneSignalMethods.js"></script>-->
   <!-- font awesome-->
   <script src="https://kit.fontawesome.com/b198ccf02e.js" crossorigin="anonymous"></script>
