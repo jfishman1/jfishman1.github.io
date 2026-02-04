@@ -29,17 +29,15 @@
   </div>
   <h1 style="margin: 100px">Coming Soon</h1>
   <script>
-    navigator.serviceWorker.getRegistrations().then(registrations => {
-  const rootScope = new URL('/', window.location.origin).href;
-  const hasRootWorker = registrations.some(reg => reg.scope === rootScope);
-  
-  if (hasRootWorker) {
-    for (const registration of registrations) {
-      registration.unregister();
+    if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for (let registration of registrations) {
+      if (registration.active.scriptURL.includes("OneSignalSDKWorker.js")) {
+        registration.unregister();
+      }
     }
-    console.log('All service workers unregistered');
-  }
-});
+  });
+}
   </script>
 </body>
 
