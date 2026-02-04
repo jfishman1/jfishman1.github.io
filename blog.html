@@ -29,15 +29,6 @@
   </div>
   <h1 style="margin: 100px">Coming Soon</h1>
   <script>
-    if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(function(registrations) {
-    for (let registration of registrations) {
-      if (registration.active.scriptURL.includes("OneSignalSDKWorker.js")) {
-        registration.unregister();
-      }
-    }
-  });
-}
   </script>
 </body>
 
