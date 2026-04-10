@@ -303,6 +303,13 @@ window.addEventListener("load", () => {
               product_name: productName,
               product_image: productImageURL,
             });
+            OneSignal.User.trackEvent("cart_updated", {
+              product_name: productName,
+              product_image: productImageURL,
+              product_price: 12.99,
+              product_quantity: 1,
+              cart_url: "https://jfishman1.github.io/checkout"
+            });
             mixpanel.people.set("$items_in_cart", "true");
           });
         });
@@ -331,6 +338,13 @@ window.addEventListener("load", () => {
             product_name: productName,
             product_image: productImageURL,
           });
+          OneSignal.User.trackEvent("cart_updated", {
+            product_name: productName,
+            product_image: productImageURL,
+            product_price: 12.99,
+            product_quantity: 1,
+            cart_url: "https://jfishman1.github.io/checkout"
+          });
         });
       } else {
         mixpanel.people.set("$items_in_cart", "false");
@@ -340,6 +354,7 @@ window.addEventListener("load", () => {
           product_name: "",
           product_image: "",
         });
+        OneSignal.User.trackEvent("cart_emptied");
       }
     }
   }
@@ -392,6 +407,7 @@ function updateOSOnCartPurchase(checkoutPriceTotal, checkoutItemsTotal) {
       product_name: "",
       product_image: "",
     });
+    OneSignal.User.trackEvent("cart_emptied");
     OneSignal.sendOutcome("Purchase", purchasePriceTotal);
     OneSignal.sendOutcome("Purchased Item Count", purchasedItemCount);
     console.log("Purchase made! Outcomes sent:");
