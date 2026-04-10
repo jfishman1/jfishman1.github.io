@@ -1,84 +1,84 @@
-// Init
-(function (d, script) {
-  script = d.createElement("script");
-  script.type = "application/javascript";
-  script.async = true;
-  script.onload = function () {
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function () {
-      //OneSignal.setConsentRequired(true);
-      await OneSignal.init({
-        //appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
-        allowLocalhostAsSecureOrigin: true,
-        appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
-        serviceWorkerParam: { scope: "/push/onesignal/js/" },
-        serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js",
-        promptOptions: {
-          slidedown: {
-            prompts: [{
-              type: "smsAndEmail",
-              autoPrompt: false,
-              text: {
-                emailLabel: "Insert Email Address",
-                smsLabel: "Insert Phone Number",
-                acceptButton: "Submit",
-                cancelButton: "No Thanks",
-                actionMessage: "Receive the latest news, updates and offers as they happen.",
-                updateMessage: "Update your push notification subscription preferences.",
-                confirmMessage: "Thank You!",
-                positiveUpdateButton: "Save Preferences",
-                negativeUpdateButton: "Cancel",
-              },
-              delay: {
-                pageViews: 1,
-                timeDelay: 20
-              },
-            },
-            {
-              type: "category",
-              autoPrompt: true,
-              text: {
-                actionMessage: "We'd like to show you notifications for the latest news and updates.",
-                acceptButton: "Allow",
-                cancelButton: "Cancel",
+// Init moved to GTM
+// (function (d, script) {
+//   script = d.createElement("script");
+//   script.type = "application/javascript";
+//   script.async = true;
+//   script.onload = function () {
+//     window.OneSignalDeferred = window.OneSignalDeferred || [];
+//     OneSignalDeferred.push(async function () {
+//       //OneSignal.setConsentRequired(true);
+//       await OneSignal.init({
+//         //appId: "0bd432c6-b55c-49d0-8373-22badb459fff", // localhost
+//         allowLocalhostAsSecureOrigin: true,
+//         appId: "1db1662c-7609-4a90-b0ad-15b45407d628", //main
+//         serviceWorkerParam: { scope: "/push/onesignal/js/" },
+//         serviceWorkerPath: "push/onesignal/OneSignalSDKWorker.js",
+//         promptOptions: {
+//           slidedown: {
+//             prompts: [{
+//               type: "smsAndEmail",
+//               autoPrompt: false,
+//               text: {
+//                 emailLabel: "Insert Email Address",
+//                 smsLabel: "Insert Phone Number",
+//                 acceptButton: "Submit",
+//                 cancelButton: "No Thanks",
+//                 actionMessage: "Receive the latest news, updates and offers as they happen.",
+//                 updateMessage: "Update your push notification subscription preferences.",
+//                 confirmMessage: "Thank You!",
+//                 positiveUpdateButton: "Save Preferences",
+//                 negativeUpdateButton: "Cancel",
+//               },
+//               delay: {
+//                 pageViews: 1,
+//                 timeDelay: 20
+//               },
+//             },
+//             {
+//               type: "category",
+//               autoPrompt: true,
+//               text: {
+//                 actionMessage: "We'd like to show you notifications for the latest news and updates.",
+//                 acceptButton: "Allow",
+//                 cancelButton: "Cancel",
 
-                /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
-                negativeUpdateButton: "Cancel",
-                positiveUpdateButton: "Save Preferences",
-                updateMessage: "Update your push notification subscription preferences.",
-              },
-              delay: {
-                pageViews: 3,
-                timeDelay: 20
-              },
-              categories: [{
-                tag: "politics",
-                label: "Politics"
-              },
-              {
-                tag: "local_news",
-                label: "Local News"
-              },
-              {
-                tag: "world_news",
-                label: "World News",
-              },
-              {
-                tag: "culture",
-                label: "Culture"
-              },
-              ]
-            }
-            ]
-          }
-        },
-      });
-    });
-  };
-  script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
-  d.getElementsByTagName("head")[0].appendChild(script);
+//                 /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
+//                 negativeUpdateButton: "Cancel",
+//                 positiveUpdateButton: "Save Preferences",
+//                 updateMessage: "Update your push notification subscription preferences.",
+//               },
+//               delay: {
+//                 pageViews: 3,
+//                 timeDelay: 20
+//               },
+//               categories: [{
+//                 tag: "politics",
+//                 label: "Politics"
+//               },
+//               {
+//                 tag: "local_news",
+//                 label: "Local News"
+//               },
+//               {
+//                 tag: "world_news",
+//                 label: "World News",
+//               },
+//               {
+//                 tag: "culture",
+//                 label: "Culture"
+//               },
+//               ]
+//             }
+//             ]
+//           }
+//         },
+//       });
+//     });
+//   };
+//   script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+//   d.getElementsByTagName("head")[0].appendChild(script);
 
-})(document);
+// })(document);
 
 // -------------------------------- Mixpanel Init -------------------------------- //
 
@@ -261,6 +261,13 @@ window.addEventListener("load", () => {
             cart_update: timestamp,
             product_name: productName,
             product_image: productImageURL,
+          });
+          OneSignal.User.trackEvent("cart_updated", {
+            product_name: productName,
+            product_image: productImageURL,
+            product_price: 12.99,
+            product_quantity: 1,
+            cart_url: "https://jfishman1.github.io/checkout"
           });
         });
       });
