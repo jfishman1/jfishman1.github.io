@@ -269,6 +269,7 @@ window.addEventListener("load", () => {
             product_quantity: 1,
             cart_url: "https://jfishman1.github.io/checkout"
           });
+          console.log("cart_updated event sent");
         });
       });
     }
@@ -310,6 +311,7 @@ window.addEventListener("load", () => {
               product_quantity: 1,
               cart_url: "https://jfishman1.github.io/checkout"
             });
+            console.log("cart_updated event sent");
             mixpanel.people.set("$items_in_cart", "true");
           });
         });
@@ -345,6 +347,7 @@ window.addEventListener("load", () => {
             product_quantity: 1,
             cart_url: "https://jfishman1.github.io/checkout"
           });
+          console.log("cart_updated event sent");
         });
       } else {
         mixpanel.people.set("$items_in_cart", "false");
